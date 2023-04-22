@@ -8,6 +8,10 @@ class LanguageController extends GetxController {
 
   Locale get locale => _locale.value;
 
+  void updateLanguage(String language) {
+    _locale.value = Locale(language);
+  }
+
   void selectEngLanguage() {
     _locale.value = const Locale('en');
   }

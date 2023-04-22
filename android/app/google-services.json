@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "514978136576",
+    "project_id": "toktok-8da9f",
+    "storage_bucket": "toktok-8da9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514978136576:android:d1102209abc8c81d97cee5",
+        "android_client_info": {
+          "package_name": "com.truonganim.toktok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514978136576-0omadver84a9i5dbj37rtdjm8dbtkm08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw-_ADoMDTBCbGYHw4ICW972DpfQR1VfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514978136576-0omadver84a9i5dbj37rtdjm8dbtkm08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

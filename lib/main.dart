@@ -1,21 +1,27 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:toktok/BottomNavigation/MyProfile/language_page.dart';
 import 'package:toktok/Locale/language_controller.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/style.dart';
+import 'package:toktok/controllers/auth_controller.dart';
+import 'package:toktok/firebase_options.dart';
 
 void main() async {
-  Get.lazyPut(() => LanguageController(), fenix: true);
-  runApp(
-    const GetMaterialApp(
-      home: Toktok(),
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) {
+    Get.lazyPut(() => LanguageController(), fenix: true);
+    Get.put(AuthController());
+  });
+
   MobileAds.instance.initialize();
+  await GetStorage.init();
+  runApp(const Toktok());
 }
 
 class Toktok extends StatelessWidget {
@@ -23,33 +29,38 @@ class Toktok extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LanguageController languageController = Get.find();
-    return Obx(
-      () => MaterialApp(
-        localizationsDelegates: const [
-          AppLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en'),
-          Locale('ar'),
-          Locale('id'),
-          Locale('fr'),
-          Locale('pt'),
-          Locale('es'),
-          Locale('it'),
-          Locale('sw'),
-          Locale('tr'),
-          Locale('de'),
-          Locale('ro'),
-        ],
-        theme: appTheme,
-        locale: languageController.locale,
-        home: ChangeLanguagePage(),
-        routes: PageRoutes().routes(),
-      ),
+    final box = GetStorage();
+    String? language = box.read('language_selected');
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        AppLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+        Locale('id'),
+        Locale('fr'),
+        Locale('pt'),
+        Locale('es'),
+        Locale('it'),
+        Locale('sw'),
+        Locale('tr'),
+        Locale('de'),
+        Locale('ro'),
+      ],
+      theme: appTheme,
+      locale: Locale(language ?? 'en'),
+      initialRoute:
+          language == null ? PageRoutes.languagePage : PageRoutes.login,
+      getPages: [
+        ...PageRoutes().widgetRoutes().entries.map(
+              (entry) => GetPage(name: entry.key, page: () => entry.value),
+            ),
+      ],
     );
   }
 }

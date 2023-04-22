@@ -1,6 +1,5 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:toktok/Components/profile_page_button.dart';
 import 'package:toktok/Components/row_item.dart';
 import 'package:toktok/Components/sliver_app_delegate.dart';
@@ -72,7 +71,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                   Navigator.pushNamed(
                                       context, PageRoutes.tncPage);
                                 } else if (value == locale.logout) {
-                                  Phoenix.rebirth(context);
+                                  // need to getx
                                 } else if (value == "Redeem Coins") {
                                   Navigator.pushNamed(
                                       context, PageRoutes.redeemCoins);
