@@ -1,5 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Components/profile_page_button.dart';
 import 'package:toktok/Components/row_item.dart';
 import 'package:toktok/Components/sliver_app_delegate.dart';
@@ -14,26 +15,44 @@ import 'package:toktok/BottomNavigation/MyProfile/following.dart';
 import 'package:toktok/Components/score_container.dart';
 import 'package:toktok/app_config/app_config.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/profile_controller.dart';
+import 'package:toktok/models/video.dart';
 
 class MyProfilePage extends StatelessWidget {
+  const MyProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MyProfileBody();
+    // Map<String, dynamic> data = Get.arguments;
+    String uid = firebaseAuth.currentUser!.uid;
+    return MyProfileBody(uid: uid);
   }
 }
 
 class MyProfileBody extends StatefulWidget {
+  const MyProfileBody({super.key, required this.uid});
+  final String uid;
   @override
   _MyProfileBodyState createState() => _MyProfileBodyState();
 }
 
 class _MyProfileBodyState extends State<MyProfileBody> {
   final key = UniqueKey();
+  late ProfileController _profileController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _profileController = Get.find();
+    _profileController.updateUserId(widget.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context);
     return Padding(
-      padding: EdgeInsets.only(bottom: 64.0),
+      padding: const EdgeInsets.only(bottom: 64.0),
       child: Scaffold(
         backgroundColor: darkColor,
         body: Stack(
@@ -81,120 +100,133 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                               itemBuilder: (BuildContext context) {
                                 return [
                                   PopupMenuItem(
-                                    child: Text(locale!.changeLanguage!),
-                                    value: locale.changeLanguage,
+                                    value: locale!.changeLanguage,
                                     textStyle: TextStyle(color: secondaryColor),
+                                    child: Text(locale.changeLanguage!),
                                   ),
                                   PopupMenuItem(
-                                    child: Text(locale.help!),
                                     value: locale.help,
                                     textStyle: TextStyle(color: secondaryColor),
+                                    child: Text(locale.help!),
                                   ),
                                   PopupMenuItem(
-                                    child: Text("Redeem Coins"),
                                     value: "Redeem Coins",
                                     textStyle: TextStyle(color: secondaryColor),
+                                    child: const Text("Redeem Coins"),
                                   ),
                                   PopupMenuItem(
-                                    child: Text(locale.termsOfUse!),
                                     value: locale.termsOfUse,
                                     textStyle: TextStyle(color: secondaryColor),
+                                    child: Text(locale.termsOfUse!),
                                   ),
                                   PopupMenuItem(
-                                    child: Text(locale.logout!),
                                     value: locale.logout,
                                     textStyle: TextStyle(color: secondaryColor),
+                                    child: Text(locale.logout!),
                                   )
                                 ];
                               },
                             ),
                           )
                         ],
-                        flexibleSpace: FlexibleSpaceBar(
-                          centerTitle: true,
-                          title: Column(
-                            children: <Widget>[
-                              Spacer(flex: 10),
-                              CircleAvatar(
-                                radius: 28.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/user.webp'),
-                              ),
-                              Spacer(),
-                              Text(
-                                'Samantha Smith',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              Text(
-                                '@imsamanthasmith',
-                                style: TextStyle(
-                                    fontSize: 10, color: disabledTextColor),
-                              ),
-                              Spacer(),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  ImageIcon(
-                                    AssetImage("assets/icons/ic_fb.png"),
-                                    color: secondaryColor,
-                                    size: 10,
-                                  ),
-                                  SizedBox(width: 16),
-                                  ImageIcon(
-                                    AssetImage("assets/icons/ic_twt.png"),
-                                    color: secondaryColor,
-                                    size: 10,
-                                  ),
-                                  SizedBox(width: 16),
-                                  ImageIcon(
-                                    AssetImage("assets/icons/ic_insta.png"),
-                                    color: secondaryColor,
-                                    size: 10,
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Text(
-                                locale!.comment5!,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 8),
-                              ),
-                              Spacer(),
-                              ProfilePageButton(
-                                locale.editProfile,
-                                () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => EditProfile()));
-                                },
-                                width: 120,
-                              ),
-                              Spacer(),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  RowItem(
-                                      '1.2m',
-                                      locale.liked,
-                                      Scaffold(
-                                        appBar: AppBar(
-                                          title: Text('Liked'),
-                                        ),
-                                        body: TabGrid(
-                                          food,
-                                        ),
-                                      )),
-                                  RowItem('12.8k', locale.followers,
-                                      FollowersPage()),
-                                  RowItem('1.9k', locale.following,
-                                      FollowingPage()),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        flexibleSpace: Obx(() {
+                          if (_profileController.user.isEmpty) {
+                            return Container();
+                          }
+                          return FlexibleSpaceBar(
+                            centerTitle: true,
+                            title: Column(
+                              children: <Widget>[
+                                const Spacer(flex: 10),
+                                CircleAvatar(
+                                  radius: 28.0,
+                                  backgroundImage: NetworkImage(
+                                      _profileController.user['profilePhoto']),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  _profileController.user['name'],
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                Text(
+                                  '@${_profileController.user['email'].toString().split('@')[0]}',
+                                  style: TextStyle(
+                                      fontSize: 10, color: disabledTextColor),
+                                ),
+                                const Spacer(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    ImageIcon(
+                                      const AssetImage(
+                                          "assets/icons/ic_fb.png"),
+                                      color: secondaryColor,
+                                      size: 10,
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ImageIcon(
+                                      const AssetImage(
+                                          "assets/icons/ic_twt.png"),
+                                      color: secondaryColor,
+                                      size: 10,
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ImageIcon(
+                                      const AssetImage(
+                                          "assets/icons/ic_insta.png"),
+                                      color: secondaryColor,
+                                      size: 10,
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Text(
+                                  locale!.comment5!,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(fontSize: 8),
+                                ),
+                                const Spacer(),
+                                ProfilePageButton(
+                                  locale.editProfile,
+                                  () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditProfile()));
+                                  },
+                                  width: 120,
+                                ),
+                                const Spacer(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    RowItem(
+                                        _profileController.user['likes'],
+                                        locale.liked,
+                                        Scaffold(
+                                          appBar: AppBar(
+                                            title: const Text('Liked'),
+                                          ),
+                                          body: TabGrid(
+                                            _profileController.user['videos'],
+                                          ),
+                                        )),
+                                    RowItem(
+                                        _profileController.user['followers'],
+                                        locale.followers,
+                                        FollowersPage()),
+                                    RowItem(
+                                        _profileController.user['following'],
+                                        locale.following,
+                                        FollowingPage()),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
                       ),
                       SliverPersistentHeader(
                         delegate: SliverAppBarDelegate(
@@ -203,9 +235,9 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             unselectedLabelColor: lightTextColor,
                             indicatorColor: transparentColor,
                             tabs: [
-                              Tab(icon: Icon(Icons.dashboard)),
-                              Tab(icon: Icon(Icons.favorite_border)),
-                              Tab(icon: Icon(Icons.bookmark_border)),
+                              const Tab(icon: Icon(Icons.dashboard)),
+                              const Tab(icon: Icon(Icons.favorite_border)),
+                              const Tab(icon: Icon(Icons.bookmark_border)),
                             ],
                           ),
                         ),
@@ -213,44 +245,50 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                       ),
                     ];
                   },
-                  body: TabBarView(
-                    children: <Widget>[
-                      FadedSlideAnimation(
-                        child: TabGrid(
-                          food + food,
-                          viewIcon: Icons.remove_red_eye,
-                          views: '2.2k',
-                          onTap: () => Navigator.pushNamed(
-                              context, PageRoutes.videoOptionPage),
+                  body: Obx(() {
+                    if (_profileController.user.isEmpty) {
+                      return Container();
+                    }
+                    return TabBarView(
+                      children: <Widget>[
+                        FadedSlideAnimation(
+                          beginOffset: const Offset(0, 0.3),
+                          endOffset: const Offset(0, 0),
+                          slideCurve: Curves.linearToEaseOut,
+                          child: TabGrid(
+                            _profileController.user['videos'],
+                            viewIcon: Icons.remove_red_eye,
+                            views: '2.2k',
+                            onTap: () => Navigator.pushNamed(
+                                context, PageRoutes.videoOptionPage),
+                          ),
                         ),
-                        beginOffset: Offset(0, 0.3),
-                        endOffset: Offset(0, 0),
-                        slideCurve: Curves.linearToEaseOut,
-                      ),
-                      FadedSlideAnimation(
-                        child: TabGrid(
-                          dance,
-                          icon: Icons.favorite,
+                        FadedSlideAnimation(
+                          beginOffset: const Offset(0, 0.3),
+                          endOffset: const Offset(0, 0),
+                          slideCurve: Curves.linearToEaseOut,
+                          child: TabGrid(
+                            _profileController.user['videos'],
+                            icon: Icons.favorite,
+                          ),
                         ),
-                        beginOffset: Offset(0, 0.3),
-                        endOffset: Offset(0, 0),
-                        slideCurve: Curves.linearToEaseOut,
-                      ),
-                      FadedSlideAnimation(
-                        child: TabGrid(
-                          lol,
-                          icon: Icons.bookmark,
+                        FadedSlideAnimation(
+                          beginOffset: const Offset(0, 0.3),
+                          endOffset: const Offset(0, 0),
+                          slideCurve: Curves.linearToEaseOut,
+                          child: TabGrid(
+                            _profileController.user['videos'],
+                            icon: Icons.bookmark,
+                          ),
                         ),
-                        beginOffset: Offset(0, 0.3),
-                        endOffset: Offset(0, 0),
-                        slideCurve: Curves.linearToEaseOut,
-                      ),
-                    ],
-                  ),
+                      ],
+                    );
+                  }),
                 ),
               ),
             ),
-            PositionedDirectional(top: 40, end: 40, child: CoinContainer()),
+            const PositionedDirectional(
+                top: 40, end: 40, child: CoinContainer()),
           ],
         ),
         // floatingActionButton:  AppConfig.isDemoMode ? BuyThisApp.button(

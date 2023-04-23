@@ -97,7 +97,7 @@ class _SearchUsersState extends State<SearchUsers> {
           children: <Widget>[
             FadedSlideAnimation(
               child: TabGrid(
-                dance + food,
+                [],
                 onTap: () =>
                     Navigator.pushNamed(context, PageRoutes.videoOptionPage),
               ),

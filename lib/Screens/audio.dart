@@ -63,7 +63,7 @@ class Audio extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               children: [
                 TabGrid(
-                  dance,
+                  [],
                   viewIcon: Icons.remove_red_eye,
                   views: '2.8m',
                   onTap: () {},

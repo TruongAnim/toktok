@@ -85,23 +85,8 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
         );
       },
       onPageChanged: widget.variable == null
-          ? (i) async {
-              if (i == 2) {
-                await showModalBottomSheet(
-                  shape: OutlineInputBorder(
-                      borderSide: BorderSide(color: transparentColor),
-                      borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16.0))),
-                  context: context,
-                  isScrollControlled: true,
-                  isDismissible: false,
-                  builder: (context) {
-                    return Container(
-                        height: MediaQuery.of(context).size.width * 1.2,
-                        child: LoginNavigator());
-                  },
-                );
-              }
+          ? (i) {
+              print('onPageChanged $i');
             }
           : null,
       itemCount: widget.videos.length,
@@ -131,6 +116,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
   @override
   void initState() {
     super.initState();
+    print('load new video ${widget.video.videoUrl}');
     _controller = VideoPlayerController.network(widget.video.videoUrl)
       ..initialize().then((value) {
         setState(() {
@@ -182,7 +168,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
 //      setState(() {
 //      });
 //    }
-    if (widget.pageIndex == 2) _controller.pause();
+// if (widget.pageIndex == 2) _controller.pause();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Stack(

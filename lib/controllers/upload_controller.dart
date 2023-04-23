@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/models/video.dart';
+import 'package:toktok/utils/random_utils.dart';
 import 'package:video_compress/video_compress.dart';
 
 class UploadController extends GetxController {
@@ -43,15 +44,12 @@ class UploadController extends GetxController {
     isUploading.value = true;
     try {
       String uid = firebaseAuth.currentUser!.uid;
-      print('logger:$uid');
       DocumentSnapshot snapshot =
           await firebaseStore.collection('users').doc(uid).get();
       var allDocs = await firebaseStore.collection('videos').get();
       int len = allDocs.docs.length;
       String videoId = 'Video $len';
-      print('logger:$videoId');
       String videoUrl = await _uploadVideoToStorage(videoId, videoPath);
-      print('logger:$videoUrl');
       String thumbnailUrl = await _uploadThumbnailToStorage(videoId, videoPath);
       Video video = Video(
         username: (snapshot.data() as Map<String, dynamic>)['name'],
@@ -65,7 +63,7 @@ class UploadController extends GetxController {
         videoUrl: videoUrl,
         profilePhoto: (snapshot.data() as Map<String, dynamic>)['profilePhoto'],
         thumbnail: thumbnailUrl,
-        albumPhoto: (snapshot.data() as Map<String, dynamic>)['albumPhoto'],
+        albumPhoto: RandomUtils.getRandomImageUrl(),
       );
       await firebaseStore.collection('videos').doc(videoId).set(video.toJson());
       print('upload done');

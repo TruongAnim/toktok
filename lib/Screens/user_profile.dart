@@ -180,7 +180,7 @@ class _UserProfileBodyState extends State<UserProfileBody> {
                                     title: Text('Liked'),
                                   ),
                                   body: TabGrid(
-                                    food + lol,
+                                    [],
                                   ),
                                 )),
                             RowItem('12.8k', locale.followers, FollowersPage()),
@@ -214,13 +214,13 @@ class _UserProfileBodyState extends State<UserProfileBody> {
             body: TabBarView(
               children: <Widget>[
                 FadedSlideAnimation(
-                  child: TabGrid(dance),
+                  child: TabGrid([]),
                   beginOffset: Offset(0, 0.3),
                   endOffset: Offset(0, 0),
                   slideCurve: Curves.linearToEaseOut,
                 ),
                 FadedSlideAnimation(
-                  child: TabGrid(food + lol),
+                  child: TabGrid([]),
                   beginOffset: Offset(0, 0.3),
                   endOffset: Offset(0, 0),
                   slideCurve: Curves.linearToEaseOut,

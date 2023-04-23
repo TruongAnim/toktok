@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/models/video.dart';
 
 class ProfileController extends GetxController {
   Rx<Map<String, dynamic>> _user = Rx<Map<String, dynamic>>({});
@@ -14,14 +15,12 @@ class ProfileController extends GetxController {
   }
 
   void getUserData() async {
-    List<String> thumbnails = [];
+    List<Video> videos = [];
     QuerySnapshot snapshot = await firebaseStore
         .collection('videos')
         .where('uid', isEqualTo: _uid.value)
         .get();
-    for (int i = 0; i < snapshot.docs.length; i++) {
-      thumbnails.add((snapshot.docs[i].data()! as dynamic)['thumbnail']);
-    }
+    videos = snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
     DocumentSnapshot userData =
         await firebaseStore.collection('users').doc(_uid.value).get();
     String userName = userData['name'];
@@ -67,8 +66,10 @@ class ProfileController extends GetxController {
       'likes': likes.toString(),
       'profilePhoto': profilePhoto,
       'name': userName,
-      'thumbnails': thumbnails
+      'videos': videos,
+      'email': userData['email']
     };
+    print('dmm ${user}');
     update();
   }
 
