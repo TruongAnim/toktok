@@ -1,5 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Components/entry_field.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
@@ -33,16 +34,15 @@ class _ChatBodyState extends State<ChatBody> {
         appBar: AppBar(
           titleSpacing: 0.0,
           title: ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/user/user2.png'),
-            ),
-            title: Text(
-              'Emili Williamson',
-              style: TextStyle(color: secondaryColor),
-            ),
-            onTap: () =>
-                Navigator.pushNamed(context, PageRoutes.userProfilePage),
-          ),
+              leading: CircleAvatar(
+                backgroundImage: AssetImage('assets/user/user2.png'),
+              ),
+              title: Text(
+                'Emili Williamson',
+                style: TextStyle(color: secondaryColor),
+              ),
+              onTap: () => Get.toNamed(PageRoutes.userProfilePage,
+                  arguments: {'uid': 'r26AouzZmNUYsQT25btk55I1Exg2'})),
         ),
         body: FadedSlideAnimation(
           child: Column(

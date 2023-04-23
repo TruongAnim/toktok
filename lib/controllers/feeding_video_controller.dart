@@ -7,14 +7,33 @@ import 'package:toktok/models/video.dart';
 
 class FeedingVideoController extends GetxController {
   final Rx<List<Video>> _videoList = Rx<List<Video>>([]);
+  final Rx<List<Video>> _videoFollowing = Rx<List<Video>>([]);
 
   List<Video> get videoList => _videoList.value;
+  List<Video> get videoFollowing => _videoFollowing.value;
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    String uid = firebaseAuth.currentUser!.uid;
     _videoList.bindStream(firebaseStore
+        .collection('videos')
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
+    }));
+    QuerySnapshot followingDoc = await firebaseStore
+        .collection('users')
+        .doc(uid)
+        .collection('following')
+        .get();
+    List<String> userFollowing = followingDoc.docs
+        .map((QueryDocumentSnapshot snapshot) => snapshot.id)
+        .toList();
+    print(userFollowing);
+
+    _videoFollowing.bindStream(firebaseStore
         .collection('videos')
         .snapshots()
         .map((QuerySnapshot snapshot) {

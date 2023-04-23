@@ -5,30 +5,6 @@ import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/controllers/feeding_video_controller.dart';
 
-List<String> videos1 = [
-  'assets/videos/3.mp4',
-  'assets/videos/1.mp4',
-  'assets/videos/2.mp4',
-];
-
-List<String> videos2 = [
-  'assets/videos/4.mp4',
-  'assets/videos/5.mp4',
-  'assets/videos/6.mp4',
-];
-
-List<String> imagesInDisc1 = [
-  'assets/user/user1.png',
-  'assets/user/user2.png',
-  'assets/user/user3.png',
-];
-
-List<String> imagesInDisc2 = [
-  'assets/user/user4.png',
-  'assets/user/user3.png',
-  'assets/user/user1.png',
-];
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -53,8 +29,8 @@ class _HomeBodyState extends State<HomeBody> {
 
   Widget build(BuildContext context) {
     List<Tab> tabs = [
+      Tab(text: AppLocalizations.of(context)!.news),
       Tab(text: AppLocalizations.of(context)!.following),
-      Tab(text: AppLocalizations.of(context)!.related),
     ];
     return DefaultTabController(
       length: tabs.length,
@@ -86,7 +62,7 @@ class _HomeBodyState extends State<HomeBody> {
                   Positioned.directional(
                     textDirection: Directionality.of(context),
                     top: 14,
-                    start: 84,
+                    start: 160,
                     child: CircleAvatar(
                       backgroundColor: mainColor,
                       radius: 3,

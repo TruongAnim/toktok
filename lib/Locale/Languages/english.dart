@@ -16,6 +16,7 @@ Map<String, String> english() {
     'submit': 'Submit',
     'resend': 'Resend',
     'following': 'Following',
+    'news': 'News',
     'related': 'Related',
     'home': 'Home',
     'explore': 'Explore',

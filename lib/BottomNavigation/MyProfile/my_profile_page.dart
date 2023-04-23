@@ -23,7 +23,6 @@ class MyProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Map<String, dynamic> data = Get.arguments;
     String uid = firebaseAuth.currentUser!.uid;
     return MyProfileBody(uid: uid);
   }

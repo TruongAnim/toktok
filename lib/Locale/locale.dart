@@ -98,6 +98,10 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]!['following'];
   }
 
+  String? get news {
+    return _localizedValues[locale.languageCode]!['news'];
+  }
+
   String? get related {
     return _localizedValues[locale.languageCode]!['related'];
   }

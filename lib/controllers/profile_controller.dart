@@ -46,19 +46,17 @@ class ProfileController extends GetxController {
     follower = followerDoc.docs.length;
     following = followingDoc.docs.length;
 
-    firebaseStore
+    DocumentSnapshot follow = await firebaseStore
         .collection('users')
         .doc(_uid.value)
         .collection('followers')
         .doc(authController.user.uid)
-        .get()
-        .then((value) {
-      if (value.exists) {
-        isFollowing = true;
-      } else {
-        isFollowing = false;
-      }
-    });
+        .get();
+    if (follow.exists) {
+      isFollowing = true;
+    } else {
+      isFollowing = false;
+    }
     _user.value = {
       'followers': follower.toString(),
       'following': following.toString(),
@@ -69,7 +67,6 @@ class ProfileController extends GetxController {
       'videos': videos,
       'email': userData['email']
     };
-    print('dmm ${user}');
     update();
   }
 
