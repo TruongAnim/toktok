@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:toktok/Auth/Login/UI/login_screen.dart';
 import 'package:toktok/Auth/Registration/UI/register_screen.dart';
 import 'package:toktok/Auth/login_navigator.dart';
+import 'package:toktok/BottomNavigation/AddVideo/add_video_page.dart';
 import 'package:toktok/BottomNavigation/Explore/more_page.dart';
 import 'package:toktok/BottomNavigation/MyProfile/badge_request.dart';
 import 'package:toktok/BottomNavigation/MyProfile/language_page.dart';
 import 'package:toktok/BottomNavigation/MyProfile/video_option.dart';
 import 'package:toktok/BottomNavigation/bottom_navigation.dart';
-import 'package:toktok/BottomNavigation/AddVideo/add_video.dart';
+import 'package:toktok/BottomNavigation/AddVideo/add_videosss.dart';
 import 'package:toktok/BottomNavigation/AddVideo/add_video_filter.dart';
 import 'package:toktok/BottomNavigation/MyProfile/followers.dart';
 import 'package:toktok/BottomNavigation/MyProfile/help_page.dart';
@@ -52,7 +53,7 @@ class PageRoutes {
       helpPage: (context) => HelpPage(),
       tncPage: (context) => TnC(),
       searchPage: (context) => SearchUsers(),
-      addVideoPage: (context) => AddVideo(),
+      addVideoPage: (context) => AddVideoPage(),
       addVideoFilterPage: (context) => AddVideoFilter(),
       postInfoPage: (context) => PostInfo(),
       userProfilePage: (context) => UserProfilePage(),
@@ -78,7 +79,7 @@ class PageRoutes {
       helpPage: HelpPage(),
       tncPage: TnC(),
       searchPage: SearchUsers(),
-      addVideoPage: AddVideo(),
+      addVideoPage: AddVideoPage(),
       addVideoFilterPage: AddVideoFilter(),
       postInfoPage: PostInfo(),
       userProfilePage: UserProfilePage(),

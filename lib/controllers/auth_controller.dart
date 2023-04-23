@@ -34,6 +34,7 @@ class AuthController extends GetxController {
       Get.offAllNamed(PageRoutes.login);
     } else {
       Get.offAllNamed(PageRoutes.bottomNavigation);
+      print(_currentUser.value!.uid);
     }
   }
 

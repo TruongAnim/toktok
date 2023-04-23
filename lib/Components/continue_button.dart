@@ -38,13 +38,17 @@ class CustomButton extends StatelessWidget {
         ),
         icon: icon ?? SizedBox.shrink(),
         onPressed: onPressed as void Function()?,
-        label: Text(
-          text ?? locale!.continueText!,
-          style: style ??
-              Theme.of(context)
-                  .textTheme
-                  .button!
-                  .copyWith(color: textColor ?? secondaryColor),
+        label: SizedBox(
+          child: Text(
+            text ?? locale!.continueText!,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: style ??
+                Theme.of(context)
+                    .textTheme
+                    .button!
+                    .copyWith(color: textColor ?? secondaryColor),
+          ),
         ),
       ),
     );

@@ -9,6 +9,12 @@ import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/style.dart';
 import 'package:toktok/controllers/auth_controller.dart';
+import 'package:toktok/controllers/comment_controller.dart';
+import 'package:toktok/controllers/music_controller.dart';
+import 'package:toktok/controllers/profile_controller.dart';
+import 'package:toktok/controllers/search_user_controller.dart';
+import 'package:toktok/controllers/upload_controller.dart';
+import 'package:toktok/controllers/video_controller.dart';
 import 'package:toktok/firebase_options.dart';
 
 void main() async {
@@ -16,6 +22,12 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {
     Get.lazyPut(() => LanguageController(), fenix: true);
+    Get.lazyPut(() => UploadController(), fenix: true);
+    Get.lazyPut(() => VideoController(), fenix: true);
+    Get.lazyPut(() => CommentController(), fenix: true);
+    Get.lazyPut(() => SearchUserController(), fenix: true);
+    Get.lazyPut(() => ProfileController(), fenix: true);
+    Get.lazyPut(() => MusicController(), fenix: true);
     Get.put(AuthController());
   });
 

@@ -13,6 +13,7 @@ import 'package:toktok/BottomNavigation/Explore/explore_page.dart';
 import 'package:toktok/BottomNavigation/MyProfile/following.dart';
 import 'package:toktok/Components/score_container.dart';
 import 'package:toktok/app_config/app_config.dart';
+import 'package:toktok/constants.dart';
 
 class MyProfilePage extends StatelessWidget {
   @override
@@ -71,7 +72,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                   Navigator.pushNamed(
                                       context, PageRoutes.tncPage);
                                 } else if (value == locale.logout) {
-                                  // need to getx
+                                  firebaseAuth.signOut();
                                 } else if (value == "Redeem Coins") {
                                   Navigator.pushNamed(
                                       context, PageRoutes.redeemCoins);

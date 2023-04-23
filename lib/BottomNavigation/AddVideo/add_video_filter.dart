@@ -1,9 +1,12 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Components/continue_button.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/models/audio_details.dart';
+import 'package:video_player/video_player.dart';
 
 class AddVideoFilter extends StatefulWidget {
   @override
@@ -43,16 +46,37 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
     BlendMode.hardLight,
     BlendMode.darken,
   ];
+  Map<String, dynamic> data = {};
+
+  late VideoPlayerController videoPlayerController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    data = Get.arguments;
+    videoPlayerController = VideoPlayerController.file(data['videoFile']);
+    videoPlayerController.initialize();
+    videoPlayerController.play();
+    videoPlayerController.setVolume(1);
+    videoPlayerController.setLooping(true);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    videoPlayerController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image.asset(
-          'assets/images/video 2.png',
-          fit: BoxFit.fill,
-          height: MediaQuery.of(context).size.height,
+        SizedBox(
           width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: VideoPlayer(videoPlayerController),
         ),
         AppBar(),
         Align(
@@ -90,21 +114,37 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Row(
               children: <Widget>[
-                CustomButton(
-                  color: transparentColor,
-                  icon: Icon(
-                    Icons.music_note,
-                    color: secondaryColor,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  child: Row(
+                    children: [
+                      CustomButton(
+                        color: transparentColor,
+                        icon: Icon(
+                          Icons.music_note,
+                          color: secondaryColor,
+                        ),
+                        text: data['music'] != null
+                            ? data['music'].toString()
+                            : AppLocalizations.of(context)!.addMusic,
+                        onPressed: () async {
+                          AudioDetails? result =
+                              await Get.toNamed(PageRoutes.addMusic)
+                                  as AudioDetails?;
+                          data['music'] = result;
+                          setState(() {});
+                        },
+                      ),
+                      Spacer(),
+                    ],
                   ),
-                  text: AppLocalizations.of(context)!.addMusic,
-                  onPressed: () {},
                 ),
                 Spacer(),
                 CustomButton(
-                  text: AppLocalizations.of(context)!.next,
-                  onPressed: () =>
-                      Navigator.pushNamed(context, PageRoutes.postInfoPage),
-                )
+                    text: AppLocalizations.of(context)!.next,
+                    onPressed: () {
+                      Get.toNamed(PageRoutes.postInfoPage, arguments: data);
+                    })
               ],
             ),
           ),

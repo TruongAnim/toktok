@@ -12,6 +12,12 @@ class MyLogin extends StatefulWidget {
 
 class _MyLoginState extends State<MyLogin> {
   late AuthController authController;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  void _login() {
+    authController.login(_emailController.text, _passwordController.text);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -46,6 +52,7 @@ class _MyLoginState extends State<MyLogin> {
                 child: Column(
                   children: [
                     TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         fillColor: Colors.grey.shade100,
                         filled: true,
@@ -59,6 +66,7 @@ class _MyLoginState extends State<MyLogin> {
                       height: 30,
                     ),
                     TextField(
+                      controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         fillColor: Colors.grey.shade100,
@@ -88,7 +96,9 @@ class _MyLoginState extends State<MyLogin> {
                           backgroundColor: const Color(0xff4c505b),
                           child: IconButton(
                             color: Colors.white,
-                            onPressed: () {},
+                            onPressed: () {
+                              _login();
+                            },
                             icon: const Icon(Icons.arrow_forward),
                           ),
                         ),
