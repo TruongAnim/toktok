@@ -12,6 +12,7 @@ class Video {
   final String videoUrl;
   final String profilePhoto;
   final String thumbnail;
+  final String albumPhoto;
 
   Video({
     required this.username,
@@ -25,6 +26,7 @@ class Video {
     required this.videoUrl,
     required this.profilePhoto,
     required this.thumbnail,
+    required this.albumPhoto,
   });
 
   Map<String, dynamic> toJson() {
@@ -40,23 +42,24 @@ class Video {
       'videoUrl': videoUrl,
       'profilePhoto': profilePhoto,
       'thumbnail': thumbnail,
+      'albumPhoto': albumPhoto,
     };
   }
 
   static Video fromSnapshort(DocumentSnapshot snapshot) {
     var snap = snapshot.data() as Map<String, dynamic>;
     return Video(
-      username: snap['username'],
-      uid: snap['uid'],
-      id: snap['id'],
-      likes: snap['likes'],
-      commentCount: snap['commentCount'],
-      shareCount: snap['shareCount'],
-      songName: snap['songName'],
-      caption: snap['caption'],
-      videoUrl: snap['videoUrl'],
-      profilePhoto: snap['profilePhoto'],
-      thumbnail: snap['thumbnail'],
-    );
+        username: snap['username'],
+        uid: snap['uid'],
+        id: snap['id'],
+        likes: snap['likes'],
+        commentCount: snap['commentCount'],
+        shareCount: snap['shareCount'],
+        songName: snap['songName'],
+        caption: snap['caption'],
+        videoUrl: snap['videoUrl'],
+        profilePhoto: snap['profilePhoto'],
+        thumbnail: snap['thumbnail'],
+        albumPhoto: snap['albumPhoto']);
   }
 }

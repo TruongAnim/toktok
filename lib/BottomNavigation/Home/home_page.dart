@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/BottomNavigation/Home/following_tab.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/controllers/feeding_video_controller.dart';
 
 List<String> videos1 = [
   'assets/videos/3.mp4',
@@ -40,10 +42,13 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
+  late FeedingVideoController _feedingVideoController;
+
   @override
   void initState() {
     super.initState();
     // _checkForBuyNow();
+    _feedingVideoController = Get.find();
   }
 
   Widget build(BuildContext context) {
@@ -57,8 +62,14 @@ class _HomeBodyState extends State<HomeBody> {
         children: <Widget>[
           TabBarView(
             children: <Widget>[
-              FollowingTabPage(videos1, imagesInDisc1, false),
-              FollowingTabPage(videos2, imagesInDisc2, true),
+              Obx(() {
+                return FollowingTabPage(
+                    _feedingVideoController.videoList, false);
+              }),
+              Obx(() {
+                return FollowingTabPage(
+                    _feedingVideoController.videoList, true);
+              }),
             ],
           ),
           SafeArea(

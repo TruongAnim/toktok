@@ -65,6 +65,7 @@ class UploadController extends GetxController {
         videoUrl: videoUrl,
         profilePhoto: (snapshot.data() as Map<String, dynamic>)['profilePhoto'],
         thumbnail: thumbnailUrl,
+        albumPhoto: (snapshot.data() as Map<String, dynamic>)['albumPhoto'],
       );
       await firebaseStore.collection('videos').doc(videoId).set(video.toJson());
       print('upload done');

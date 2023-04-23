@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/models/video.dart';
 
-class VideoController extends GetxController {
+class FeedingVideoController extends GetxController {
   final Rx<List<Video>> _videoList = Rx<List<Video>>([]);
 
   List<Video> get videoList => _videoList.value;

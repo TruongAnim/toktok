@@ -6,34 +6,34 @@ import 'package:toktok/Components/rotated_image.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/models/video.dart';
+import 'package:toktok/utils/random_utils.dart';
 import 'package:video_player/video_player.dart';
 import 'package:toktok/Components/score_container.dart';
 
 RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class FollowingTabPage extends StatelessWidget {
-  final List<String> videos;
-  final List<String> images;
+  final List<Video> videos;
   final bool isFollowing;
 
   final int? variable;
 
-  FollowingTabPage(this.videos, this.images, this.isFollowing, {this.variable});
+  FollowingTabPage(this.videos, this.isFollowing, {this.variable});
 
   @override
   Widget build(BuildContext context) {
-    return FollowingTabBody(videos, images, isFollowing, variable);
+    return FollowingTabBody(videos, isFollowing, variable);
   }
 }
 
 class FollowingTabBody extends StatefulWidget {
-  final List<String> videos;
-  final List<String> images;
+  final List<Video> videos;
 
   final bool isFollowing;
   final int? variable;
 
-  FollowingTabBody(this.videos, this.images, this.isFollowing, this.variable);
+  FollowingTabBody(this.videos, this.isFollowing, this.variable);
 
   @override
   _FollowingTabBodyState createState() => _FollowingTabBodyState();
@@ -64,6 +64,7 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
   @override
   void initState() {
     super.initState();
+    print(widget.videos);
     _pageController = PageController();
     _pageController!.addListener(scrollListener);
   }
@@ -71,13 +72,12 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       controller: _pageController,
       itemBuilder: (context, position) {
         return VideoPage(
           widget.videos[position],
-          widget.images[position],
           pageIndex: position,
           currentPageIndex: current,
           isPaused: isOnPageTurning,
@@ -90,8 +90,8 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
                 await showModalBottomSheet(
                   shape: OutlineInputBorder(
                       borderSide: BorderSide(color: transparentColor),
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16.0))),
+                      borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(16.0))),
                   context: context,
                   isScrollControlled: true,
                   isDismissible: false,
@@ -110,14 +110,13 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
 }
 
 class VideoPage extends StatefulWidget {
-  final String video;
-  final String image;
+  final Video video;
   final int? pageIndex;
   final int? currentPageIndex;
   final bool? isPaused;
   final bool? isFollowing;
 
-  VideoPage(this.video, this.image,
+  VideoPage(this.video,
       {this.pageIndex, this.currentPageIndex, this.isPaused, this.isFollowing});
 
   @override
@@ -132,7 +131,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(widget.video)
+    _controller = VideoPlayerController.network(widget.video.videoUrl)
       ..initialize().then((value) {
         setState(() {
           _controller.setLooping(true);
@@ -196,7 +195,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
             },
             child: _controller.value.isInitialized
                 ? VideoPlayer(_controller)
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
           ),
           Positioned.directional(
             textDirection: Directionality.of(context),
@@ -214,7 +213,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                     children: [
                       CircleAvatar(
                           backgroundImage:
-                              AssetImage('assets/images/user.webp')),
+                              NetworkImage(widget.video.profilePhoto)),
                       PositionedDirectional(
                         bottom: -10,
                         start: 12,
@@ -233,17 +232,17 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                 ),
                 CustomButton(
                   ImageIcon(
-                    AssetImage('assets/icons/ic_views.png'),
+                    const AssetImage('assets/icons/ic_views.png'),
                     color: secondaryColor,
                   ),
-                  '1.2k',
+                  widget.video.shareCount.toString(),
                 ),
                 CustomButton(
                     ImageIcon(
-                      AssetImage('assets/icons/ic_comment.png'),
+                      const AssetImage('assets/icons/ic_comment.png'),
                       color: secondaryColor,
                     ),
-                    '287', onPressed: () {
+                    widget.video.commentCount.toString(), onPressed: () {
                   commentSheet(context);
                 }),
                 CustomButton(
@@ -251,7 +250,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                     isLiked ? Icons.favorite : Icons.favorite_border,
                     color: secondaryColor,
                   ),
-                  '8.2k',
+                  widget.video.likes.length.toString(),
                   onPressed: () {
                     setState(() {
                       isLiked = !isLiked;
@@ -259,8 +258,8 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                   },
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: RotatedImage(widget.image),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: RotatedImage(widget.video.albumPhoto),
                 ),
               ],
             ),
@@ -279,8 +278,8 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                         size: 12.0,
                       )),
                 )
-              : SizedBox.shrink(),
-          Align(
+              : const SizedBox.shrink(),
+          const Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
                 padding: EdgeInsets.only(bottom: 60.0),
@@ -299,12 +298,20 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
               child: RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: '@emiliwilliamson\n',
+                      text: '@${widget.video.username}\n',
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 16.0,
+                          fontSize: 17.0,
                           fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5)),
-                  TextSpan(text: locale.comment8),
+                          letterSpacing: 0.5,
+                          height: 3)),
+                  TextSpan(
+                    text: '${widget.video.caption}\n',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  TextSpan(
+                      text: '${widget.video.songName}',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, height: 1.5)),
                   TextSpan(
                       text: '  ${locale.seeMore}',
                       style: TextStyle(
@@ -314,7 +321,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
               ),
             ),
           ),
-          PositionedDirectional(end: 20, top: 34, child: CoinContainer())
+          const PositionedDirectional(end: 20, top: 34, child: CoinContainer())
         ],
       ),
     );

@@ -49,6 +49,7 @@ class _RotatedImageState extends State<RotatedImage>
       child: RotationTransition(
         turns: animation,
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Image.asset(
               'assets/images/disk.png',
@@ -58,9 +59,16 @@ class _RotatedImageState extends State<RotatedImage>
               textDirection: Directionality.of(context),
               start: 7.5,
               top: 7.5,
-              child: Image.asset(
-                widget.image,
-                scale: 3,
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    widget.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
           ],

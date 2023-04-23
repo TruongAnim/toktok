@@ -14,7 +14,7 @@ import 'package:toktok/controllers/music_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';
 import 'package:toktok/controllers/search_user_controller.dart';
 import 'package:toktok/controllers/upload_controller.dart';
-import 'package:toktok/controllers/video_controller.dart';
+import 'package:toktok/controllers/feeding_video_controller.dart';
 import 'package:toktok/firebase_options.dart';
 
 void main() async {
@@ -23,7 +23,7 @@ void main() async {
       .then((value) {
     Get.lazyPut(() => LanguageController(), fenix: true);
     Get.lazyPut(() => UploadController(), fenix: true);
-    Get.lazyPut(() => VideoController(), fenix: true);
+    Get.lazyPut(() => FeedingVideoController(), fenix: true);
     Get.lazyPut(() => CommentController(), fenix: true);
     Get.lazyPut(() => SearchUserController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);

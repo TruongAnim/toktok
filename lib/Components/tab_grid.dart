@@ -31,40 +31,41 @@ class TabGrid extends StatelessWidget {
           mainAxisSpacing: 3,
         ),
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FollowingTabPage(
-                        videos1, imagesInDisc1, false,
-                        variable: 1))),
-            child: FadedScaleAnimation(
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(list![index]), fit: BoxFit.fill),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                padding: EdgeInsets.all(8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Icon(
-                      viewIcon,
-                      color: secondaryColor,
-                      size: 15,
-                    ),
-                    views != null ? Text(' ' + views!) : SizedBox.shrink(),
-                    Spacer(),
-                    Icon(
-                      icon,
-                      color: mainColor,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
+          return Container();
+          // return GestureDetector(
+          //   onTap: () => Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => FollowingTabPage(
+          //               videos1, imagesInDisc1, false,
+          //               variable: 1))),
+          //   child: FadedScaleAnimation(
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //             image: AssetImage(list![index]), fit: BoxFit.fill),
+          //         borderRadius: BorderRadius.circular(5),
+          //       ),
+          //       padding: EdgeInsets.all(8),
+          //       child: Row(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: <Widget>[
+          //           Icon(
+          //             viewIcon,
+          //             color: secondaryColor,
+          //             size: 15,
+          //           ),
+          //           views != null ? Text(' ' + views!) : SizedBox.shrink(),
+          //           Spacer(),
+          //           Icon(
+          //             icon,
+          //             color: mainColor,
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // );
         });
   }
 }

@@ -25,14 +25,15 @@ class ThumbTile extends StatelessWidget {
         ),
       ),
       onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => FollowingTabPage(
-                    videos2 + videos1,
-                    imagesInDisc2 + imagesInDisc1,
-                    false,
-                    variable: 1,
-                  ))),
+        context,
+        MaterialPageRoute(builder: (context) => Container() // FollowingTabPage(
+            //   videos2 + videos1,
+            //   imagesInDisc2 + imagesInDisc1,
+            //   false,
+            //   variable: 1,
+            // ),
+            ),
+      ),
     );
   }
 }
