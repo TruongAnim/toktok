@@ -115,28 +115,27 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
             child: Row(
               children: <Widget>[
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  child: Row(
-                    children: [
-                      CustomButton(
-                        color: transparentColor,
-                        icon: Icon(
-                          Icons.music_note,
-                          color: secondaryColor,
-                        ),
-                        text: data['music'] != null
-                            ? data['music'].toString()
-                            : AppLocalizations.of(context)!.addMusic,
-                        onPressed: () async {
-                          AudioDetails? result =
-                              await Get.toNamed(PageRoutes.addMusic)
-                                  as AudioDetails?;
-                          data['music'] = result;
-                          setState(() {});
-                        },
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    alignment: Alignment.centerLeft,
+                    child: CustomButton(
+                      color: transparentColor,
+                      icon: Icon(
+                        Icons.music_note,
+                        color: secondaryColor,
                       ),
-                      Spacer(),
-                    ],
+                      text: data['music'] != null
+                          ? data['music'].toString()
+                          : AppLocalizations.of(context)!.addMusic,
+                      onPressed: () async {
+                        AudioDetails? result =
+                            await Get.toNamed(PageRoutes.addMusic)
+                                as AudioDetails?;
+                        data['music'] = result;
+                        setState(() {});
+                      },
+                    ),
                   ),
                 ),
                 Spacer(),

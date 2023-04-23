@@ -41,6 +41,7 @@ class CustomButton extends StatelessWidget {
         label: SizedBox(
           child: Text(
             text ?? locale!.continueText!,
+            textAlign: TextAlign.left,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: style ??
