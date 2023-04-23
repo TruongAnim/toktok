@@ -181,6 +181,7 @@ class _UserProfileBodyState extends State<UserProfileBody> {
                                   ),
                                   body: TabGrid(
                                     [],
+                                    showView: false,
                                   ),
                                 )),
                             RowItem('12.8k', locale.followers, FollowersPage()),
@@ -214,13 +215,19 @@ class _UserProfileBodyState extends State<UserProfileBody> {
             body: TabBarView(
               children: <Widget>[
                 FadedSlideAnimation(
-                  child: TabGrid([]),
+                  child: TabGrid(
+                    [],
+                    showView: false,
+                  ),
                   beginOffset: Offset(0, 0.3),
                   endOffset: Offset(0, 0),
                   slideCurve: Curves.linearToEaseOut,
                 ),
                 FadedSlideAnimation(
-                  child: TabGrid([]),
+                  child: TabGrid(
+                    [],
+                    showView: false,
+                  ),
                   beginOffset: Offset(0, 0.3),
                   endOffset: Offset(0, 0),
                   slideCurve: Curves.linearToEaseOut,

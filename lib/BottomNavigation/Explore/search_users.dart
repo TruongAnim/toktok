@@ -98,6 +98,7 @@ class _SearchUsersState extends State<SearchUsers> {
             FadedSlideAnimation(
               child: TabGrid(
                 [],
+                showView: false,
                 onTap: () =>
                     Navigator.pushNamed(context, PageRoutes.videoOptionPage),
               ),

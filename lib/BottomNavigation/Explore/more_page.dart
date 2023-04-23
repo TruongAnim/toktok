@@ -16,7 +16,10 @@ class MorePage extends StatelessWidget {
             title: Text(title!),
           ),
           body: FadedSlideAnimation(
-            child: TabGrid([]),
+            child: TabGrid(
+              [],
+              showView: false,
+            ),
             beginOffset: Offset(0.3, 0.3),
             endOffset: Offset(0, 0),
             slideCurve: Curves.linearToEaseOut,

@@ -64,8 +64,8 @@ class Audio extends StatelessWidget {
               children: [
                 TabGrid(
                   [],
+                  showView: true,
                   viewIcon: Icons.remove_red_eye,
-                  views: '2.8m',
                   onTap: () {},
                 ),
                 Container(

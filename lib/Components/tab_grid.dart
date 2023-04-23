@@ -4,16 +4,21 @@ import 'package:toktok/BottomNavigation/Home/following_tab.dart';
 import 'package:toktok/BottomNavigation/Home/home_page.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/models/video.dart';
+import 'package:toktok/utils/random_utils.dart';
 
 class TabGrid extends StatelessWidget {
   final List<Video> list;
   final IconData? icon;
   final Function? onTap;
   final IconData? viewIcon;
-  final String? views;
+  final bool showView;
 
   const TabGrid(this.list,
-      {super.key, this.icon, this.onTap, this.viewIcon, this.views});
+      {super.key,
+      this.icon,
+      this.onTap,
+      this.viewIcon,
+      required this.showView});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +55,9 @@ class TabGrid extends StatelessWidget {
                       color: secondaryColor,
                       size: 15,
                     ),
-                    views != null ? Text(' ' + views!) : SizedBox.shrink(),
+                    showView
+                        ? Text(' ' + RandomUtils.getRandomView())
+                        : SizedBox.shrink(),
                     Spacer(),
                     Icon(
                       icon,

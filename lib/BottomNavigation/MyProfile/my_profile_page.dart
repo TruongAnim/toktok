@@ -211,6 +211,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                           ),
                                           body: TabGrid(
                                             _profileController.user['videos'],
+                                            showView: false,
                                           ),
                                         )),
                                     RowItem(
@@ -234,10 +235,10 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             labelColor: mainColor,
                             unselectedLabelColor: lightTextColor,
                             indicatorColor: transparentColor,
-                            tabs: [
-                              const Tab(icon: Icon(Icons.dashboard)),
-                              const Tab(icon: Icon(Icons.favorite_border)),
-                              const Tab(icon: Icon(Icons.bookmark_border)),
+                            tabs: const [
+                              Tab(icon: Icon(Icons.dashboard)),
+                              Tab(icon: Icon(Icons.favorite_border)),
+                              Tab(icon: Icon(Icons.bookmark_border)),
                             ],
                           ),
                         ),
@@ -258,7 +259,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                           child: TabGrid(
                             _profileController.user['videos'],
                             viewIcon: Icons.remove_red_eye,
-                            views: '2.2k',
+                            showView: true,
                             onTap: () => Navigator.pushNamed(
                                 context, PageRoutes.videoOptionPage),
                           ),
@@ -270,6 +271,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                           child: TabGrid(
                             _profileController.user['videos'],
                             icon: Icons.favorite,
+                            showView: false,
                           ),
                         ),
                         FadedSlideAnimation(
@@ -279,6 +281,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                           child: TabGrid(
                             _profileController.user['videos'],
                             icon: Icons.bookmark,
+                            showView: false,
                           ),
                         ),
                       ],
