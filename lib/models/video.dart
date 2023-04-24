@@ -57,7 +57,7 @@ class Video {
         shareCount: snap['shareCount'],
         songName: snap['songName'],
         caption: snap['caption'],
-        videoUrl:
+        videoUrl: //'assets/videos/1.mp4',
             'https://assets.mixkit.co/videos/preview/mixkit-pov-of-a-basket-of-easter-eggs-48595-large.mp4', //snap['videoUrl'],
         profilePhoto: snap['profilePhoto'],
         thumbnail: snap['thumbnail'],

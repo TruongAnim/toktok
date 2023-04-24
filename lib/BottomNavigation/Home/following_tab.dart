@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 import 'package:toktok/Auth/login_navigator.dart';
 import 'package:toktok/BottomNavigation/Home/comment_sheet.dart';
 import 'package:toktok/Components/custom_button.dart';
@@ -44,7 +45,7 @@ class FollowingTabBody extends StatefulWidget {
 }
 
 class _FollowingTabBodyState extends State<FollowingTabBody> {
-  PageController? _pageController;
+  PreloadPageController? _pageController;
   int current = 0;
   bool isOnPageTurning = false;
 
@@ -68,7 +69,7 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(
+    _pageController = PreloadPageController(
       initialPage: widget.variable ?? 0,
     );
     _pageController!.addListener(scrollListener);
@@ -76,7 +77,8 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
+    return PreloadPageView.builder(
+      // allowImplicitScrolling: true,
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       controller: _pageController,
@@ -133,14 +135,14 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
 
   @override
   void didPopNext() {
-    print("didPopNext");
+    print("mylog didPopNext");
     _controller.play();
     super.didPopNext();
   }
 
   @override
   void didPushNext() {
-    print("didPushNext");
+    print("mylog didPushNext");
     _controller.pause();
     super.didPushNext();
   }
@@ -165,7 +167,9 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
         !widget.isPaused! &&
         initialized) {
       _controller.play();
+      print("mylog play");
     } else {
+      print("mylog pause");
       _controller.pause();
     }
     var locale = AppLocalizations.of(context)!;
