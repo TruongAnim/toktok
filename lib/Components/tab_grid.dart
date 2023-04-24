@@ -23,9 +23,9 @@ class TabGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemCount: list.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           childAspectRatio: 2 / 2.5,
           crossAxisSpacing: 3,
@@ -37,7 +37,7 @@ class TabGrid extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        FollowingTabPage(list, false, variable: 1))),
+                        FollowingTabPage(list, false, variable: index))),
             child: FadedScaleAnimation(
               child: Container(
                 decoration: BoxDecoration(
@@ -46,7 +46,7 @@ class TabGrid extends StatelessWidget {
                       fit: BoxFit.fill),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -56,9 +56,9 @@ class TabGrid extends StatelessWidget {
                       size: 15,
                     ),
                     showView
-                        ? Text(' ' + RandomUtils.getRandomView())
-                        : SizedBox.shrink(),
-                    Spacer(),
+                        ? Text(' ${RandomUtils.getRandomView()}')
+                        : const SizedBox.shrink(),
+                    const Spacer(),
                     Icon(
                       icon,
                       color: mainColor,

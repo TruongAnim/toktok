@@ -259,8 +259,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             _profileController.user['videos'],
                             viewIcon: Icons.remove_red_eye,
                             showView: true,
-                            onTap: () => Navigator.pushNamed(
-                                context, PageRoutes.videoOptionPage),
+                            onTap: () => print('video click'),
                           ),
                         ),
                         FadedSlideAnimation(

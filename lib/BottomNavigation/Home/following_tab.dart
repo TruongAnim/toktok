@@ -69,7 +69,9 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
   void initState() {
     super.initState();
     print(widget.videos);
-    _pageController = PageController();
+    _pageController = PageController(
+      initialPage: widget.variable ?? 0,
+    );
     _pageController!.addListener(scrollListener);
   }
 
