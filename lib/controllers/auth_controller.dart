@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ import 'package:toktok/models/user.dart' as Model;
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-
+  late String profileTemp;
   late Rx<User?> _currentUser;
 
   User get user => firebaseAuth.currentUser!;
@@ -34,8 +35,16 @@ class AuthController extends GetxController {
       Get.offAllNamed(PageRoutes.login);
     } else {
       Get.offAllNamed(PageRoutes.bottomNavigation);
+      getProfilePicture();
       print(_currentUser.value!.uid);
     }
+  }
+
+  getProfilePicture() {
+    print('getProfilePIctrue');
+    firebaseStore.collection('users').doc(user.uid).get().then((value) {
+      profileTemp = (value.data() as Map<String, dynamic>)['profilePhoto'];
+    });
   }
 
   Future<String> uploadToStorage(File avatar) async {

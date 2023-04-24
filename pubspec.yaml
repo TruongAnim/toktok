@@ -53,6 +53,7 @@ dependencies:
   video_compress: 3.1.2
   image_picker: ^0.8.7+4
   numeral: ^2.0.1
+  timeago: ^3.3.0
 
 dev_dependencies:
   flutter_test:

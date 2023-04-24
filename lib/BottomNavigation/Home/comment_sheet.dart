@@ -1,16 +1,21 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toktok/Components/custom_button.dart';
 import 'package:toktok/Components/entry_field.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/comment_controller.dart';
 import 'package:toktok/models/comment.dart';
+import 'package:timeago/timeago.dart' as TimeAgo;
 
 void commentSheet(BuildContext context, String postId) async {
   var locale = AppLocalizations.of(context)!;
   CommentController _commentController = Get.find();
   _commentController.updatePostId(postId);
+  TextEditingController editingController = TextEditingController();
 
   await showModalBottomSheet(
       enableDrag: false,
@@ -59,9 +64,11 @@ void commentSheet(BuildContext context, String postId) async {
                                       thickness: 1,
                                     ),
                                     ListTile(
-                                      leading: Image.asset(
-                                        comment.profileImage,
-                                        scale: 2.3,
+                                      leading: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                          comment.profileImage,
+                                          scale: 1,
+                                        ),
                                       ),
                                       title: Text(comment.username,
                                           style: Theme.of(context)
@@ -73,19 +80,34 @@ void commentSheet(BuildContext context, String postId) async {
                                       subtitle: RichText(
                                         text: TextSpan(children: [
                                           TextSpan(
-                                            text: comment.comment,
+                                            text: '${comment.comment}  ',
                                           ),
                                           TextSpan(
-                                              text: comment.publicDate,
+                                              text: TimeAgo.format((comment
+                                                      .publicDate as Timestamp)
+                                                  .toDate()),
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .caption),
                                         ]),
                                       ),
-                                      trailing: ImageIcon(
-                                        const AssetImage(
-                                            'assets/icons/ic_like.png'),
-                                        color: disabledTextColor,
+                                      trailing: CustomButton(
+                                        Icon(
+                                          comment.likes.contains(
+                                                  authController.user.uid)
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color: comment.likes.contains(
+                                                  authController.user.uid)
+                                              ? Colors.red
+                                              : disabledTextColor,
+                                        ),
+                                        comment.likes.length.toString(),
+                                        onPressed: () {
+                                          _commentController
+                                              .likeComment(comment.id);
+                                        },
+                                        padding: 8,
                                       ),
                                     ),
                                   ],
@@ -100,21 +122,30 @@ void commentSheet(BuildContext context, String postId) async {
                     start: 0,
                     end: 0,
                     child: EntryField(
+                      controller: editingController,
                       counter: null,
                       padding: EdgeInsets.zero,
                       hint: locale.writeYourComment,
                       fillColor: darkColor,
-                      prefix: const Padding(
+                      prefix: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 8.0),
                         child: CircleAvatar(
                           backgroundImage:
-                              AssetImage('assets/images/user.webp'),
+                              NetworkImage(authController.profileTemp),
                         ),
                       ),
-                      suffixIcon: Icon(
-                        Icons.send,
-                        color: mainColor,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          Icons.send,
+                          color: mainColor,
+                        ),
+                        onPressed: () {
+                          _commentController
+                              .postComment(editingController.text);
+                          editingController.text = '';
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        },
                       ),
                     ),
                   ),

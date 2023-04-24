@@ -5,14 +5,16 @@ class CustomButton extends StatelessWidget {
   final Widget icon;
   final String text;
   final Function? onPressed;
+  final double padding;
 
-  CustomButton(this.icon, this.text, {this.onPressed});
+  CustomButton(this.icon, this.text,
+      {super.key, this.onPressed, this.padding = 12});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       splashColor: transparentColor,
-      padding: EdgeInsets.symmetric(vertical: 12.0),
+      padding: EdgeInsets.symmetric(vertical: padding),
       child: Column(
         children: <Widget>[
           icon,
