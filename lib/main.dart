@@ -10,6 +10,7 @@ import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/style.dart';
 import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/comment_controller.dart';
+import 'package:toktok/controllers/hashtag_controller.dart';
 import 'package:toktok/controllers/music_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';
 import 'package:toktok/controllers/search_controller.dart';
@@ -30,6 +31,7 @@ void main() async {
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => MusicController(), fenix: true);
     Get.lazyPut(() => VideoInfoController(), fenix: true);
+    Get.lazyPut(() => HashtagController(), fenix: true);
     Get.put(AuthController());
   });
 

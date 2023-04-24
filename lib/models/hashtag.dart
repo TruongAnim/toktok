@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:toktok/models/video.dart';
 
 class Hashtag {
   final String name;
-  final List videos;
+  final List<Video> videos;
 
   Hashtag({required this.name, required this.videos});
 

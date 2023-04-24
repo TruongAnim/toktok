@@ -3,12 +3,16 @@ import 'dart:io';
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:toktok/BottomNavigation/Explore/more_page.dart';
 import 'package:toktok/Components/thumb_list.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/controllers/hashtag_controller.dart';
+import 'package:toktok/models/hashtag.dart';
+import 'package:toktok/models/video.dart';
 
 List<String> dance = [
   'assets/thumbnails/dance/Layer 951.png',
@@ -55,65 +59,76 @@ class ExploreBody extends StatefulWidget {
 }
 
 class _ExploreBodyState extends State<ExploreBody> {
-  static final AdRequest request = AdRequest(
-    keywords: <String>['foo', 'bar'],
-    contentUrl: 'http://foo.com/bar.html',
-    nonPersonalizedAds: true,
-  );
+  // static const AdRequest request = AdRequest(
+  //   keywords: <String>['foo', 'bar'],
+  //   contentUrl: 'http://foo.com/bar.html',
+  //   nonPersonalizedAds: true,
+  // );
 
-  BannerAd? _anchoredBanner;
-  bool _loadingAnchoredBanner = false;
+  // BannerAd? _anchoredBanner;
+  // bool _loadingAnchoredBanner = false;
+  bool showingAd = false;
 
-  Future<void> _createAnchoredBanner(BuildContext context) async {
-    final AnchoredAdaptiveBannerAdSize? size =
-        await AdSize.getAnchoredAdaptiveBannerAdSize(
-      Orientation.portrait,
-      MediaQuery.of(context).size.width.truncate(),
-    );
+  // Future<void> _createAnchoredBanner(BuildContext context) async {
+  //   final AnchoredAdaptiveBannerAdSize? size =
+  //       await AdSize.getAnchoredAdaptiveBannerAdSize(
+  //     Orientation.portrait,
+  //     MediaQuery.of(context).size.width.truncate(),
+  //   );
 
-    if (size == null) {
-      print('Unable to get height of anchored banner.');
-      return;
-    }
+  //   if (size == null) {
+  //     print('Unable to get height of anchored banner.');
+  //     return;
+  //   }
 
-    final BannerAd banner = BannerAd(
-      size: size,
-      request: request,
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
-          : 'ca-app-pub-3940256099942544/2934735716',
-      listener: BannerAdListener(
-        onAdLoaded: (Ad ad) {
-          print('$BannerAd loaded.');
-          setState(() {
-            _anchoredBanner = ad as BannerAd?;
-          });
-        },
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('$BannerAd failedToLoad: $error');
-          ad.dispose();
-        },
-        onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
-      ),
-    );
-    return banner.load();
+  //   final BannerAd banner = BannerAd(
+  //     size: size,
+  //     request: request,
+  //     adUnitId: Platform.isAndroid
+  //         ? 'ca-app-pub-3940256099942544/6300978111'
+  //         : 'ca-app-pub-3940256099942544/2934735716',
+  //     listener: BannerAdListener(
+  //       onAdLoaded: (Ad ad) {
+  //         print('$BannerAd loaded.');
+  //         setState(() {
+  //           _anchoredBanner = ad as BannerAd?;
+  //         });
+  //       },
+  //       onAdFailedToLoad: (Ad ad, LoadAdError error) {
+  //         print('$BannerAd failedToLoad: $error');
+  //         ad.dispose();
+  //       },
+  //       onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
+  //       onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
+  //     ),
+  //   );
+  //   return banner.load();
+  // }
+
+  late HashtagController _hashtagController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _hashtagController = Get.find();
+    _hashtagController.getHashtags();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _anchoredBanner?.dispose();
+    // _anchoredBanner?.dispose();
   }
 
-  final List<ThumbList> thumbLists = [
-    ThumbList(dance),
-    ThumbList(lol),
-    ThumbList(food),
-    ThumbList(dance),
-    ThumbList(lol),
-    ThumbList(food),
-  ];
+  // final List<ThumbList> thumbLists = [
+  //   ThumbList(dance),
+  //   ThumbList(lol),
+  //   ThumbList(food),
+  //   ThumbList(dance),
+  //   ThumbList(lol),
+  //   ThumbList(food),
+  // ];
 
   int _current = 0;
 
@@ -130,18 +145,19 @@ class _ExploreBodyState extends State<ExploreBody> {
     ];
     return Builder(
       builder: (BuildContext context) {
-        if (!_loadingAnchoredBanner) {
-          _loadingAnchoredBanner = true;
-          _createAnchoredBanner(context);
-        }
+        // if (!_loadingAnchoredBanner) {
+        //   _loadingAnchoredBanner = true;
+        //   _createAnchoredBanner(context);
+        // }
         return Padding(
-          padding: EdgeInsets.only(bottom: 60.0, top: 20.0),
+          padding: const EdgeInsets.only(bottom: 60.0, top: 20.0),
           child: Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(72.0),
+              preferredSize: const Size.fromHeight(72.0),
               child: Container(
-                margin: EdgeInsets.all(20.0),
-                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
+                margin: const EdgeInsets.all(20.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
                 decoration: BoxDecoration(
                   color: darkColor,
                   borderRadius: BorderRadius.circular(25.0),
@@ -159,85 +175,93 @@ class _ExploreBodyState extends State<ExploreBody> {
                 ),
               ),
             ),
-            body: FadedSlideAnimation(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: <Widget>[
-                  Stack(
-                    children: [
-                      CarouselSlider(
-                        items: carouselImages.map((i) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                    child: FadedScaleAnimation(
-                                        child: Image.asset(i))),
-                              );
-                            },
-                          );
-                        }).toList(),
-                        options: CarouselOptions(
-                            enableInfiniteScroll: false,
-                            viewportFraction: 1.0,
-                            autoPlay: true,
-                            aspectRatio: 3,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _current = index;
-                              });
-                            }),
-                      ),
-                      Positioned.directional(
-                        textDirection: Directionality.of(context),
-                        end: 20.0,
-                        bottom: 0.0,
-                        child: Row(
-                          children: carouselImages.map((i) {
-                            int index = carouselImages.indexOf(i);
-
-                            return Container(
-                              width: 8.0,
-                              height: 8.0,
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 16.0, horizontal: 4.0),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: _current == index
-                                    ? Color.fromRGBO(0, 0, 0, 0.9)
-                                    : disabledTextColor.withOpacity(0.5),
+            body: Obx(() {
+              return FadedSlideAnimation(
+                beginOffset: const Offset(0, 0.3),
+                endOffset: const Offset(0, 0),
+                slideCurve: Curves.linearToEaseOut,
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: <Widget>[
+                    showingAd
+                        ? Stack(
+                            children: [
+                              CarouselSlider(
+                                items: carouselImages.map((i) {
+                                  return Builder(
+                                    builder: (BuildContext context) {
+                                      return GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                            child: FadedScaleAnimation(
+                                                child: Image.asset(i))),
+                                      );
+                                    },
+                                  );
+                                }).toList(),
+                                options: CarouselOptions(
+                                    enableInfiniteScroll: false,
+                                    viewportFraction: 1.0,
+                                    autoPlay: true,
+                                    aspectRatio: 3,
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        _current = index;
+                                      });
+                                    }),
                               ),
-                            );
-                          }).toList(),
-                        ),
-                      )
-                    ],
-                  ),
-                  if (_anchoredBanner != null)
-                    Container(
-                      width: _anchoredBanner!.size.width.toDouble(),
-                      height: _anchoredBanner!.size.height.toDouble(),
-                      child: AdWidget(ad: _anchoredBanner!),
-                    ),
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: titleRows.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: <Widget>[
-                            titleRows[index],
-                            thumbLists[index],
-                          ],
-                        );
-                      }),
-                ],
-              ),
-              beginOffset: Offset(0, 0.3),
-              endOffset: Offset(0, 0),
-              slideCurve: Curves.linearToEaseOut,
-            ),
+                              Positioned.directional(
+                                textDirection: Directionality.of(context),
+                                end: 20.0,
+                                bottom: 0.0,
+                                child: Row(
+                                  children: carouselImages.map((i) {
+                                    int index = carouselImages.indexOf(i);
+
+                                    return Container(
+                                      width: 8.0,
+                                      height: 8.0,
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 16.0, horizontal: 4.0),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: _current == index
+                                            ? const Color.fromRGBO(0, 0, 0, 0.9)
+                                            : disabledTextColor
+                                                .withOpacity(0.5),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
+                            ],
+                          )
+                        : Container(),
+                    // if (_anchoredBanner != null)
+                    //   Container(
+                    //     width: _anchoredBanner!.size.width.toDouble(),
+                    //     height: _anchoredBanner!.size.height.toDouble(),
+                    //     child: AdWidget(ad: _anchoredBanner!),
+                    //   ),
+                    ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _hashtagController.hashtags.length,
+                        itemBuilder: (context, index) {
+                          Hashtag hashtag = _hashtagController.hashtags[index];
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              TitleRow('#${hashtag.name}',
+                                  '${hashtag.videos.length} videos', []),
+                              ThumbList(hashtag.videos),
+                            ],
+                          );
+                        }),
+                  ],
+                ),
+              );
+            }),
           ),
         );
       },
@@ -272,7 +296,7 @@ class TitleRow extends StatelessWidget {
               subTitle + ' ' + AppLocalizations.of(context)!.video!,
               style: Theme.of(context).textTheme.caption,
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               "${AppLocalizations.of(context)!.viewAll}",
               style: Theme.of(context).textTheme.caption,

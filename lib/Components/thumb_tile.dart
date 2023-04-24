@@ -19,7 +19,7 @@ class ThumbTile extends StatelessWidget {
           width: screenWidth / 4.25,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(mediaListData), fit: BoxFit.fill),
+                image: NetworkImage(mediaListData), fit: BoxFit.fill),
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),

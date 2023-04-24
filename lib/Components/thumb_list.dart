@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:toktok/Components/thumb_tile.dart';
+import 'package:toktok/models/video.dart';
 
 class ThumbList extends StatelessWidget {
-  final List<String> mediaList;
+  final List<Video> mediaList;
 
   ThumbList(this.mediaList);
 
@@ -18,7 +19,7 @@ class ThumbList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            return ThumbTile(mediaList[index]);
+            return ThumbTile(mediaList[index].thumbnail);
           }),
     );
   }
