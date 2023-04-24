@@ -8,7 +8,7 @@ import 'package:toktok/BottomNavigation/MyProfile/badge_request.dart';
 import 'package:toktok/BottomNavigation/MyProfile/language_page.dart';
 import 'package:toktok/BottomNavigation/MyProfile/video_option.dart';
 import 'package:toktok/BottomNavigation/bottom_navigation.dart';
-import 'package:toktok/BottomNavigation/AddVideo/add_videosss.dart';
+import 'package:toktok/BottomNavigation/AddVideo/add_video.dart';
 import 'package:toktok/BottomNavigation/AddVideo/add_video_filter.dart';
 import 'package:toktok/BottomNavigation/MyProfile/followers.dart';
 import 'package:toktok/BottomNavigation/MyProfile/help_page.dart';
@@ -30,6 +30,7 @@ class PageRoutes {
   static const String tncPage = '/tnc_page';
   static const String searchPage = '/search_page';
   static const String addVideoPage = '/add_video_page';
+  static const String addVideo = '/add_video';
   static const String addVideoFilterPage = '/add_video_filter_page';
   static const String postInfoPage = '/post_info_page';
   static const String userProfilePage = '/user_profile_page';
@@ -54,6 +55,7 @@ class PageRoutes {
       tncPage: (context) => TnC(),
       searchPage: (context) => SearchUsers(),
       addVideoPage: (context) => AddVideoPage(),
+      addVideo: (context) => AddVideo(),
       addVideoFilterPage: (context) => AddVideoFilter(),
       postInfoPage: (context) => PostInfo(),
       userProfilePage: (context) => UserProfilePage(),
@@ -80,6 +82,7 @@ class PageRoutes {
       tncPage: TnC(),
       searchPage: SearchUsers(),
       addVideoPage: AddVideoPage(),
+      addVideo: AddVideo(),
       addVideoFilterPage: AddVideoFilter(),
       postInfoPage: PostInfo(),
       userProfilePage: UserProfilePage(),

@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
@@ -10,16 +14,34 @@ class AddVideo extends StatefulWidget {
 }
 
 class _AddVideoState extends State<AddVideo> {
+  void _pickVideo(ImageSource source, BuildContext context) async {
+    final video = await ImagePicker().pickVideo(
+      source: source,
+    );
+    if (video != null) {
+      Get.toNamed(
+        PageRoutes.addVideoFilterPage,
+        arguments: {
+          'videoFile': File(video.path),
+          'videoPath': video.path,
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double ht = MediaQuery.of(context).size.height;
     double wt = MediaQuery.of(context).size.width;
     return Scaffold(
       body: FadedSlideAnimation(
+        beginOffset: Offset(0, 0.3),
+        endOffset: Offset(0, 0),
+        slideCurve: Curves.linearToEaseOut,
         child: Stack(
           children: <Widget>[
             Image.asset(
-              'assets/images/video 2.png',
+              'assets/images/camera_preview.jpg',
               fit: BoxFit.fill,
               height: ht,
               width: wt,
@@ -41,9 +63,14 @@ class _AddVideoState extends State<AddVideo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Icon(
-                    Icons.camera_front,
-                    color: secondaryColor,
+                  GestureDetector(
+                    child: Image.asset(
+                      'assets/icons/gallery1.png',
+                      width: 65,
+                    ),
+                    onTap: () {
+                      _pickVideo(ImageSource.gallery, context);
+                    },
                   ),
                   GestureDetector(
                     child: CircleAvatar(
@@ -55,8 +82,9 @@ class _AddVideoState extends State<AddVideo> {
                         size: 30,
                       ),
                     ),
-                    onTap: () => Navigator.pushNamed(
-                        context, PageRoutes.addVideoFilterPage),
+                    onTap: () {
+                      _pickVideo(ImageSource.camera, context);
+                    },
                   ),
                   Icon(
                     Icons.flash_off,
@@ -87,9 +115,6 @@ class _AddVideoState extends State<AddVideo> {
             ),
           ],
         ),
-        beginOffset: Offset(0, 0.3),
-        endOffset: Offset(0, 0),
-        slideCurve: Curves.linearToEaseOut,
       ),
     );
   }

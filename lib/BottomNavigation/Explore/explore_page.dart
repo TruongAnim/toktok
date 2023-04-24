@@ -247,13 +247,13 @@ class TitleRow extends StatelessWidget {
         ),
       ),
       title: Text(
-        title!,
+        title,
         style: Theme.of(context).textTheme.bodyText1,
       ),
       subtitle: Row(
         children: <Widget>[
           Text(
-            subTitle + ' ' + AppLocalizations.of(context)!.video!,
+            '$subTitle ${AppLocalizations.of(context)!.video!}',
             style: Theme.of(context).textTheme.caption,
           ),
           const Spacer(),

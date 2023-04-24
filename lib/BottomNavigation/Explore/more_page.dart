@@ -14,7 +14,7 @@ class MorePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(title!),
+            title: Text(title),
           ),
           body: FadedSlideAnimation(
             beginOffset: const Offset(0.3, 0.3),

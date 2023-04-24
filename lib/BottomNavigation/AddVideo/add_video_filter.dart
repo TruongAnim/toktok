@@ -55,11 +55,14 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
     // TODO: implement initState
     super.initState();
     data = Get.arguments;
-    videoPlayerController = VideoPlayerController.file(data['videoFile']);
-    videoPlayerController.initialize();
-    videoPlayerController.play();
-    videoPlayerController.setVolume(1);
-    videoPlayerController.setLooping(true);
+    videoPlayerController = VideoPlayerController.file(data['videoFile'])
+      ..initialize().then((value) {
+        setState(() {
+          videoPlayerController.setLooping(true);
+          videoPlayerController.play();
+          videoPlayerController.setVolume(1);
+        });
+      });
   }
 
   @override
@@ -142,6 +145,8 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
                 CustomButton(
                     text: AppLocalizations.of(context)!.next,
                     onPressed: () {
+                      videoPlayerController.pause();
+
                       Get.toNamed(PageRoutes.postInfoPage, arguments: data);
                     })
               ],

@@ -58,7 +58,8 @@ class EntryField extends StatelessWidget {
             contentPadding: EdgeInsets.all(16.0),
             filled: true,
             fillColor: fillColor ?? transparentColor,
-            prefixIcon: prefix,
+            prefixIcon:
+                Padding(padding: EdgeInsets.only(right: 10), child: prefix),
             suffixIcon: suffixIcon,
             labelText: label,
             labelStyle: Theme.of(context)

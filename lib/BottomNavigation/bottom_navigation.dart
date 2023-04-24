@@ -26,7 +26,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   void onTap(int index) {
     if (index == 2) {
-      Navigator.pushNamed(context, PageRoutes.addVideoPage);
+      Navigator.pushNamed(context, PageRoutes.addVideo);
     } else {
       setState(() {
         _currentIndex = index;

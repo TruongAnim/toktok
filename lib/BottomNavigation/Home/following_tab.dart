@@ -167,9 +167,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
         !widget.isPaused! &&
         initialized) {
       _controller.play();
-      print("mylog play");
     } else {
-      print("mylog pause");
       _controller.pause();
     }
     var locale = AppLocalizations.of(context)!;
