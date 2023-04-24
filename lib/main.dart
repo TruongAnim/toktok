@@ -15,6 +15,7 @@ import 'package:toktok/controllers/profile_controller.dart';
 import 'package:toktok/controllers/search_user_controller.dart';
 import 'package:toktok/controllers/upload_controller.dart';
 import 'package:toktok/controllers/feeding_video_controller.dart';
+import 'package:toktok/controllers/video_info_controller.dart';
 import 'package:toktok/firebase_options.dart';
 
 void main() async {
@@ -28,6 +29,7 @@ void main() async {
     Get.lazyPut(() => SearchUserController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => MusicController(), fenix: true);
+    Get.lazyPut(() => VideoInfoController(), fenix: true);
     Get.put(AuthController());
   });
 

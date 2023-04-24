@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Auth/login_navigator.dart';
 import 'package:toktok/BottomNavigation/Home/comment_sheet.dart';
 import 'package:toktok/Components/custom_button.dart';
@@ -6,6 +7,9 @@ import 'package:toktok/Components/rotated_image.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/feeding_video_controller.dart';
+import 'package:toktok/controllers/video_info_controller.dart';
 import 'package:toktok/models/video.dart';
 import 'package:toktok/utils/random_utils.dart';
 import 'package:video_player/video_player.dart';
@@ -110,12 +114,13 @@ class VideoPage extends StatefulWidget {
 
 class _VideoPageState extends State<VideoPage> with RouteAware {
   late VideoPlayerController _controller;
+  late VideoInfoController _videoInfoController;
   bool initialized = false;
-  bool isLiked = false;
 
   @override
   void initState() {
     super.initState();
+    _videoInfoController = Get.find();
     print('load new video ${widget.video.videoUrl}');
     _controller = VideoPlayerController.network(widget.video.videoUrl)
       ..initialize().then((value) {
@@ -233,14 +238,14 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                 }),
                 CustomButton(
                   Icon(
-                    isLiked ? Icons.favorite : Icons.favorite_border,
+                    widget.video.likes.contains(authController.user.uid)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
                     color: secondaryColor,
                   ),
                   widget.video.likes.length.toString(),
                   onPressed: () {
-                    setState(() {
-                      isLiked = !isLiked;
-                    });
+                    _videoInfoController.like(widget.video.id);
                   },
                 ),
                 Padding(
