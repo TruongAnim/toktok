@@ -60,7 +60,8 @@ class UploadController extends GetxController {
       });
     } else {
       firebaseStore.collection('hashtags').doc(hashtag).set({
-        'videos': [videoId]
+        'videos': [videoId],
+        'name': hashtag,
       });
     }
   }
