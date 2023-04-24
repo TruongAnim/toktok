@@ -17,12 +17,13 @@ class FeedingVideoController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     String uid = firebaseAuth.currentUser!.uid;
-    _videoList.bindStream(firebaseStore
-        .collection('videos')
-        .snapshots()
-        .map((QuerySnapshot snapshot) {
-      return snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
-    }));
+    _videoList.bindStream(
+      firebaseStore.collection('videos').snapshots().map(
+        (QuerySnapshot snapshot) {
+          return snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
+        },
+      ),
+    );
     QuerySnapshot followingDoc = await firebaseStore
         .collection('users')
         .doc(uid)
@@ -31,14 +32,18 @@ class FeedingVideoController extends GetxController {
     List<String> userFollowing = followingDoc.docs
         .map((QueryDocumentSnapshot snapshot) => snapshot.id)
         .toList();
-    print(userFollowing);
 
-    _videoFollowing.bindStream(firebaseStore
-        .collection('videos')
-        .snapshots()
-        .map((QuerySnapshot snapshot) {
-      return snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
-    }));
+    _videoFollowing.bindStream(
+      firebaseStore
+          .collection('videos')
+          .where('uid', whereIn: userFollowing)
+          .snapshots()
+          .map(
+        (QuerySnapshot snapshot) {
+          return snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
+        },
+      ),
+    );
   }
 
   void like(String videoId) async {

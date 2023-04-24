@@ -44,7 +44,7 @@ class _HomeBodyState extends State<HomeBody> {
               }),
               Obx(() {
                 return FollowingTabPage(
-                    _feedingVideoController.videoList, true);
+                    _feedingVideoController.videoFollowing, true);
               }),
             ],
           ),
