@@ -20,7 +20,7 @@ class ProfileController extends GetxController {
         .collection('videos')
         .where('uid', isEqualTo: _uid.value)
         .get();
-    videos = snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
+    videos = snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
     DocumentSnapshot userData =
         await firebaseStore.collection('users').doc(_uid.value).get();
     String userName = userData['name'];

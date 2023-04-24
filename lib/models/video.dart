@@ -46,7 +46,7 @@ class Video {
     };
   }
 
-  static Video fromSnapshort(DocumentSnapshot snapshot) {
+  static Video fromSnapshot(DocumentSnapshot snapshot) {
     var snap = snapshot.data() as Map<String, dynamic>;
     return Video(
         username: snap['username'],
@@ -57,7 +57,8 @@ class Video {
         shareCount: snap['shareCount'],
         songName: snap['songName'],
         caption: snap['caption'],
-        videoUrl: snap['videoUrl'],
+        videoUrl:
+            'https://assets.mixkit.co/videos/preview/mixkit-pov-of-a-basket-of-easter-eggs-48595-large.mp4', //snap['videoUrl'],
         profilePhoto: snap['profilePhoto'],
         thumbnail: snap['thumbnail'],
         albumPhoto: snap['albumPhoto']);

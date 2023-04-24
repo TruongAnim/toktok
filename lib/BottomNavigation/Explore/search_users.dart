@@ -1,18 +1,14 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/BottomNavigation/Explore/explore_page.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/Extension/extensions.dart';
 import 'package:toktok/Components/tab_grid.dart';
-
-class User {
-  User(this.name, this.id, this.img);
-  String name;
-  String id;
-  String img;
-}
+import 'package:toktok/controllers/search_controller.dart';
+import 'package:toktok/models/user.dart';
 
 class SearchUsers extends StatefulWidget {
   @override
@@ -20,21 +16,15 @@ class SearchUsers extends StatefulWidget {
 }
 
 class _SearchUsersState extends State<SearchUsers> {
+  late SearchController _searchController;
   var _controller = TextEditingController();
-  List<User> names = [
-    User("Food Master", "@georgesmith", "assets/user/user1.png"),
-    User("Foody Girl", "@emiliwilliamson", "assets/user/user2.png"),
-    User("Foodzilla", "@foodyzilla", "assets/user/user3.png"),
-    User("Linda Johnson", "@lindahere", "assets/user/user4.png"),
-    User("Opus Labs", "@opuslabs", "assets/user/user1.png"),
-    User("Ling Tong", "@lingtong", "assets/user/user2.png"),
-    User("Tosh Williamson", "@toshwilliamson", "assets/user/user3.png"),
-    User("Linda Johnson", "@lindahere", "assets/user/user4.png"),
-    User("Food Master", "@georgesmith", "assets/user/user1.png"),
-    User("Foody Girl", "@emiliwilliamson", "assets/user/user2.png"),
-    User("Foodzilla", "@foodyzilla", "assets/user/user3.png"),
-    User("Linda Johnson", "@lindahere", "assets/user/user4.png"),
-  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _searchController = Get.find();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +35,12 @@ class _SearchUsersState extends State<SearchUsers> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(66.0),
+            preferredSize: const Size.fromHeight(66.0),
             child: Column(
               children: <Widget>[
                 Container(
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 12.0),
                   decoration: BoxDecoration(
                     color: darkColor,
                     borderRadius: BorderRadius.circular(25.0),
@@ -59,7 +49,7 @@ class _SearchUsersState extends State<SearchUsers> {
                     controller: _controller,
                     decoration: InputDecoration(
                         icon: IconButton(
-                          icon: Icon(Icons.arrow_back),
+                          icon: const Icon(Icons.arrow_back),
                           color: secondaryColor,
                           onPressed: () => Navigator.pop(context),
                         ),
@@ -67,10 +57,14 @@ class _SearchUsersState extends State<SearchUsers> {
                         hintText: AppLocalizations.of(context)!.search,
                         hintStyle: Theme.of(context).textTheme.subtitle1,
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.close),
+                          icon: const Icon(Icons.search),
                           color: secondaryColor,
                           onPressed: () {
-                            _controller.clear();
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            _searchController
+                                .searchUser(_controller.text.toLowerCase());
+                            _searchController
+                                .searchVideo(_controller.text.toLowerCase());
                           },
                         )),
                   ),
@@ -84,7 +78,7 @@ class _SearchUsersState extends State<SearchUsers> {
                     labelStyle: Theme.of(context).textTheme.headline6,
                     unselectedLabelColor: disabledTextColor,
                     tabs: <Widget>[
-                      Tab(text: local.video!.capitalize()),
+                      Tab(text: GetStringUtils(local.video!).capitalize),
                       Tab(text: local.users),
                     ],
                   ),
@@ -93,56 +87,60 @@ class _SearchUsersState extends State<SearchUsers> {
             ),
           ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            FadedSlideAnimation(
-              child: TabGrid(
-                [],
-                showView: false,
-                onTap: () =>
-                    Navigator.pushNamed(context, PageRoutes.videoOptionPage),
+        body: Obx(() {
+          return TabBarView(
+            children: <Widget>[
+              FadedSlideAnimation(
+                beginOffset: const Offset(0, 0.3),
+                endOffset: const Offset(0, 0),
+                slideCurve: Curves.linearToEaseOut,
+                child: TabGrid(
+                  _searchController.listVideo,
+                  showView: true,
+                  onTap: () =>
+                      Navigator.pushNamed(context, PageRoutes.videoOptionPage),
+                ),
               ),
-              beginOffset: Offset(0, 0.3),
-              endOffset: Offset(0, 0),
-              slideCurve: Curves.linearToEaseOut,
-            ),
-            FadedSlideAnimation(
-              child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: names.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: <Widget>[
-                        Divider(
-                          color: darkColor,
-                          height: 1.0,
-                          thickness: 1,
-                        ),
-                        ListTile(
-                          leading: FadedScaleAnimation(
-                            child: CircleAvatar(
-                              backgroundColor: darkColor,
-                              backgroundImage: AssetImage(names[index].img),
+              FadedSlideAnimation(
+                beginOffset: const Offset(0, 0.3),
+                endOffset: const Offset(0, 0),
+                slideCurve: Curves.linearToEaseOut,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: _searchController.listUser.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      User user = _searchController.listUser[index];
+                      return Column(
+                        children: <Widget>[
+                          Divider(
+                            color: darkColor,
+                            height: 1.0,
+                            thickness: 1,
+                          ),
+                          ListTile(
+                            leading: FadedScaleAnimation(
+                              child: CircleAvatar(
+                                backgroundColor: darkColor,
+                                backgroundImage:
+                                    NetworkImage(user.profilePhoto),
+                              ),
                             ),
+                            title: Text(
+                              user.name,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Text(user.email.split('@')[0]),
+                            onTap: () => Get.toNamed(PageRoutes.userProfilePage,
+                                arguments: {'uid': user.uid}),
                           ),
-                          title: Text(
-                            names[index].name,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          subtitle: Text(names[index].id),
-                          onTap: () => Navigator.pushNamed(
-                              context, PageRoutes.userProfilePage),
-                        ),
-                      ],
-                    );
-                  }),
-              beginOffset: Offset(0, 0.3),
-              endOffset: Offset(0, 0),
-              slideCurve: Curves.linearToEaseOut,
-            )
-          ],
-        ),
+                        ],
+                      );
+                    }),
+              )
+            ],
+          );
+        }),
       ),
     );
   }

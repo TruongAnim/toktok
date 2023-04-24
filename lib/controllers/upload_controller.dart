@@ -7,6 +7,7 @@ import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/models/video.dart';
 import 'package:toktok/utils/random_utils.dart';
+import 'package:toktok/utils/string_utils.dart';
 import 'package:video_compress/video_compress.dart';
 
 class UploadController extends GetxController {
@@ -40,6 +41,30 @@ class UploadController extends GetxController {
     return downloadUrl;
   }
 
+  void getHashtag(String title, String videoId) {
+    List<String?> hashtags = StringUtils.getHashTags(title);
+    for (String? hashtag in hashtags) {
+      if (hashtag != null) {
+        hashtag = hashtag.replaceAll('#', '').trim();
+        updateHashtag(hashtag, videoId);
+      }
+    }
+  }
+
+  void updateHashtag(String hashtag, String videoId) async {
+    DocumentSnapshot snapshot =
+        await firebaseStore.collection('hashtags').doc(hashtag).get();
+    if (snapshot.exists) {
+      firebaseStore.collection('hashtags').doc(hashtag).update({
+        'videos': FieldValue.arrayUnion([videoId])
+      });
+    } else {
+      firebaseStore.collection('hashtags').doc(hashtag).set({
+        'videos': [videoId]
+      });
+    }
+  }
+
   void uploadVideo(String songName, String caption, String videoPath) async {
     isUploading.value = true;
     try {
@@ -69,6 +94,7 @@ class UploadController extends GetxController {
       print('upload done');
       isUploading.value = false;
       Get.offAllNamed(PageRoutes.bottomNavigation);
+      getHashtag(caption, videoId);
     } catch (e) {
       Get.showSnackbar(
         GetSnackBar(

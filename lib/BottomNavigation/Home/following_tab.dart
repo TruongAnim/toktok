@@ -68,7 +68,6 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
   @override
   void initState() {
     super.initState();
-    print(widget.videos);
     _pageController = PageController(
       initialPage: widget.variable ?? 0,
     );
@@ -92,7 +91,7 @@ class _FollowingTabBodyState extends State<FollowingTabBody> {
       },
       onPageChanged: widget.variable == null
           ? (i) {
-              print('onPageChanged $i');
+              print('mylog onPageChanged $i');
             }
           : null,
       itemCount: widget.videos.length,
@@ -123,7 +122,6 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
   void initState() {
     super.initState();
     _videoInfoController = Get.find();
-    print('load new video ${widget.video.videoUrl}');
     _controller = VideoPlayerController.network(widget.video.videoUrl)
       ..initialize().then((value) {
         setState(() {

@@ -12,7 +12,7 @@ import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/comment_controller.dart';
 import 'package:toktok/controllers/music_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';
-import 'package:toktok/controllers/search_user_controller.dart';
+import 'package:toktok/controllers/search_controller.dart';
 import 'package:toktok/controllers/upload_controller.dart';
 import 'package:toktok/controllers/feeding_video_controller.dart';
 import 'package:toktok/controllers/video_info_controller.dart';
@@ -26,7 +26,7 @@ void main() async {
     Get.lazyPut(() => UploadController(), fenix: true);
     Get.lazyPut(() => FeedingVideoController(), fenix: true);
     Get.lazyPut(() => CommentController(), fenix: true);
-    Get.lazyPut(() => SearchUserController(), fenix: true);
+    Get.lazyPut(() => SearchController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => MusicController(), fenix: true);
     Get.lazyPut(() => VideoInfoController(), fenix: true);

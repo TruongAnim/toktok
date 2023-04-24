@@ -20,7 +20,7 @@ class FeedingVideoController extends GetxController {
     _videoList.bindStream(
       firebaseStore.collection('videos').snapshots().map(
         (QuerySnapshot snapshot) {
-          return snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
+          return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
         },
       ),
     );
@@ -40,7 +40,7 @@ class FeedingVideoController extends GetxController {
           .snapshots()
           .map(
         (QuerySnapshot snapshot) {
-          return snapshot.docs.map((e) => Video.fromSnapshort(e)).toList();
+          return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
         },
       ),
     );
