@@ -3,9 +3,9 @@ import 'package:toktok/Components/thumb_tile.dart';
 import 'package:toktok/models/video.dart';
 
 class ThumbList extends StatelessWidget {
-  final List<Video> mediaList;
+  final List<Video> videos;
 
-  ThumbList(this.mediaList);
+  ThumbList(this.videos);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,11 @@ class ThumbList extends StatelessWidget {
       height: screenWidth / 3,
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: mediaList.length,
+          itemCount: videos.length,
           scrollDirection: Axis.horizontal,
           physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            return ThumbTile(mediaList[index].thumbnail);
+            return ThumbTile(videos, index);
           }),
     );
   }

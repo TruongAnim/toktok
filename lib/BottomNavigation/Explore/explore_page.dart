@@ -14,31 +14,6 @@ import 'package:toktok/controllers/hashtag_controller.dart';
 import 'package:toktok/models/hashtag.dart';
 import 'package:toktok/models/video.dart';
 
-List<String> dance = [
-  'assets/thumbnails/dance/Layer 951.png',
-  'assets/thumbnails/dance/Layer 952.png',
-  'assets/thumbnails/dance/Layer 953.png',
-  'assets/thumbnails/dance/Layer 954.png',
-  'assets/thumbnails/dance/Layer 951.png',
-  'assets/thumbnails/dance/Layer 952.png',
-  'assets/thumbnails/dance/Layer 953.png',
-  'assets/thumbnails/dance/Layer 954.png',
-];
-List<String> lol = [
-  'assets/thumbnails/lol/Layer 978.png',
-  'assets/thumbnails/lol/Layer 979.png',
-  'assets/thumbnails/lol/Layer 980.png',
-  'assets/thumbnails/lol/Layer 981.png',
-];
-List<String> food = [
-  'assets/thumbnails/food/Layer 783.png',
-  'assets/thumbnails/food/Layer 784.png',
-  'assets/thumbnails/food/Layer 785.png',
-  'assets/thumbnails/food/Layer 786.png',
-  'assets/thumbnails/food/Layer 787.png',
-  'assets/thumbnails/food/Layer 788.png',
-];
-
 List<String> carouselImages = [
   "assets/images/banner 1.png",
   "assets/images/banner 2.png",
@@ -121,28 +96,11 @@ class _ExploreBodyState extends State<ExploreBody> {
     // _anchoredBanner?.dispose();
   }
 
-  // final List<ThumbList> thumbLists = [
-  //   ThumbList(dance),
-  //   ThumbList(lol),
-  //   ThumbList(food),
-  //   ThumbList(dance),
-  //   ThumbList(lol),
-  //   ThumbList(food),
-  // ];
-
   int _current = 0;
 
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
-    final List<TitleRow> titleRows = [
-      TitleRow(locale.danceLike, '159.8k', dance),
-      TitleRow(locale.laughOut, '108.9k', lol),
-      TitleRow(locale.followUr, '159.8k', food),
-      TitleRow(locale.danceLike, '159.8k', dance),
-      TitleRow(locale.laughOut, '108.9k', lol),
-      TitleRow(locale.followUr, '159.8k', food),
-    ];
     return Builder(
       builder: (BuildContext context) {
         // if (!_loadingAnchoredBanner) {
@@ -252,8 +210,10 @@ class _ExploreBodyState extends State<ExploreBody> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              TitleRow('#${hashtag.name}',
-                                  '${hashtag.videos.length} videos', []),
+                              TitleRow(
+                                  '#${hashtag.name}',
+                                  '${hashtag.videos.length} videos',
+                                  hashtag.videos),
                               ThumbList(hashtag.videos),
                             ],
                           );
@@ -270,51 +230,53 @@ class _ExploreBodyState extends State<ExploreBody> {
 }
 
 class TitleRow extends StatelessWidget {
-  final String? title;
+  final String title;
   final String subTitle;
-  final List list;
+  final List<Video> videos;
 
-  TitleRow(this.title, this.subTitle, this.list);
+  TitleRow(this.title, this.subTitle, this.videos);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: CircleAvatar(
-          backgroundColor: darkColor,
-          child: Text(
-            '#',
-            style: TextStyle(color: mainColor),
+      leading: CircleAvatar(
+        backgroundColor: darkColor,
+        child: Text(
+          '#',
+          style: TextStyle(color: mainColor),
+        ),
+      ),
+      title: Text(
+        title!,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
+      subtitle: Row(
+        children: <Widget>[
+          Text(
+            subTitle + ' ' + AppLocalizations.of(context)!.video!,
+            style: Theme.of(context).textTheme.caption,
+          ),
+          const Spacer(),
+          Text(
+            "${AppLocalizations.of(context)!.viewAll}",
+            style: Theme.of(context).textTheme.caption,
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: secondaryColor,
+            size: 10,
+          ),
+        ],
+      ),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MorePage(
+            title: title,
+            videos: videos,
           ),
         ),
-        title: Text(
-          title!,
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        subtitle: Row(
-          children: <Widget>[
-            Text(
-              subTitle + ' ' + AppLocalizations.of(context)!.video!,
-              style: Theme.of(context).textTheme.caption,
-            ),
-            const Spacer(),
-            Text(
-              "${AppLocalizations.of(context)!.viewAll}",
-              style: Theme.of(context).textTheme.caption,
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: secondaryColor,
-              size: 10,
-            ),
-          ],
-        ),
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MorePage(
-                        title: title,
-                        list: list,
-                      )),
-            ));
+      ),
+    );
   }
 }

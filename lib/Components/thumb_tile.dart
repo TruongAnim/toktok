@@ -2,11 +2,13 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:toktok/BottomNavigation/Home/following_tab.dart';
 import 'package:toktok/BottomNavigation/Home/home_page.dart';
+import 'package:toktok/models/video.dart';
 
 class ThumbTile extends StatelessWidget {
-  final String mediaListData;
+  final List<Video> videos;
+  final int index;
 
-  ThumbTile(this.mediaListData);
+  ThumbTile(this.videos, this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -19,21 +21,16 @@ class ThumbTile extends StatelessWidget {
           width: screenWidth / 4.25,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(mediaListData), fit: BoxFit.fill),
+                image: NetworkImage(videos[index].thumbnail), fit: BoxFit.fill),
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
       ),
       onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Container() // FollowingTabPage(
-            //   videos2 + videos1,
-            //   imagesInDisc2 + imagesInDisc1,
-            //   false,
-            //   variable: 1,
-            // ),
-            ),
-      ),
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  FollowingTabPage(videos, false, variable: index))),
     );
   }
 }

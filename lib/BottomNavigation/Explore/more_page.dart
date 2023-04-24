@@ -1,12 +1,13 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:toktok/Components/tab_grid.dart';
+import 'package:toktok/models/video.dart';
 
 class MorePage extends StatelessWidget {
-  final String? title;
-  final List? list;
+  final String title;
+  final List<Video> videos;
 
-  MorePage({this.title, this.list});
+  MorePage({super.key, required this.title, required this.videos});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +17,14 @@ class MorePage extends StatelessWidget {
             title: Text(title!),
           ),
           body: FadedSlideAnimation(
-            child: TabGrid(
-              [],
-              showView: false,
-            ),
-            beginOffset: Offset(0.3, 0.3),
-            endOffset: Offset(0, 0),
+            beginOffset: const Offset(0.3, 0.3),
+            endOffset: const Offset(0, 0),
             slideCurve: Curves.linearToEaseOut,
+            child: TabGrid(
+              videos,
+              viewIcon: Icons.remove_red_eye,
+              showView: true,
+            ),
           )),
     );
   }
