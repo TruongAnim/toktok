@@ -234,14 +234,16 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                       color: secondaryColor,
                     ),
                     widget.video.commentCount.toString(), onPressed: () {
-                  commentSheet(context);
+                  commentSheet(context, widget.video.id);
                 }),
                 CustomButton(
                   Icon(
                     widget.video.likes.contains(authController.user.uid)
                         ? Icons.favorite
                         : Icons.favorite_border,
-                    color: secondaryColor,
+                    color: widget.video.likes.contains(authController.user.uid)
+                        ? Colors.red
+                        : secondaryColor,
                   ),
                   widget.video.likes.length.toString(),
                   onPressed: () {

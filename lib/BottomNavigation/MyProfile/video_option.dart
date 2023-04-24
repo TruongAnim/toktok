@@ -73,7 +73,7 @@ class _VideoOptionState extends State<VideoOption> {
                       color: secondaryColor,
                     ),
                     '287', onPressed: () {
-                  commentSheet(context);
+                  commentSheet(context, '');
                 }),
                 CustomButton(
                   Icon(
