@@ -199,7 +199,8 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                 InkWell(
                   onTap: () {
                     _controller.pause();
-                    Navigator.pushNamed(context, PageRoutes.userProfilePage);
+                    Get.toNamed(PageRoutes.userProfilePage,
+                        arguments: {'uid': widget.video.uid});
                   },
                   child: Stack(
                     clipBehavior: Clip.none,

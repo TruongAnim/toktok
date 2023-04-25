@@ -7,6 +7,7 @@ import 'package:toktok/Components/post_thumb_list.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/upload_controller.dart';
 
 class PostInfo extends StatefulWidget {
@@ -68,8 +69,9 @@ class _PostInfoState extends State<PostInfo> {
                   EntryField(
                     controller: _titleController,
                     prefix: FadedScaleAnimation(
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/user.webp'),
+                      child: CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(authController.profileTemp),
                       ),
                     ),
                     label:
