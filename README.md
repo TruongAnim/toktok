@@ -1,16 +1,35 @@
-# toktok
+# TokTok (Tiktok Clone)
 
-A new Flutter project.
+A tiktok clone android app that written using flutter.
 
-## Getting Started
+## Main feature
 
-This project is a starting point for a Flutter application.
+- Upload video from gallery, camera.
+- Surfing videos, like, comment, like comment.
+- Follow Idol, add hashtag, explore hashtag videos
+- Profile page, count likes, count following, count follower.
+- And sign-in, log-in of course.
 
-A few resources to get you started if this is your first Flutter project:
+### State management: [GetX](https://pub.dev/packages/get)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Database: [Firebase](https://firebase.google.com)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Screenshot
+<p align="center">
+    <img src="https://github.com/TruongAnim/toktok/blob/main/test/1.png" alt="drawing"   width="330"/>
+    <img src="https://github.com/TruongAnim/toktok/blob/main/test/2.png" alt="drawing"   width="330"/>
+    <img src="https://github.com/TruongAnim/toktok/blob/main/test/3.png" alt="drawing"   width="330"/>
+<p align="center">
+    <img src="https://github.com/TruongAnim/toktok/blob/main/test/4.png" alt="drawing"   width="330"/>
+    <img src="https://github.com/TruongAnim/toktok/blob/main/test/5.png" alt="drawing"   width="330"/>
+
+## Upcoming feature
+- Change profile picture
+- Update profile page
+- Notification
+- Chat with other
+- Multilanguage support
+- Block user
+- Update hashtag feature
+- Allow using music library
+- Allow selecting video thumbnail
