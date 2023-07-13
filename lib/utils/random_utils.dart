@@ -14,4 +14,17 @@ class RandomUtils {
     int randomView = random.nextInt(1000000000);
     return Numeral(randomView).format(fractionDigits: 1);
   }
+
+  static String getRandomVideo() {
+    List<String> videos = [
+      'assets/videos/1.mp4',
+      'assets/videos/2.mp4',
+      'assets/videos/3.mp4',
+      'assets/videos/4.mp4',
+      'assets/videos/5.mp4',
+      'assets/videos/6.mp4',
+    ];
+    Random random = Random();
+    return videos[random.nextInt(videos.length)];
+  }
 }
