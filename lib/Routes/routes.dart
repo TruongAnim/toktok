@@ -20,7 +20,7 @@ import 'package:toktok/BottomNavigation/MyProfile/redeem_history.dart';
 import 'package:toktok/Chat/chat_page.dart';
 import 'package:toktok/Screens/add_music.dart';
 import 'package:toktok/Screens/audio.dart';
-import 'package:toktok/Screens/user_profile.dart';
+import 'package:toktok/Screens/user_profile/user_profile.dart';
 
 class PageRoutes {
   static const String loginNavigator = '/login_navigator';
