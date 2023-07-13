@@ -1,11 +1,9 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
-import 'package:toktok/BottomNavigation/Explore/explore_page.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
-import 'package:toktok/Extension/extensions.dart';
 import 'package:toktok/Components/tab_grid.dart';
 import 'package:toktok/controllers/search_controller.dart';
 import 'package:toktok/models/user.dart';

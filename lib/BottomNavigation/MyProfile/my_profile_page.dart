@@ -10,13 +10,10 @@ import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/BottomNavigation/MyProfile/edit_profile.dart';
 import 'package:toktok/BottomNavigation/MyProfile/followers.dart';
 import 'package:toktok/Theme/colors.dart';
-import 'package:toktok/BottomNavigation/Explore/explore_page.dart';
 import 'package:toktok/BottomNavigation/MyProfile/following.dart';
 import 'package:toktok/Components/score_container.dart';
-import 'package:toktok/app_config/app_config.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/profile_controller.dart';
-import 'package:toktok/models/video.dart';
 
 class MyProfilePage extends StatelessWidget {
   const MyProfilePage({super.key});
