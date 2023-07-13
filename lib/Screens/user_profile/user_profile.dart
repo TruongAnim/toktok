@@ -53,7 +53,6 @@ class _UserProfileBodyState extends State<UserProfileBody> {
               return <Widget>[
                 SliverAppBar(
                   expandedHeight: 350,
-                  floating: false,
                   actions: <Widget>[
                     PopupMenuButton(
                       color: backgroundColor,

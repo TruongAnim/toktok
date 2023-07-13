@@ -1,6 +1,7 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toktok/BottomNavigation/MyProfile/my_info.dart';
 import 'package:toktok/Components/profile_page_button.dart';
 import 'package:toktok/Components/row_item.dart';
 import 'package:toktok/Components/sliver_app_delegate.dart';
@@ -38,7 +39,6 @@ class _MyProfileBodyState extends State<MyProfileBody> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _profileController = Get.find();
     _profileController.updateUserId(widget.uid);
@@ -61,7 +61,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                       (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
-                        expandedHeight: 404.0,
+                        expandedHeight: 350,
                         floating: false,
                         actions: <Widget>[
                           Theme(
@@ -125,105 +125,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             ),
                           )
                         ],
-                        flexibleSpace: Obx(() {
-                          if (_profileController.user.isEmpty) {
-                            return Container();
-                          }
-                          return FlexibleSpaceBar(
-                            centerTitle: true,
-                            title: Column(
-                              children: <Widget>[
-                                const Spacer(flex: 10),
-                                CircleAvatar(
-                                  radius: 28.0,
-                                  backgroundImage: NetworkImage(
-                                      _profileController.user['profilePhoto']),
-                                ),
-                                const Spacer(),
-                                Text(
-                                  _profileController.user['name'],
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                                Text(
-                                  '@${_profileController.user['email'].toString().split('@')[0]}',
-                                  style: TextStyle(
-                                      fontSize: 10, color: disabledTextColor),
-                                ),
-                                const Spacer(),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    ImageIcon(
-                                      const AssetImage(
-                                          "assets/icons/ic_fb.png"),
-                                      color: secondaryColor,
-                                      size: 10,
-                                    ),
-                                    const SizedBox(width: 16),
-                                    ImageIcon(
-                                      const AssetImage(
-                                          "assets/icons/ic_twt.png"),
-                                      color: secondaryColor,
-                                      size: 10,
-                                    ),
-                                    const SizedBox(width: 16),
-                                    ImageIcon(
-                                      const AssetImage(
-                                          "assets/icons/ic_insta.png"),
-                                      color: secondaryColor,
-                                      size: 10,
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Text(
-                                  locale!.comment5!,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 8),
-                                ),
-                                const Spacer(),
-                                ProfilePageButton(
-                                  locale.editProfile,
-                                  () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EditProfile()));
-                                  },
-                                  width: 120,
-                                ),
-                                const Spacer(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    RowItem(
-                                        _profileController.user['likes'],
-                                        locale.liked,
-                                        Scaffold(
-                                          appBar: AppBar(
-                                            title: const Text('Liked'),
-                                          ),
-                                          body: TabGrid(
-                                            _profileController.user['videos'],
-                                            showView: false,
-                                          ),
-                                        )),
-                                    RowItem(
-                                        _profileController.user['followers'],
-                                        locale.followers,
-                                        FollowersPage()),
-                                    RowItem(
-                                        _profileController.user['following'],
-                                        locale.following,
-                                        FollowingPage()),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
+                        flexibleSpace: MyInfo(),
                       ),
                       SliverPersistentHeader(
                         delegate: SliverAppBarDelegate(

@@ -3,7 +3,6 @@ import 'package:toktok/Theme/colors.dart';
 
 class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   SliverAppBarDelegate(this._tabBar);
-
   final TabBar _tabBar;
 
   @override
@@ -14,10 +13,10 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
+    return Container(
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+        // borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       child: _tabBar,
     );

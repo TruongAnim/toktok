@@ -1,24 +1,23 @@
-import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toktok/BottomNavigation/MyProfile/edit_profile.dart';
 import 'package:toktok/BottomNavigation/MyProfile/followers.dart';
 import 'package:toktok/BottomNavigation/MyProfile/following.dart';
 import 'package:toktok/Components/profile_page_button.dart';
 import 'package:toktok/Components/row_item.dart';
 import 'package:toktok/Components/tab_grid.dart';
 import 'package:toktok/Locale/locale.dart';
-import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/controllers/profile_controller.dart';
 
-class UserInfo extends StatelessWidget {
-  const UserInfo({super.key});
+class MyInfo extends StatelessWidget {
+  MyInfo({super.key});
+  final ProfileController _profileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context);
-    return GetBuilder<ProfileController>(
-        builder: (ProfileController _profileController) {
+    return Obx(() {
       if (_profileController.user.isEmpty) {
         return Container();
       }
@@ -27,12 +26,10 @@ class UserInfo extends StatelessWidget {
         background: Column(
           children: <Widget>[
             const Spacer(),
-            FadedScaleAnimation(
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage:
-                    NetworkImage(_profileController.user['profilePhoto']),
-              ),
+            CircleAvatar(
+              radius: 40,
+              backgroundImage:
+                  NetworkImage(_profileController.user['profilePhoto']),
             ),
             const Spacer(),
             Row(
@@ -55,62 +52,42 @@ class UserInfo extends StatelessWidget {
               style: TextStyle(fontSize: 10, color: disabledTextColor),
             ),
             const Spacer(),
-            FadedScaleAnimation(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ImageIcon(
-                    const AssetImage(
-                      "assets/icons/ic_fb.png",
-                    ),
-                    color: secondaryColor,
-                    size: 10,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  ImageIcon(
-                    const AssetImage("assets/icons/ic_twt.png"),
-                    color: secondaryColor,
-                    size: 10,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  ImageIcon(
-                    const AssetImage("assets/icons/ic_insta.png"),
-                    color: secondaryColor,
-                    size: 10,
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ImageIcon(
+                  const AssetImage("assets/icons/ic_fb.png"),
+                  color: secondaryColor,
+                  size: 10,
+                ),
+                const SizedBox(width: 16),
+                ImageIcon(
+                  const AssetImage("assets/icons/ic_twt.png"),
+                  color: secondaryColor,
+                  size: 10,
+                ),
+                const SizedBox(width: 16),
+                ImageIcon(
+                  const AssetImage("assets/icons/ic_insta.png"),
+                  color: secondaryColor,
+                  size: 10,
+                ),
+              ],
             ),
             const Spacer(),
             Text(
-              locale!.comment7!,
+              locale!.comment5!,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
             ),
             const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ProfilePageButton(locale.message,
-                    () => Navigator.pushNamed(context, PageRoutes.chatPage)),
-                const SizedBox(width: 16),
-                _profileController.user['isFollowing']
-                    ? ProfilePageButton(locale.following, () {
-                        _profileController.followUser();
-                      })
-                    : ProfilePageButton(
-                        locale.follow,
-                        () {
-                          _profileController.followUser();
-                        },
-                        color: mainColor,
-                        textColor: secondaryColor,
-                      ),
-              ],
+            ProfilePageButton(
+              locale.editProfile,
+              () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => EditProfile()));
+              },
+              width: 120,
             ),
             const Spacer(),
             Row(

@@ -1,7 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:toktok/BottomNavigation/Home/following_tab.dart';
-import 'package:toktok/BottomNavigation/Home/home_page.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/models/video.dart';
 import 'package:toktok/utils/random_utils.dart';
