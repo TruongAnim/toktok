@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/comment.dart';
 
 class CommentController extends GetxController {
@@ -31,7 +32,7 @@ class CommentController extends GetxController {
       if (content.isNotEmpty) {
         DocumentSnapshot userDoc = await firebaseStore
             .collection('users')
-            .doc(authController.user.uid)
+            .doc(AuthController.instance.user.uid)
             .get();
         var allComments = await firebaseStore
             .collection('videos')
@@ -41,7 +42,7 @@ class CommentController extends GetxController {
         String commentId = 'Comment ${allComments.docs.length}';
         Comment comment = Comment(
           id: commentId,
-          uid: authController.user.uid,
+          uid: AuthController.instance.user.uid,
           username: (userDoc.data() as Map<String, dynamic>)['name'],
           comment: content,
           profileImage:
@@ -72,7 +73,7 @@ class CommentController extends GetxController {
   }
 
   void likeComment(String commentId) async {
-    String uid = authController.user.uid;
+    String uid = AuthController.instance.user.uid;
     DocumentSnapshot snapshot = await firebaseStore
         .collection('videos')
         .doc(_postId)

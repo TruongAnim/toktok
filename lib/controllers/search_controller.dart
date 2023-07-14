@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/user.dart';
 import 'package:toktok/models/video.dart';
 
@@ -22,7 +23,7 @@ class SearchController extends GetxController {
           List<User> temp = [];
           for (QueryDocumentSnapshot item in snapshot.docs) {
             var data = item.data() as Map<String, dynamic>;
-            if (data['uid'] != authController.user.uid &&
+            if (data['uid'] != AuthController.instance.user.uid &&
                 ((data['name'] as String).toLowerCase().contains(query) ||
                     (data['email'] as String).toLowerCase().contains(query))) {
               temp.add(User.fromSnapshot(item));

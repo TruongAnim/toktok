@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/video.dart';
 
 class ProfileController extends GetxController {
@@ -50,7 +51,7 @@ class ProfileController extends GetxController {
         .collection('users')
         .doc(_uid.value)
         .collection('followers')
-        .doc(authController.user.uid)
+        .doc(AuthController.instance.user.uid)
         .get();
     if (follow.exists) {
       isFollowing = true;
@@ -75,18 +76,18 @@ class ProfileController extends GetxController {
         .collection('users')
         .doc(_uid.value)
         .collection('followers')
-        .doc(authController.user.uid)
+        .doc(AuthController.instance.user.uid)
         .get();
     if (follower.exists) {
       await firebaseStore
           .collection('users')
           .doc(_uid.value)
           .collection('followers')
-          .doc(authController.user.uid)
+          .doc(AuthController.instance.user.uid)
           .delete();
       await firebaseStore
           .collection('users')
-          .doc(authController.user.uid)
+          .doc(AuthController.instance.user.uid)
           .collection('following')
           .doc(_uid.value)
           .delete();
@@ -97,11 +98,11 @@ class ProfileController extends GetxController {
           .collection('users')
           .doc(_uid.value)
           .collection('followers')
-          .doc(authController.user.uid)
+          .doc(AuthController.instance.user.uid)
           .set({});
       await firebaseStore
           .collection('users')
-          .doc(authController.user.uid)
+          .doc(AuthController.instance.user.uid)
           .collection('following')
           .doc(_uid.value)
           .set({});

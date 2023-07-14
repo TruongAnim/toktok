@@ -7,6 +7,7 @@ import 'package:toktok/Components/entry_field.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/comment_controller.dart';
 import 'package:toktok/models/comment.dart';
 import 'package:timeago/timeago.dart' as TimeAgo;
@@ -93,12 +94,13 @@ void commentSheet(BuildContext context, String postId) async {
                                       ),
                                       trailing: CustomButton(
                                         Icon(
-                                          comment.likes.contains(
-                                                  authController.user.uid)
+                                          comment.likes.contains(AuthController
+                                                  .instance.user.uid)
                                               ? Icons.favorite
                                               : Icons.favorite_border,
                                           color: comment.likes.contains(
-                                                  authController.user.uid)
+                                                  AuthController
+                                                      .instance.user.uid)
                                               ? Colors.red
                                               : disabledTextColor,
                                         ),
@@ -132,7 +134,7 @@ void commentSheet(BuildContext context, String postId) async {
                             horizontal: 16.0, vertical: 8.0),
                         child: CircleAvatar(
                           backgroundImage:
-                              NetworkImage(authController.profileTemp),
+                              NetworkImage(AuthController.instance.profileTemp),
                         ),
                       ),
                       suffixIcon: IconButton(

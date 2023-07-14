@@ -12,7 +12,6 @@ class FeedingVideoController extends GetxController {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     String uid = firebaseAuth.currentUser!.uid;
     _videoList.bindStream(

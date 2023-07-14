@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/BottomNavigation/Explore/explore_page.dart';
 import 'package:toktok/BottomNavigation/Home/home_page.dart';
 import 'package:toktok/BottomNavigation/MyProfile/my_profile_page.dart';
+import 'package:toktok/BottomNavigation/controllers/bottom_navigation_controller.dart';
 import 'package:toktok/Locale/locale.dart';
-import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/BottomNavigation/Notifications/notification_messages.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/Theme/style.dart';
@@ -14,8 +15,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _currentIndex = 0;
-
+  BottomNavigationController _bottomNavigationController = Get.find();
   final List<Widget> _children = [
     HomePage(),
     ExplorePage(),
@@ -23,16 +23,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
     NotificationMessages(),
     MyProfilePage(),
   ];
-
-  void onTap(int index) {
-    if (index == 2) {
-      Navigator.pushNamed(context, PageRoutes.addVideo);
-    } else {
-      setState(() {
-        _currentIndex = index;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,26 +61,30 @@ class _BottomNavigationState extends State<BottomNavigation> {
       ),
     ];
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _children[_currentIndex],
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              backgroundColor: transparentColor,
-              elevation: 0.0,
-              type: BottomNavigationBarType.fixed,
-              iconSize: 22.0,
-              selectedItemColor: secondaryColor,
-              selectedFontSize: 12,
-              unselectedFontSize: 10,
-              unselectedItemColor: secondaryColor,
-              items: _bottomBarItems,
-              onTap: onTap,
+      body: Obx(
+        () => Stack(
+          children: <Widget>[
+            _children[_bottomNavigationController.getCurrentIndex],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: BottomNavigationBar(
+                currentIndex: _bottomNavigationController.getCurrentIndex,
+                backgroundColor: transparentColor,
+                elevation: 0.0,
+                type: BottomNavigationBarType.fixed,
+                iconSize: 22.0,
+                selectedItemColor: secondaryColor,
+                selectedFontSize: 12,
+                unselectedFontSize: 10,
+                unselectedItemColor: secondaryColor,
+                items: _bottomBarItems,
+                onTap: (value) {
+                  _bottomNavigationController.onTap(value, context);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

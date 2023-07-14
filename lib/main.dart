@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:toktok/BottomNavigation/controllers/bottom_navigation_controller.dart';
 import 'package:toktok/Locale/language_controller.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
@@ -32,6 +33,7 @@ void main() async {
     Get.lazyPut(() => MusicController(), fenix: true);
     Get.lazyPut(() => VideoInfoController(), fenix: true);
     Get.lazyPut(() => HashtagController(), fenix: true);
+    Get.lazyPut(() => BottomNavigationController(), fenix: true);
     Get.put(AuthController());
   });
 

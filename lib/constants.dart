@@ -7,6 +7,3 @@ import 'package:toktok/controllers/auth_controller.dart';
 var firebaseAuth = FirebaseAuth.instance;
 var firebaseStore = FirebaseFirestore.instance;
 var firebaseStorage = FirebaseStorage.instance;
-
-// CONTROLLER
-var authController = AuthController.instance;

@@ -8,6 +8,7 @@ import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/upload_controller.dart';
 
 class PostInfo extends StatefulWidget {
@@ -71,7 +72,7 @@ class _PostInfoState extends State<PostInfo> {
                     prefix: FadedScaleAnimation(
                       child: CircleAvatar(
                         backgroundImage:
-                            NetworkImage(authController.profileTemp),
+                            NetworkImage(AuthController.instance.profileTemp),
                       ),
                     ),
                     label:
