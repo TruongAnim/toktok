@@ -27,16 +27,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {
-    Get.lazyPut(() => LanguageController());
-    Get.lazyPut(() => UploadController());
-    Get.lazyPut(() => FeedingVideoController());
-    Get.lazyPut(() => CommentController());
-    Get.lazyPut(() => SearchController());
-    Get.lazyPut(() => ProfileController());
-    Get.lazyPut(() => MusicController());
-    Get.lazyPut(() => VideoInfoController());
-    Get.lazyPut(() => HashtagController());
-    Get.lazyPut(() => BottomNavigationController());
+    Get.lazyPut(() => LanguageController(), fenix: true);
+    Get.lazyPut(() => UploadController(), fenix: true);
+    Get.lazyPut(() => FeedingVideoController(), fenix: true);
+    Get.lazyPut(() => CommentController(), fenix: true);
+    Get.lazyPut(() => SearchController(), fenix: true);
+    Get.lazyPut(() => ProfileController(), fenix: true);
+    Get.lazyPut(() => MusicController(), fenix: true);
+    Get.lazyPut(() => VideoInfoController(), fenix: true);
+    Get.lazyPut(() => HashtagController(), fenix: true);
+    Get.lazyPut(() => BottomNavigationController(), fenix: true);
     Get.lazyPut(() => ChatController(), fenix: true);
     Get.put(AuthController());
   });
