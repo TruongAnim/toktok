@@ -1,7 +1,7 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toktok/BottomNavigation/MyProfile/my_info.dart';
+import 'package:toktok/Screens/my_profile/my_info.dart';
 import 'package:toktok/Components/sliver_app_delegate.dart';
 import 'package:toktok/Components/tab_grid.dart';
 import 'package:toktok/Locale/locale.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toktok/BottomNavigation/Explore/explore_page.dart';
-import 'package:toktok/BottomNavigation/Home/home_page.dart';
-import 'package:toktok/BottomNavigation/MyProfile/my_profile_page.dart';
+import 'package:toktok/Screens/explore/explore_page.dart';
+import 'package:toktok/Screens/notifications/notification_messages.dart';
+import 'package:toktok/Screens/home_screen/home_page.dart';
+import 'package:toktok/Screens/my_profile/my_profile_page.dart';
 import 'package:toktok/BottomNavigation/controllers/bottom_navigation_controller.dart';
 import 'package:toktok/Locale/locale.dart';
-import 'package:toktok/BottomNavigation/Notifications/notification_messages.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/Theme/style.dart';
 

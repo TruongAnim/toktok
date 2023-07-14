@@ -1,6 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
-import 'package:toktok/BottomNavigation/Home/following_tab.dart';
+import 'package:toktok/Screens/home_screen/following_tab.dart';
 import 'package:toktok/models/video.dart';
 
 class ThumbTile extends StatelessWidget {

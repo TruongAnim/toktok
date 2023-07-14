@@ -1,8 +1,8 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toktok/BottomNavigation/MyProfile/followers.dart';
-import 'package:toktok/BottomNavigation/MyProfile/following.dart';
+import 'package:toktok/Screens/my_profile/followers.dart';
+import 'package:toktok/Screens/my_profile/following.dart';
 import 'package:toktok/Components/profile_page_button.dart';
 import 'package:toktok/Components/row_item.dart';
 import 'package:toktok/Components/tab_grid.dart';
