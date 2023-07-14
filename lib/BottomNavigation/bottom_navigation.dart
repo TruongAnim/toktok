@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:toktok/Screens/explore/explore_page.dart';
-import 'package:toktok/Screens/notifications/notification_messages.dart';
 import 'package:toktok/Screens/home_screen/home_page.dart';
 import 'package:toktok/Screens/my_profile/my_profile_page.dart';
 import 'package:toktok/BottomNavigation/controllers/bottom_navigation_controller.dart';
@@ -21,35 +19,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
     HomePage(),
     ExplorePage(),
     Container(),
-    NotificationMessages(),
+    Container(),
     MyProfilePage(),
   ];
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    Map<String, dynamic>? data =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
-    print('init bottom navigation 2');
-    if (data != null) {
-      print(data);
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (data['tab'] == 'notification') {
-          _bottomNavigationController.changeTab(3);
-        }
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    print('build bottom navigation');
     var locale = AppLocalizations.of(context)!;
     final List<BottomNavigationBarItem> _bottomBarItems = [
       BottomNavigationBarItem(

@@ -80,11 +80,13 @@ class Toktok extends StatelessWidget {
       locale: Locale(language ?? 'en'),
       initialRoute:
           language == null ? PageRoutes.languagePage : PageRoutes.login,
-      getPages: [
-        ...PageRoutes().widgetRoutes().entries.map(
-              (entry) => GetPage(name: entry.key, page: () => entry.value),
-            ),
-      ],
+      getPages: PageRoutes()
+          .widgetRoutes()
+          .entries
+          .map(
+            (entry) => GetPage(name: entry.key, page: () => entry.value),
+          )
+          .toList(),
     );
   }
 }

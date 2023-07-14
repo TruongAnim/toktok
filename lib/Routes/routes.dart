@@ -20,6 +20,7 @@ import 'package:toktok/Screens/my_profile/redeem_history.dart';
 import 'package:toktok/Screens/chat/chat_page.dart';
 import 'package:toktok/Screens/add_music.dart';
 import 'package:toktok/Screens/audio.dart';
+import 'package:toktok/Screens/notification_screen/notification_screen.dart';
 import 'package:toktok/Screens/user_profile/user_profile.dart';
 
 class PageRoutes {
@@ -45,6 +46,7 @@ class PageRoutes {
   static const String addMusic = '/addMusic';
   static const String login = '/login';
   static const String register = '/register';
+  static const String notificationMessages = '/notification_messages';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -97,6 +99,7 @@ class PageRoutes {
       addMusic: AddMusic(),
       login: MyLogin(),
       register: MyRegister(),
+      notificationMessages: NotificationScreen(),
     };
   }
 }

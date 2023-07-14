@@ -48,7 +48,7 @@ class CommentController extends GetxController {
           profileImage:
               (userDoc.data() as Map<String, dynamic>)['profilePhoto'],
           likes: [],
-          publicDate: DateTime.now(),
+          publicDate: Timestamp.fromDate(DateTime.now()),
         );
         await firebaseStore
             .collection('videos')
