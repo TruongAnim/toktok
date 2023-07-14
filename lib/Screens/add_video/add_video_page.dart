@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:toktok/Screens/add_video/confirm_screen.dart';
 import 'package:toktok/Routes/routes.dart';
 
 class AddVideoPage extends StatelessWidget {

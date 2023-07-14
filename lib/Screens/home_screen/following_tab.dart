@@ -209,7 +209,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                   onTap: () {
                     _controller.pause();
                     if (widget.video.uid == firebaseAuth.currentUser?.uid) {
-                      Get.find<BottomNavigationController>().onTap(4, context);
+                      Get.find<BottomNavigationController>().changeTab(4);
                     } else {
                       Get.toNamed(PageRoutes.userProfilePage,
                           arguments: {'uid': widget.video.uid});

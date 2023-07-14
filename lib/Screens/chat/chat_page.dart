@@ -4,10 +4,23 @@ import 'package:get/get.dart';
 import 'package:toktok/Components/entry_field.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
+import 'package:toktok/Screens/chat/controllers/chat_controller.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/Theme/style.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  late ChatController controller;
+  @override
+  void initState() {
+    controller = Get.find<ChatController>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChatBody();

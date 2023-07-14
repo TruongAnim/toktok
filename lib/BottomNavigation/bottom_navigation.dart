@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:toktok/Screens/explore/explore_page.dart';
 import 'package:toktok/Screens/notifications/notification_messages.dart';
@@ -15,7 +16,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  BottomNavigationController _bottomNavigationController = Get.find();
+  final BottomNavigationController _bottomNavigationController = Get.find();
   final List<Widget> _children = [
     HomePage(),
     ExplorePage(),
@@ -25,7 +26,30 @@ class _BottomNavigationState extends State<BottomNavigation> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Map<String, dynamic>? data =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    print('init bottom navigation 2');
+    if (data != null) {
+      print(data);
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (data['tab'] == 'notification') {
+          _bottomNavigationController.changeTab(3);
+        }
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('build bottom navigation');
     var locale = AppLocalizations.of(context)!;
     final List<BottomNavigationBarItem> _bottomBarItems = [
       BottomNavigationBarItem(
@@ -79,7 +103,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 unselectedItemColor: secondaryColor,
                 items: _bottomBarItems,
                 onTap: (value) {
-                  _bottomNavigationController.onTap(value, context);
+                  _bottomNavigationController.changeTab(value);
                 },
               ),
             ),
