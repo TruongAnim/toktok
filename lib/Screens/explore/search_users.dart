@@ -108,7 +108,7 @@ class _SearchUsersState extends State<SearchUsers> {
                     itemCount: _searchController.listUser.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      User user = _searchController.listUser[index];
+                      AppUser user = _searchController.listUser[index];
                       return Column(
                         children: <Widget>[
                           Divider(

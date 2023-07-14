@@ -7,19 +7,21 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/constants.dart';
-import 'package:toktok/models/user.dart' as Model;
+import 'package:toktok/models/user.dart';
+import 'package:toktok/services/user_service.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  late String profileTemp;
+  final UserService _userService = UserService.instance;
+  late String currentUserProfile;
   late Rx<User?> _currentUser;
 
-  User get user => firebaseAuth.currentUser!;
+  User get user => UserService.instance.getCurrentUser()!;
 
   @override
   void onReady() {
     super.onReady();
-    _currentUser = Rx<User?>(firebaseAuth.currentUser);
+    _currentUser = Rx<User?>(_userService.getCurrentUser());
     _currentUser.bindStream(firebaseAuth.authStateChanges());
     ever(_currentUser, _setInitialScreen);
   }
@@ -34,16 +36,14 @@ class AuthController extends GetxController {
       Get.offAllNamed(PageRoutes.login);
     } else {
       Get.offAllNamed(PageRoutes.bottomNavigation);
-      getProfilePicture();
-      print(_currentUser.value!.uid);
+      getcurrentUserProfile();
     }
   }
 
-  getProfilePicture() {
-    print('getProfilePIctrue');
-    firebaseStore.collection('users').doc(user.uid).get().then((value) {
-      profileTemp = (value.data() as Map<String, dynamic>)['profilePhoto'];
-    });
+  getcurrentUserProfile() async {
+    UserService.instance
+        .getProfilePicture(user.uid)
+        .then((value) => currentUserProfile = value);
   }
 
   Future<String> uploadToStorage(File avatar) async {
@@ -91,7 +91,7 @@ class AuthController extends GetxController {
         Random random = new Random();
         int randomId = random.nextInt(70);
         String urlAvatar = 'https://i.pravatar.cc/150?img=$randomId';
-        Model.User modelUser = Model.User(
+        AppUser modelUser = AppUser(
             uid: credential.user!.uid,
             name: userName,
             email: email,

@@ -7,7 +7,7 @@ class Comment {
   final String comment;
   final String profileImage;
   final List likes;
-  final publicDate;
+  final Timestamp publicDate;
 
   Comment({
     required this.id,

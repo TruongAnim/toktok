@@ -18,57 +18,57 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
     List<Notif> notification = [
-      Notif(
-          "Emili Williamson",
-          locale.likedYourVideo,
-          "5 " + locale.minAgo!,
-          "assets/user/user1.png",
-          "assets/thumbnails/dance/Layer 951.png",
-          Icons.favorite),
-      Notif(
-          "Kesha Taylor",
-          locale.commentedOnYour,
-          "5 " + locale.minAgo!,
-          "assets/user/user2.png",
-          "assets/thumbnails/dance/Layer 952.png",
-          Icons.message),
-      Notif(
-          "Ling Tong",
-          locale.commentedOnYour,
-          "5 " + locale.minAgo!,
-          "assets/user/user3.png",
-          "assets/thumbnails/food/Layer 783.png",
-          Icons.message),
-      Notif(
-          "Linda Johnson",
-          locale.likedYourVideo,
-          "5 " + locale.minAgo!,
-          "assets/user/user4.png",
-          "assets/thumbnails/food/Layer 786.png",
-          Icons.favorite),
-      Notif("George Smith", locale.startedFollowing, "5 " + locale.minAgo!,
-          "assets/user/user1.png", "assets/images/user.webp", Icons.add),
-      Notif(
-          "Emili Williamson",
-          locale.likedYourVideo,
-          "5 " + locale.minAgo!,
-          "assets/user/user1.png",
-          "assets/thumbnails/dance/Layer 951.png",
-          Icons.favorite),
-      Notif(
-          "Kesha Taylor",
-          locale.commentedOnYour,
-          "5 " + locale.minAgo!,
-          "assets/user/user2.png",
-          "assets/thumbnails/dance/Layer 952.png",
-          Icons.message),
-      Notif(
-          "Ling Tong",
-          locale.commentedOnYour,
-          "5 " + locale.minAgo!,
-          "assets/user/user3.png",
-          "assets/thumbnails/food/Layer 783.png",
-          Icons.message),
+      // Notif(
+      //     "Emili Williamson",
+      //     locale.likedYourVideo,
+      //     "5 " + locale.minAgo!,
+      //     "assets/user/user1.png",
+      //     "assets/thumbnails/dance/Layer 951.png",
+      //     Icons.favorite),
+      // Notif(
+      //     "Kesha Taylor",
+      //     locale.commentedOnYour,
+      //     "5 " + locale.minAgo!,
+      //     "assets/user/user2.png",
+      //     "assets/thumbnails/dance/Layer 952.png",
+      //     Icons.message),
+      // Notif(
+      //     "Ling Tong",
+      //     locale.commentedOnYour,
+      //     "5 " + locale.minAgo!,
+      //     "assets/user/user3.png",
+      //     "assets/thumbnails/food/Layer 783.png",
+      //     Icons.message),
+      // Notif(
+      //     "Linda Johnson",
+      //     locale.likedYourVideo,
+      //     "5 " + locale.minAgo!,
+      //     "assets/user/user4.png",
+      //     "assets/thumbnails/food/Layer 786.png",
+      //     Icons.favorite),
+      // Notif("George Smith", locale.startedFollowing, "5 " + locale.minAgo!,
+      //     "assets/user/user1.png", "assets/images/user.webp", Icons.add),
+      // Notif(
+      //     "Emili Williamson",
+      //     locale.likedYourVideo,
+      //     "5 " + locale.minAgo!,
+      //     "assets/user/user1.png",
+      //     "assets/thumbnails/dance/Layer 951.png",
+      //     Icons.favorite),
+      // Notif(
+      //     "Kesha Taylor",
+      //     locale.commentedOnYour,
+      //     "5 " + locale.minAgo!,
+      //     "assets/user/user2.png",
+      //     "assets/thumbnails/dance/Layer 952.png",
+      //     Icons.message),
+      // Notif(
+      //     "Ling Tong",
+      //     locale.commentedOnYour,
+      //     "5 " + locale.minAgo!,
+      //     "assets/user/user3.png",
+      //     "assets/thumbnails/food/Layer 783.png",
+      //     Icons.message),
     ];
 
     List<String?> messages = [

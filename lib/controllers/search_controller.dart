@@ -6,8 +6,8 @@ import 'package:toktok/models/user.dart';
 import 'package:toktok/models/video.dart';
 
 class SearchController extends GetxController {
-  final Rx<List<User>> _listUser = Rx<List<User>>([]);
-  List<User> get listUser => _listUser.value;
+  final Rx<List<AppUser>> _listUser = Rx<List<AppUser>>([]);
+  List<AppUser> get listUser => _listUser.value;
   final Rx<List<Video>> _listVideo = Rx<List<Video>>([]);
   List<Video> get listVideo => _listVideo.value;
 
@@ -20,13 +20,13 @@ class SearchController extends GetxController {
           .snapshots()
           .map(
         (QuerySnapshot snapshot) {
-          List<User> temp = [];
+          List<AppUser> temp = [];
           for (QueryDocumentSnapshot item in snapshot.docs) {
             var data = item.data() as Map<String, dynamic>;
             if (data['uid'] != AuthController.instance.user.uid &&
                 ((data['name'] as String).toLowerCase().contains(query) ||
                     (data['email'] as String).toLowerCase().contains(query))) {
-              temp.add(User.fromSnapshot(item));
+              temp.add(AppUser.fromSnapshot(item));
             }
           }
           return temp;
