@@ -45,16 +45,16 @@ class NotificationScreen extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[
             FadedSlideAnimation(
-              beginOffset: Offset(0, 0.3),
-              endOffset: Offset(0, 0),
+              beginOffset: const Offset(0, 0.3),
+              endOffset: const Offset(0, 0),
               slideCurve: Curves.linearToEaseOut,
-              child: NotificationTab(),
+              child: const NotificationTab(),
             ),
             FadedSlideAnimation(
-              child: MessagesTab(),
-              beginOffset: Offset(0, 0.3),
-              endOffset: Offset(0, 0),
+              beginOffset: const Offset(0, 0.3),
+              endOffset: const Offset(0, 0),
               slideCurve: Curves.linearToEaseOut,
+              child: const MessagesTab(),
             ),
           ],
         ),

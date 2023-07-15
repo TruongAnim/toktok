@@ -5,9 +5,7 @@ import 'package:toktok/Components/continue_button.dart';
 import 'package:toktok/Components/entry_field.dart';
 import 'package:toktok/Components/post_thumb_list.dart';
 import 'package:toktok/Locale/locale.dart';
-import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
-import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/upload_controller.dart';
 

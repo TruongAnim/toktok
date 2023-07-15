@@ -19,26 +19,23 @@ import 'package:toktok/Components/score_container.dart';
 RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class FollowingTabPage extends StatelessWidget {
-  final List<Video> videos;
-  final bool isFollowing;
-
-  final int? variable;
-
-  FollowingTabPage(this.videos, this.isFollowing, {this.variable});
+  const FollowingTabPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FollowingTabBody(videos, isFollowing, variable);
+    Map<String, dynamic> arguments = Get.arguments;
+    return FollowingTabBody(
+        arguments['videos'], arguments['isFollowing'], arguments['variable']);
   }
 }
 
 class FollowingTabBody extends StatefulWidget {
   final List<Video> videos;
-
   final bool isFollowing;
   final int? variable;
 
-  FollowingTabBody(this.videos, this.isFollowing, this.variable);
+  const FollowingTabBody(this.videos, this.isFollowing, this.variable,
+      {super.key});
 
   @override
   _FollowingTabBodyState createState() => _FollowingTabBodyState();
@@ -108,8 +105,12 @@ class VideoPage extends StatefulWidget {
   final bool? isPaused;
   final bool? isFollowing;
 
-  VideoPage(this.video,
-      {this.pageIndex, this.currentPageIndex, this.isPaused, this.isFollowing});
+  const VideoPage(this.video,
+      {super.key,
+      this.pageIndex,
+      this.currentPageIndex,
+      this.isPaused,
+      this.isFollowing});
 
   @override
   _VideoPageState createState() => _VideoPageState();

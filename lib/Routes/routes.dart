@@ -6,6 +6,7 @@ import 'package:toktok/Auth/login_navigator.dart';
 import 'package:toktok/Screens/add_video/add_video_page.dart';
 import 'package:toktok/Screens/explore/more_page.dart';
 import 'package:toktok/Screens/explore/search_users.dart';
+import 'package:toktok/Screens/home_screen/following_tab.dart';
 import 'package:toktok/Screens/my_profile/badge_request.dart';
 import 'package:toktok/Screens/my_profile/language_page.dart';
 import 'package:toktok/Screens/my_profile/video_option.dart';
@@ -29,6 +30,7 @@ class PageRoutes {
   static const String loginNavigator = '/login_navigator';
   static const String bottomNavigation = '/bottom_navigation';
   static const String followersPage = '/followers_page';
+  static const String followingTabPage = '/following_tab_page';
   static const String helpPage = '/help_page';
   static const String tncPage = '/tnc_page';
   static const String searchPage = '/search_page';
@@ -58,22 +60,22 @@ class PageRoutes {
       helpPage: (context) => HelpPage(),
       tncPage: (context) => TnC(),
       searchPage: (context) => SearchUsers(),
-      addVideoPage: (context) => AddVideoPage(),
+      addVideoPage: (context) => const AddVideoPage(),
       addVideo: (context) => AddVideo(),
       addVideoFilterPage: (context) => AddVideoFilter(),
       postInfoPage: (context) => PostInfo(),
-      userProfilePage: (context) => UserProfilePage(),
+      userProfilePage: (context) => const UserProfilePage(),
       chatPage: (context) => ChatPage(),
       morePage: (context) => MorePage(title: 'Title', videos: []),
       videoOptionPage: (context) => VideoOptionPage(),
       verifiedBadgePage: (context) => BadgeRequest(),
-      languagePage: (context) => ChangeLanguagePage(),
-      redeemCoins: (context) => RedeemCoins(),
-      redeemHistory: (context) => RedeemHistory(),
+      languagePage: (context) => const ChangeLanguagePage(),
+      redeemCoins: (context) => const RedeemCoins(),
+      redeemHistory: (context) => const RedeemHistory(),
       audio: (context) => Audio(),
-      addMusic: (context) => AddMusic(),
-      login: (context) => MyLogin(),
-      register: (context) => MyRegister(),
+      addMusic: (context) => const AddMusic(),
+      login: (context) => const MyLogin(),
+      register: (context) => const MyRegister(),
     };
   }
 
@@ -85,25 +87,26 @@ class PageRoutes {
       GetPage(name: helpPage, page: () => HelpPage()),
       GetPage(name: tncPage, page: () => TnC()),
       GetPage(name: searchPage, page: () => SearchUsers()),
-      GetPage(name: addVideoPage, page: () => AddVideoPage()),
+      GetPage(name: addVideoPage, page: () => const AddVideoPage()),
       GetPage(name: addVideo, page: () => AddVideo()),
       GetPage(name: addVideoFilterPage, page: () => AddVideoFilter()),
       GetPage(name: postInfoPage, page: () => PostInfo()),
-      GetPage(name: userProfilePage, page: () => UserProfilePage()),
+      GetPage(name: userProfilePage, page: () => const UserProfilePage()),
       GetPage(name: chatPage, page: () => ChatPage()),
       GetPage(name: morePage, page: () => MorePage(title: 'Title', videos: [])),
       GetPage(name: videoOptionPage, page: () => VideoOptionPage()),
       GetPage(name: verifiedBadgePage, page: () => BadgeRequest()),
-      GetPage(name: languagePage, page: () => ChangeLanguagePage()),
-      GetPage(name: redeemCoins, page: () => RedeemCoins()),
-      GetPage(name: redeemHistory, page: () => RedeemHistory()),
+      GetPage(name: languagePage, page: () => const ChangeLanguagePage()),
+      GetPage(name: redeemCoins, page: () => const RedeemCoins()),
+      GetPage(name: redeemHistory, page: () => const RedeemHistory()),
       GetPage(name: audio, page: () => Audio()),
-      GetPage(name: addMusic, page: () => AddMusic()),
-      GetPage(name: login, page: () => MyLogin()),
-      GetPage(name: register, page: () => MyRegister()),
+      GetPage(name: addMusic, page: () => const AddMusic()),
+      GetPage(name: login, page: () => const MyLogin()),
+      GetPage(name: register, page: () => const MyRegister()),
+      GetPage(name: followingTabPage, page: () => const FollowingTabPage()),
       GetPage(
           name: notification,
-          page: () => NotificationScreen(),
+          page: () => const NotificationScreen(),
           binding: NotificationBinding()),
     ];
   }

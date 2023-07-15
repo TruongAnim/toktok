@@ -1,6 +1,7 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
-import 'package:toktok/Screens/home_screen/following_tab.dart';
+import 'package:get/get.dart';
+import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/models/video.dart';
 import 'package:toktok/utils/random_utils.dart';
@@ -32,11 +33,11 @@ class TabGrid extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        FollowingTabPage(list, false, variable: index))),
+            onTap: () => Get.toNamed(PageRoutes.followingTabPage, arguments: {
+              'videos': list,
+              'isFollowing': false,
+              'variable': index,
+            }),
             child: FadedScaleAnimation(
               child: Container(
                 decoration: BoxDecoration(

@@ -39,12 +39,12 @@ class _HomeBodyState extends State<HomeBody> {
           TabBarView(
             children: <Widget>[
               Obx(() {
-                return FollowingTabPage(
-                    _feedingVideoController.videoList, false);
+                return FollowingTabBody(
+                    _feedingVideoController.videoList, false, null);
               }),
               Obx(() {
-                return FollowingTabPage(
-                    _feedingVideoController.videoFollowing, false);
+                return FollowingTabBody(
+                    _feedingVideoController.videoFollowing, false, null);
               }),
             ],
           ),
