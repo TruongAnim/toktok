@@ -238,6 +238,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                     ],
                   ),
                 ),
+                const SizedBox(height: 12),
                 CustomButton(
                   ImageIcon(
                     const AssetImage('assets/icons/ic_views.png'),
@@ -318,12 +319,12 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                           height: 3)),
                   TextSpan(
                     text: '${widget.video.caption}\n',
-                    style: TextStyle(fontSize: 15),
+                    style: const TextStyle(fontSize: 15),
                   ),
                   TextSpan(
                       text: '${widget.video.songName}',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, height: 1.5)),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w600, height: 1.5)),
                   TextSpan(
                       text: '  ${locale.seeMore}',
                       style: TextStyle(

@@ -65,13 +65,9 @@ class _NotificationTabState extends State<NotificationTab> {
                   end: 55,
                   bottom: 10,
                   child: CircleAvatar(
-                    backgroundColor: mainColor,
-                    radius: 12,
-                    child: Icon(
-                      CommonUtils.getIconFromType(notif.type),
-                      color: Colors.white,
-                      size: 15,
-                    ),
+                    backgroundColor: Colors.white,
+                    radius: 13,
+                    child: CommonUtils.getIconFromType(notif.type, 18),
                   )),
             ],
           );

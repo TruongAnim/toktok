@@ -30,13 +30,15 @@ class _NotifThumbnailState extends State<NotifThumbnail> {
                   image: Image.network(thumbnail!).image, fit: BoxFit.cover),
             ),
           )
-        : const Row(children: [
-            Spacer(),
-            SizedBox(
-              width: 35,
-              height: 35,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            ),
-          ]);
+        : const Row(
+            children: [
+              Spacer(),
+              SizedBox(
+                width: 35,
+                height: 35,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            ],
+          );
   }
 }
