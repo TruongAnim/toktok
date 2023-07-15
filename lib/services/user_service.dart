@@ -43,4 +43,13 @@ class UserService {
       return null;
     }
   }
+
+  Future<List<String>> getFollowers(String uid) async {
+    QuerySnapshot snapshot = await firebaseStore
+        .collection('users')
+        .doc(uid)
+        .collection('followers')
+        .get();
+    return snapshot.docs.map((e) => e.id).toList();
+  }
 }

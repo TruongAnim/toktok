@@ -29,14 +29,15 @@ class _NotificationTabState extends State<NotificationTab> {
   Widget build(BuildContext context) {
     return Obx(
       () => ListView.builder(
-          itemCount: _controller.notifications.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            Notif notif = _controller.notifications[index];
-            return Stack(children: <Widget>[
+        itemCount: _controller.notifications.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          Notif notif = _controller.notifications[index];
+          return Stack(
+            children: <Widget>[
               ListTile(
                   leading: NotifAvatar(
-                      avatar: _controller.getUserProfile(notif.uid)),
+                      avatar: _controller.getUserProfile(notif.senderId)),
                   title: Text(
                     notif.title,
                     style: TextStyle(color: secondaryColor),
@@ -69,11 +70,13 @@ class _NotificationTabState extends State<NotificationTab> {
                     child: Icon(
                       CommonUtils.getIconFromType(notif.type),
                       color: Colors.white,
-                      size: 12,
+                      size: 15,
                     ),
                   )),
-            ]);
-          }),
+            ],
+          );
+        },
+      ),
     );
   }
 }

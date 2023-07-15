@@ -37,7 +37,6 @@ class _PostInfoState extends State<PostInfo> {
   late UploadController _uploadController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     data = Get.arguments;
     _titleController = TextEditingController();
