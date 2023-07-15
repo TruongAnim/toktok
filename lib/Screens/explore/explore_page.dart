@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:toktok/Components/thumb_list.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
@@ -108,7 +105,7 @@ class _ExploreBodyState extends State<ExploreBody> {
         //   _createAnchoredBanner(context);
         // }
         return Padding(
-          padding: const EdgeInsets.only(bottom: 60.0, top: 20.0),
+          padding: const EdgeInsets.only(bottom: 56.0, top: 20.0),
           child: Scaffold(
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(72.0),

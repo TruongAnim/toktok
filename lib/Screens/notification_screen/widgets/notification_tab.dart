@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Screens/notification_screen/controllers/notification_controller.dart';
 import 'package:toktok/Screens/notification_screen/widgets/notif_avatar.dart';
 import 'package:toktok/Screens/notification_screen/widgets/notif_thumbnail.dart';

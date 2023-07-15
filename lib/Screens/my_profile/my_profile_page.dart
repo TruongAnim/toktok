@@ -43,7 +43,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 64.0),
+      padding: const EdgeInsets.only(bottom: 56.0),
       child: Scaffold(
         backgroundColor: darkColor,
         body: DefaultTabController(

@@ -42,21 +42,24 @@ class NotificationScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            FadedSlideAnimation(
-              beginOffset: const Offset(0, 0.3),
-              endOffset: const Offset(0, 0),
-              slideCurve: Curves.linearToEaseOut,
-              child: const NotificationTab(),
-            ),
-            FadedSlideAnimation(
-              beginOffset: const Offset(0, 0.3),
-              endOffset: const Offset(0, 0),
-              slideCurve: Curves.linearToEaseOut,
-              child: const MessagesTab(),
-            ),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.only(bottom: 56.0),
+          child: TabBarView(
+            children: <Widget>[
+              FadedSlideAnimation(
+                beginOffset: const Offset(0, 0.3),
+                endOffset: const Offset(0, 0),
+                slideCurve: Curves.linearToEaseOut,
+                child: const NotificationTab(),
+              ),
+              FadedSlideAnimation(
+                beginOffset: const Offset(0, 0.3),
+                endOffset: const Offset(0, 0),
+                slideCurve: Curves.linearToEaseOut,
+                child: const MessagesTab(),
+              ),
+            ],
+          ),
         ),
       ),
     );
