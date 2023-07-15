@@ -72,7 +72,7 @@ class _PostInfoState extends State<PostInfo> {
                     prefix: FadedScaleAnimation(
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            AuthController.instance.currentUserProfile),
+                            AuthController.instance.appUser.profilePhoto),
                       ),
                     ),
                     label:

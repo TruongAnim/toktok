@@ -6,6 +6,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:toktok/Auth/login_navigator.dart';
 import 'package:toktok/Routes/routes.dart';
+import 'package:toktok/models/notif.dart';
+import 'package:toktok/services/user_service.dart';
 
 class FirebaseMessagingService {
   static final FirebaseMessagingService _instance =
@@ -39,6 +41,7 @@ class FirebaseMessagingService {
   }
 
   Future<void> initPushNotification() async {
+    print('initPushNotification');
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
             alert: true, badge: true, sound: true);
@@ -68,24 +71,16 @@ class FirebaseMessagingService {
   }
 
   Future<void> onBackgroundMessage(RemoteMessage message) async {
-    // call when recieve notification
+    // call when recieve notification in background
     print('onBackgroundMessage');
     print(message.notification?.title);
     print(message.notification?.body);
     print(message.data);
   }
 
-  void handleMessage(RemoteMessage? message) {
-    // call when click to notification
-    print('handleMessage');
-    print(message?.notification?.title);
-    print(message?.notification?.body);
-    print(message?.data);
-    navigatorKey.currentState?.pushNamed(PageRoutes.bottomNavigation,
-        arguments: {'tab': 'notification', 'message': message});
-  }
-
   void handleForegroundMessage(RemoteMessage message) {
+    // call when recieve notification in foreground
+    print('handleForegroundMessage');
     final notification = message.notification;
     if (notification != null) {
       _localNotifications.show(
@@ -103,24 +98,33 @@ class FirebaseMessagingService {
     }
   }
 
-  // void sendNotification(NotificationRequest notification) async {
-  void sendNotification() async {
-    Map<String, dynamic> headers = await _getHeader();
-    await _dio.post(
-      _SEND_NOTIFY_URL,
-      options: Options(headers: headers),
-      data: {
-        "to":
-            'ffmwKpkWSoeo_aW6v3kFYr:APA91bF8KtsjGZL_kh3s1roiCEDg9Cr_MOtCWnosm2v_bkKA32H9q5wwU2pkOHzWDo0IYDvmCQqcYGRszBHsBW8nqph-V7prqkeqmaGzDGr8TX48j1ahuATL7kZ-HDJmrxxMb-sUXGFi',
-        "notification": {
-          "title": 'notification.title',
-          "body": 'notification.body',
+  void handleMessage(RemoteMessage? message) {
+    // call when click to notification
+    print('handleMessage');
+    print(message?.notification?.title);
+    print(message?.notification?.body);
+    print(message?.data);
+    navigatorKey.currentState?.pushNamed(PageRoutes.bottomNavigation,
+        arguments: {'tab': 'notification', 'message': message});
+  }
+
+  void sendNotification(Notif notification) async {
+    String? fmToken = await UserService.instance.getFmToken(notification.uid);
+    if (fmToken != null) {
+      Map<String, dynamic> headers = await _getHeader();
+      await _dio.post(
+        _SEND_NOTIFY_URL,
+        options: Options(headers: headers),
+        data: {
+          "to": fmToken,
+          "notification": {
+            "title": notification.title,
+            "body": notification.desc,
+          },
+          "data": notification.toJsonDio(),
         },
-        // "data": {
-        //   "adminDocId": notification.adminDocId,
-        // },
-      },
-    );
+      );
+    }
   }
 
   Future<Map<String, dynamic>> _getHeader() async {

@@ -13,7 +13,7 @@ import 'package:toktok/services/user_service.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   final UserService _userService = UserService.instance;
-  late String currentUserProfile;
+  late AppUser appUser;
   late Rx<User?> _currentUser;
 
   User get user => UserService.instance.getCurrentUser()!;
@@ -37,15 +37,13 @@ class AuthController extends GetxController {
       Get.offAllNamed(PageRoutes.login);
     } else {
       Get.offAllNamed(PageRoutes.bottomNavigation);
-      getcurrentUserProfile();
+      getAppUser();
       _userService.updateFmToken();
     }
   }
 
-  void getcurrentUserProfile() async {
-    UserService.instance
-        .getProfilePicture(user.uid)
-        .then((value) => currentUserProfile = value);
+  void getAppUser() async {
+    appUser = await UserService.instance.getAppUser(user.uid);
   }
 
   Future<String> uploadToStorage(File avatar) async {

@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/comment.dart';
+import 'package:toktok/models/notif.dart';
+import 'package:toktok/models/user.dart';
+import 'package:toktok/models/video.dart';
+import 'package:toktok/services/firebase_messaging_service.dart';
 
 class CommentController extends GetxController {
   final Rx<List<Comment>> _comments = Rx<List<Comment>>([]);
@@ -30,18 +34,19 @@ class CommentController extends GetxController {
     try {
       content = content.trim();
       if (content.isNotEmpty) {
-        DocumentSnapshot userDoc = await firebaseStore
-            .collection('users')
-            .doc(AuthController.instance.user.uid)
-            .get();
+        String currentUid = AuthController.instance.user.uid;
+        DocumentReference postRef =
+            firebaseStore.collection('videos').doc(_postId);
+        DocumentSnapshot userDoc =
+            await firebaseStore.collection('users').doc(currentUid).get();
         var allComments = await firebaseStore
             .collection('videos')
             .doc(_postId)
             .collection('comments')
             .get();
-        String commentId = 'Comment ${allComments.docs.length}';
+        DocumentReference commentRef = postRef.collection('comments').doc();
         Comment comment = Comment(
-          id: commentId,
+          id: commentRef.id,
           uid: AuthController.instance.user.uid,
           username: (userDoc.data() as Map<String, dynamic>)['name'],
           comment: content,
@@ -50,16 +55,10 @@ class CommentController extends GetxController {
           likes: [],
           publicDate: Timestamp.fromDate(DateTime.now()),
         );
-        await firebaseStore
-            .collection('videos')
-            .doc(_postId)
-            .collection('comments')
-            .doc(commentId)
-            .set(comment.toJson());
-        await firebaseStore
-            .collection('videos')
-            .doc(_postId)
-            .update({'commentCount': allComments.docs.length + 1});
+        await commentRef.set(comment.toJson());
+        await postRef.update({'commentCount': allComments.docs.length + 1});
+
+        createCommentNotification(postRef);
       }
     } catch (e) {
       Get.showSnackbar(
@@ -70,6 +69,22 @@ class CommentController extends GetxController {
         ),
       );
     }
+  }
+
+  void createCommentNotification(DocumentReference postRef) async {
+    Video video = Video.fromSnapshot(await postRef.get());
+    AppUser appUser = AuthController.instance.appUser;
+    Notif notif = Notif(
+        id: '',
+        uid: video.uid,
+        senderId: AuthController.instance.user.uid,
+        isRead: false,
+        title: '${appUser.name} commented on your video.',
+        desc: '',
+        type: 'comment',
+        videoId: video.id,
+        time: Timestamp.now());
+    FirebaseMessagingService.instance.sendNotification(notif);
   }
 
   void likeComment(String commentId) async {

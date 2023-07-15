@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:preload_page_view/preload_page_view.dart';
-import 'package:toktok/Screens/home_screen/comment_sheet.dart';
+import 'package:toktok/Screens/comment/comment_sheet.dart';
 import 'package:toktok/BottomNavigation/controllers/bottom_navigation_controller.dart';
 import 'package:toktok/Components/custom_button.dart';
 import 'package:toktok/Components/rotated_image.dart';

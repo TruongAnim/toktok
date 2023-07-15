@@ -12,7 +12,7 @@ import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Screens/chat/controllers/chat_controller.dart';
 import 'package:toktok/Theme/style.dart';
 import 'package:toktok/controllers/auth_controller.dart';
-import 'package:toktok/controllers/comment_controller.dart';
+import 'package:toktok/Screens/comment/controllers/comment_controller.dart';
 import 'package:toktok/controllers/hashtag_controller.dart';
 import 'package:toktok/controllers/music_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';

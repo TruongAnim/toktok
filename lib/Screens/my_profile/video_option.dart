@@ -1,6 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
-import 'package:toktok/Screens/home_screen/comment_sheet.dart';
+import 'package:toktok/Screens/comment/comment_sheet.dart';
 import 'package:toktok/Components/custom_button.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Theme/colors.dart';
