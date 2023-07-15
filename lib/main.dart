@@ -36,7 +36,6 @@ void main() async {
     Get.lazyPut(() => MusicController(), fenix: true);
     Get.lazyPut(() => VideoInfoController(), fenix: true);
     Get.lazyPut(() => HashtagController(), fenix: true);
-    Get.lazyPut(() => BottomNavigationController(), fenix: true);
     Get.lazyPut(() => ChatController(), fenix: true);
     Get.put(AuthController());
   });

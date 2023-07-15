@@ -8,8 +8,6 @@ class BottomNavigationController extends GetxController {
   void changeTab(int index) {
     if (index == 2) {
       Get.toNamed(PageRoutes.addVideo);
-    } else if (index == 3) {
-      Get.toNamed(PageRoutes.notification);
     } else {
       _currentIndex.value = index;
     }

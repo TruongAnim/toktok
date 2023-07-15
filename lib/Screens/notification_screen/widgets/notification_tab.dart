@@ -59,22 +59,19 @@ class _NotificationTabState extends State<NotificationTab> {
                       thumbnail: _controller.getVideoThumnail(notif.videoId),
                     ),
                   ),
-                  onTap: () {
-                    // FirebaseMessagingService.instance.sendNotification();
-                    Navigator.pushNamed(context, PageRoutes.userProfilePage);
-                  }),
+                  onTap: () => _controller.onTap(index)),
               Positioned.directional(
                   textDirection: Directionality.of(context),
                   end: 55,
                   bottom: 10,
                   child: CircleAvatar(
                     backgroundColor: mainColor,
+                    radius: 12,
                     child: Icon(
                       CommonUtils.getIconFromType(notif.type),
                       color: Colors.white,
-                      size: 10,
+                      size: 12,
                     ),
-                    radius: 10,
                   )),
             ]);
           }),

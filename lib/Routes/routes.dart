@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toktok/Auth/Login/UI/login_screen.dart';
 import 'package:toktok/Auth/Registration/UI/register_screen.dart';
 import 'package:toktok/Auth/login_navigator.dart';
+import 'package:toktok/BottomNavigation/bindings/bottom_navigation_binding.dart';
 import 'package:toktok/Screens/add_video/add_video_page.dart';
 import 'package:toktok/Screens/explore/more_page.dart';
 import 'package:toktok/Screens/explore/search_users.dart';
@@ -82,7 +83,10 @@ class PageRoutes {
   List<GetPage<dynamic>> widgetRoutes() {
     return [
       GetPage(name: loginNavigator, page: () => LoginNavigator()),
-      GetPage(name: bottomNavigation, page: () => BottomNavigation()),
+      GetPage(
+          name: bottomNavigation,
+          page: () => BottomNavigation(),
+          binding: BottomNavigationBinding()),
       GetPage(name: followersPage, page: () => FollowersPage()),
       GetPage(name: helpPage, page: () => HelpPage()),
       GetPage(name: tncPage, page: () => TnC()),
