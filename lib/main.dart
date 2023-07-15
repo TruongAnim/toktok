@@ -55,38 +55,31 @@ class Toktok extends StatelessWidget {
     final box = GetStorage();
     String? language = box.read('language_selected');
     return GetMaterialApp(
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        AppLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ar'),
-        Locale('id'),
-        Locale('fr'),
-        Locale('pt'),
-        Locale('es'),
-        Locale('it'),
-        Locale('sw'),
-        Locale('tr'),
-        Locale('de'),
-        Locale('ro'),
-      ],
-      theme: appTheme,
-      locale: Locale(language ?? 'en'),
-      initialRoute:
-          language == null ? PageRoutes.languagePage : PageRoutes.login,
-      getPages: PageRoutes()
-          .widgetRoutes()
-          .entries
-          .map(
-            (entry) => GetPage(name: entry.key, page: () => entry.value),
-          )
-          .toList(),
-    );
+        navigatorKey: navigatorKey,
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: const [
+          AppLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ar'),
+          Locale('id'),
+          Locale('fr'),
+          Locale('pt'),
+          Locale('es'),
+          Locale('it'),
+          Locale('sw'),
+          Locale('tr'),
+          Locale('de'),
+          Locale('ro'),
+        ],
+        theme: appTheme,
+        locale: Locale(language ?? 'en'),
+        initialRoute:
+            language == null ? PageRoutes.languagePage : PageRoutes.login,
+        getPages: PageRoutes().widgetRoutes());
   }
 }

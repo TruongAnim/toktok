@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Auth/Login/UI/login_screen.dart';
 import 'package:toktok/Auth/Registration/UI/register_screen.dart';
 import 'package:toktok/Auth/login_navigator.dart';
@@ -20,6 +21,7 @@ import 'package:toktok/Screens/my_profile/redeem_history.dart';
 import 'package:toktok/Screens/chat/chat_page.dart';
 import 'package:toktok/Screens/add_music.dart';
 import 'package:toktok/Screens/audio.dart';
+import 'package:toktok/Screens/notification_screen/bindings/notification_binding.dart';
 import 'package:toktok/Screens/notification_screen/notification_screen.dart';
 import 'package:toktok/Screens/user_profile/user_profile.dart';
 
@@ -46,7 +48,7 @@ class PageRoutes {
   static const String addMusic = '/addMusic';
   static const String login = '/login';
   static const String register = '/register';
-  static const String notificationMessages = '/notification_messages';
+  static const String notification = '/notification_messages';
 
   Map<String, WidgetBuilder> routes() {
     return {
@@ -75,31 +77,34 @@ class PageRoutes {
     };
   }
 
-  Map<String, Widget> widgetRoutes() {
-    return {
-      loginNavigator: LoginNavigator(),
-      bottomNavigation: BottomNavigation(),
-      followersPage: FollowersPage(),
-      helpPage: HelpPage(),
-      tncPage: TnC(),
-      searchPage: SearchUsers(),
-      addVideoPage: AddVideoPage(),
-      addVideo: AddVideo(),
-      addVideoFilterPage: AddVideoFilter(),
-      postInfoPage: PostInfo(),
-      userProfilePage: UserProfilePage(),
-      chatPage: ChatPage(),
-      morePage: MorePage(title: 'Title', videos: []),
-      videoOptionPage: VideoOptionPage(),
-      verifiedBadgePage: BadgeRequest(),
-      languagePage: ChangeLanguagePage(),
-      redeemCoins: RedeemCoins(),
-      redeemHistory: RedeemHistory(),
-      audio: Audio(),
-      addMusic: AddMusic(),
-      login: MyLogin(),
-      register: MyRegister(),
-      notificationMessages: NotificationScreen(),
-    };
+  List<GetPage<dynamic>> widgetRoutes() {
+    return [
+      GetPage(name: loginNavigator, page: () => LoginNavigator()),
+      GetPage(name: bottomNavigation, page: () => BottomNavigation()),
+      GetPage(name: followersPage, page: () => FollowersPage()),
+      GetPage(name: helpPage, page: () => HelpPage()),
+      GetPage(name: tncPage, page: () => TnC()),
+      GetPage(name: searchPage, page: () => SearchUsers()),
+      GetPage(name: addVideoPage, page: () => AddVideoPage()),
+      GetPage(name: addVideo, page: () => AddVideo()),
+      GetPage(name: addVideoFilterPage, page: () => AddVideoFilter()),
+      GetPage(name: postInfoPage, page: () => PostInfo()),
+      GetPage(name: userProfilePage, page: () => UserProfilePage()),
+      GetPage(name: chatPage, page: () => ChatPage()),
+      GetPage(name: morePage, page: () => MorePage(title: 'Title', videos: [])),
+      GetPage(name: videoOptionPage, page: () => VideoOptionPage()),
+      GetPage(name: verifiedBadgePage, page: () => BadgeRequest()),
+      GetPage(name: languagePage, page: () => ChangeLanguagePage()),
+      GetPage(name: redeemCoins, page: () => RedeemCoins()),
+      GetPage(name: redeemHistory, page: () => RedeemHistory()),
+      GetPage(name: audio, page: () => Audio()),
+      GetPage(name: addMusic, page: () => AddMusic()),
+      GetPage(name: login, page: () => MyLogin()),
+      GetPage(name: register, page: () => MyRegister()),
+      GetPage(
+          name: notification,
+          page: () => NotificationScreen(),
+          binding: NotificationBinding()),
+    ];
   }
 }

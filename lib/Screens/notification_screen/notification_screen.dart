@@ -1,6 +1,8 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Locale/locale.dart';
+import 'package:toktok/Screens/notification_screen/controllers/notification_controller.dart';
 import 'package:toktok/Screens/notification_screen/widgets/messages_tab.dart';
 import 'package:toktok/Screens/notification_screen/widgets/notification_tab.dart';
 import 'package:toktok/Theme/colors.dart';
@@ -14,6 +16,16 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  late NotificationController _notificationController;
+  @override
+  void initState() {
+    super.initState();
+    _notificationController = Get.find();
+    _notificationController.getNotifications();
+    print(
+        '_notificationController.notifications ${_notificationController.notifications}');
+  }
+
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
