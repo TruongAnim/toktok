@@ -1,76 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Routes/routes.dart';
+import 'package:toktok/Screens/notification_screen/controllers/notification_controller.dart';
+import 'package:toktok/Screens/notification_screen/widgets/notif_avatar.dart';
+import 'package:toktok/Screens/notification_screen/widgets/notif_thumbnail.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/models/notif.dart';
+import 'package:toktok/utils/common_utils.dart';
+import 'package:toktok/utils/time_utils.dart';
 
-class NotificationTab extends StatelessWidget {
-  const NotificationTab({
-    Key? key,
-    required this.notification,
-  }) : super(key: key);
+class NotificationTab extends StatefulWidget {
+  const NotificationTab({super.key});
 
-  final List<Notif> notification;
+  @override
+  State<NotificationTab> createState() => _NotificationTabState();
+}
+
+class _NotificationTabState extends State<NotificationTab> {
+  late NotificationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = Get.find();
+    _controller.getNotifications();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // return ListView.builder(
-    //     itemCount: notification.length,
-    //     shrinkWrap: true,
-    //     itemBuilder: (context, index) {
-    //       return Stack(children: <Widget>[
-    //         ListTile(
-    //             leading: CircleAvatar(
-    //                 backgroundImage: AssetImage(notification[index].image)),
-    //             title: Text(
-    //               notification[index].name,
-    //               style: TextStyle(color: secondaryColor),
-    //             ),
-    //             subtitle: RichText(
-    //                 text: TextSpan(children: [
-    //               TextSpan(
-    //                 text: notification[index].desc! + ' ',
-    //                 style: TextStyle(color: lightTextColor),
-    //               ),
-    //               TextSpan(
-    //                   text: notification[index].time,
-    //                   style: TextStyle(color: lightTextColor.withOpacity(0.15)))
-    //             ])),
-    //             trailing: Container(
-    //               width: 50,
-    //               //height: 45,
-    //               child: notification[index].icon == Icons.add
-    //                   ? CircleAvatar(
-    //                       radius: 25.0,
-    //                       backgroundImage:
-    //                           AssetImage('assets/images/user.webp'),
-    //                     )
-    //                   : Container(
-    //                       decoration: BoxDecoration(
-    //                           borderRadius: BorderRadius.circular(5),
-    //                           image: DecorationImage(
-    //                               image: AssetImage(
-    //                                   notification[index].notifImage),
-    //                               fit: BoxFit.fill))),
-    //             ),
-    //             onTap: () {
-    //               // FirebaseMessagingService.instance.sendNotification();
-    //               Navigator.pushNamed(context, PageRoutes.userProfilePage);
-    //             }),
-    //         Positioned.directional(
-    //             textDirection: Directionality.of(context),
-    //             end: 55,
-    //             bottom: 10,
-    //             child: CircleAvatar(
-    //               backgroundColor: mainColor,
-    //               child: Icon(
-    //                 notification[index].icon,
-    //                 color: Colors.white,
-    //                 size: 10,
-    //               ),
-    //               radius: 10,
-    //             )),
-    //       ]);
-    //     });
-    return Container();
+    return Obx(
+      () => ListView.builder(
+          itemCount: _controller.notifications.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            Notif notif = _controller.notifications[index];
+            return Stack(children: <Widget>[
+              ListTile(
+                  leading: NotifAvatar(
+                      avatar: _controller.getUserProfile(notif.uid)),
+                  title: Text(
+                    notif.title,
+                    style: TextStyle(color: secondaryColor),
+                  ),
+                  subtitle: RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                      text: '${notif.desc} ',
+                      style: TextStyle(color: lightTextColor),
+                    ),
+                    TextSpan(
+                        text: TimeUtils.getTimeFromMilisecond(notif.time),
+                        style:
+                            TextStyle(color: lightTextColor.withOpacity(0.15)))
+                  ])),
+                  trailing: Container(
+                    width: 50,
+                    child: NotifThumbnail(
+                      thumbnail: _controller.getVideoThumnail(notif.videoId),
+                    ),
+                  ),
+                  onTap: () {
+                    // FirebaseMessagingService.instance.sendNotification();
+                    Navigator.pushNamed(context, PageRoutes.userProfilePage);
+                  }),
+              Positioned.directional(
+                  textDirection: Directionality.of(context),
+                  end: 55,
+                  bottom: 10,
+                  child: CircleAvatar(
+                    backgroundColor: mainColor,
+                    child: Icon(
+                      CommonUtils.getIconFromType(notif.type),
+                      color: Colors.white,
+                      size: 10,
+                    ),
+                    radius: 10,
+                  )),
+            ]);
+          }),
+    );
   }
 }

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MessagesTab extends StatelessWidget {
-  const MessagesTab({
-    Key? key,
-    required this.messages,
-  }) : super(key: key);
-
-  final List<String?> messages;
+  const MessagesTab({super.key});
 
   @override
   Widget build(BuildContext context) {

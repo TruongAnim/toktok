@@ -88,9 +88,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/user/
-    - assets/thumbnails/dance/
-    - assets/thumbnails/lol/
-    - assets/thumbnails/food/
+    - assets/thumbnails/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
