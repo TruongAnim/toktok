@@ -87,7 +87,7 @@ class UserInfo extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              locale!.comment7!,
+              _profileController.user['description'],
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
             ),
@@ -95,7 +95,7 @@ class UserInfo extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                ProfilePageButton(locale.message,
+                ProfilePageButton(locale!.message,
                     () => Navigator.pushNamed(context, PageRoutes.chatPage)),
                 const SizedBox(width: 16),
                 _profileController.user['isFollowing']

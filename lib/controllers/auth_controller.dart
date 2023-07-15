@@ -32,15 +32,17 @@ class AuthController extends GetxController {
     if (language == null) {
       return;
     }
+
     if (_currentUser.value == null) {
       Get.offAllNamed(PageRoutes.login);
     } else {
       Get.offAllNamed(PageRoutes.bottomNavigation);
       getcurrentUserProfile();
+      _userService.updateFmToken();
     }
   }
 
-  getcurrentUserProfile() async {
+  void getcurrentUserProfile() async {
     UserService.instance
         .getProfilePicture(user.uid)
         .then((value) => currentUserProfile = value);
@@ -92,10 +94,13 @@ class AuthController extends GetxController {
         int randomId = random.nextInt(70);
         String urlAvatar = 'https://i.pravatar.cc/150?img=$randomId';
         AppUser modelUser = AppUser(
-            uid: credential.user!.uid,
-            name: userName,
-            email: email,
-            profilePhoto: urlAvatar);
+          uid: credential.user!.uid,
+          name: userName,
+          email: email,
+          profilePhoto: urlAvatar,
+          fmToken: 'None',
+          description: 'None',
+        );
         await firebaseStore
             .collection('users')
             .doc(credential.user!.uid)

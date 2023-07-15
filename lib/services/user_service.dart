@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/services/firebase_messaging_service.dart';
 
 class UserService {
   static final UserService _instance = UserService._();
@@ -13,5 +14,15 @@ class UserService {
   Future<String> getProfilePicture(String uid) async {
     var value = await firebaseStore.collection('users').doc(uid).get();
     return (value.data() as Map<String, dynamic>)['profilePhoto'];
+  }
+
+  Future<void> updateFmToken() async {
+    String? fmToken = await FirebaseMessagingService.instance.getFmToken();
+    if (fmToken != null) {
+      await firebaseStore
+          .collection('users')
+          .doc(getCurrentUser()!.uid)
+          .update({'fmToken': fmToken});
+    }
   }
 }

@@ -76,13 +76,13 @@ class MyInfo extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              locale!.comment5!,
+              _profileController.user['description'],
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
             ),
             const Spacer(),
             ProfilePageButton(
-              locale.editProfile,
+              locale!.editProfile,
               () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => EditProfile()));

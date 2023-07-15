@@ -25,9 +25,13 @@ class FirebaseMessagingService {
       importance: Importance.defaultImportance);
   final _localNotifications = FlutterLocalNotificationsPlugin();
 
+  Future<String?> getFmToken() async {
+    return fmInstance.getToken();
+  }
+
   Future<void> initNotification() async {
     await fmInstance.requestPermission();
-    final fmToken = await fmInstance.getToken();
+    final fmToken = await getFmToken();
     print('fmToken $fmToken');
     FirebaseMessaging.onBackgroundMessage(onBackgroundMessage);
     initPushNotification();
@@ -122,7 +126,7 @@ class FirebaseMessagingService {
   Future<Map<String, dynamic>> _getHeader() async {
     // String token = await AppSecureStorage.getTokenFirebase();
     return {
-      // "Content-Type": "application/json",
+      "Content-Type": "application/json",
       "Authorization": "Bearer $_SERVER_KEY",
     };
   }

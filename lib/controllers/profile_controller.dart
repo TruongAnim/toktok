@@ -5,10 +5,10 @@ import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/video.dart';
 
 class ProfileController extends GetxController {
-  Rx<Map<String, dynamic>> _user = Rx<Map<String, dynamic>>({});
+  final Rx<Map<String, dynamic>> _user = Rx<Map<String, dynamic>>({});
 
   Map<String, dynamic> get user => _user.value;
-  Rx<String> _uid = ''.obs;
+  final Rx<String> _uid = ''.obs;
 
   updateUserId(String uid) {
     _uid.value = uid;
@@ -66,7 +66,8 @@ class ProfileController extends GetxController {
       'profilePhoto': profilePhoto,
       'name': userName,
       'videos': videos,
-      'email': userData['email']
+      'email': userData['email'],
+      'description': userData['description'],
     };
     update();
   }
