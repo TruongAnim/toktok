@@ -9,7 +9,7 @@ class Notif {
   final String desc;
   final String type;
   final bool isRead;
-  final Timestamp time;
+  final int time;
 
   Notif({
     required this.id,
@@ -37,20 +37,6 @@ class Notif {
     };
   }
 
-  Map<String, dynamic> toJsonDio() {
-    return <String, dynamic>{
-      'id': id,
-      'uid': uid,
-      'senderId': senderId,
-      'videoId': videoId,
-      'title': title,
-      'desc': desc,
-      'type': type,
-      'isRead': isRead,
-      'time': time.millisecondsSinceEpoch,
-    };
-  }
-
   static Notif fromSnapshot(DocumentSnapshot snapshot) {
     var snap = snapshot.data() as Map<String, dynamic>;
     return Notif(
@@ -62,7 +48,7 @@ class Notif {
       desc: snap['desc'] as String,
       type: snap['type'] as String,
       isRead: snap['isRead'] as bool,
-      time: snap['time'] as Timestamp,
+      time: snap['time'] as int,
     );
   }
 }

@@ -83,7 +83,7 @@ class CommentController extends GetxController {
         desc: '',
         type: 'comment',
         videoId: video.id,
-        time: Timestamp.now());
+        time: DateTime.now().millisecondsSinceEpoch);
     FirebaseMessagingService.instance.sendNotification(notif);
   }
 

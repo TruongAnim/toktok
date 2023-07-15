@@ -7,7 +7,7 @@ class NotificationController extends GetxController {
   NotificationService notiService = NotificationService.instance;
   UserService userService = UserService.instance;
   RxList<Notif> notifications = RxList();
-  void getNotifications() async {
+  Future<void> getNotifications() async {
     notifications.value =
         await notiService.getNotifications(userService.getCurrentUser()!.uid);
   }

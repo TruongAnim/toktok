@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:toktok/Routes/routes.dart';
-import 'package:toktok/Theme/colors.dart';
-import 'package:toktok/models/notif.dart';
 
 class MessagesTab extends StatelessWidget {
   const MessagesTab({
     Key? key,
-    required this.notification,
     required this.messages,
   }) : super(key: key);
 
-  final List<Notif> notification;
   final List<String?> messages;
 
   @override

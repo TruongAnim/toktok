@@ -7,6 +7,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:toktok/Auth/login_navigator.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/models/notif.dart';
+import 'package:toktok/services/notification_service.dart';
 import 'package:toktok/services/user_service.dart';
 
 class FirebaseMessagingService {
@@ -57,11 +58,11 @@ class FirebaseMessagingService {
     await _localNotifications.initialize(
       setting,
       onDidReceiveNotificationResponse: (payload) {
+        print('onDidReceiveNotificationResponse');
         final message = RemoteMessage.fromMap(jsonDecode(payload.payload!));
         handleMessage(message);
-        print('onDidReceiveNotificationResponse');
       },
-      onDidReceiveBackgroundNotificationResponse: (details) {
+      onDidReceiveBackgroundNotificationResponse: (payload) {
         print('onDidReceiveBackgroundNotificationResponse');
       },
     );
@@ -73,9 +74,12 @@ class FirebaseMessagingService {
   Future<void> onBackgroundMessage(RemoteMessage message) async {
     // call when recieve notification in background
     print('onBackgroundMessage');
-    print(message.notification?.title);
-    print(message.notification?.body);
-    print(message.data);
+    final notification = message.notification;
+    if (notification != null) {
+      print(message.notification?.title);
+      print(message.notification?.body);
+      print(message.data);
+    }
   }
 
   void handleForegroundMessage(RemoteMessage message) {
@@ -83,6 +87,8 @@ class FirebaseMessagingService {
     print('handleForegroundMessage');
     final notification = message.notification;
     if (notification != null) {
+      // firebase do not create notification
+      // need to show custom notification
       _localNotifications.show(
         notification.hashCode,
         notification.title,
@@ -101,11 +107,13 @@ class FirebaseMessagingService {
   void handleMessage(RemoteMessage? message) {
     // call when click to notification
     print('handleMessage');
-    print(message?.notification?.title);
-    print(message?.notification?.body);
-    print(message?.data);
-    navigatorKey.currentState?.pushNamed(PageRoutes.bottomNavigation,
-        arguments: {'tab': 'notification', 'message': message});
+    if (message?.notification != null) {
+      print(message?.notification?.title);
+      print(message?.notification?.body);
+      print(message?.data);
+      navigatorKey.currentState?.pushNamed(PageRoutes.notification,
+          arguments: {'tab': 'notification', 'data': message?.data});
+    }
   }
 
   void sendNotification(Notif notification) async {
@@ -121,10 +129,11 @@ class FirebaseMessagingService {
             "title": notification.title,
             "body": notification.desc,
           },
-          "data": notification.toJsonDio(),
+          "data": notification.toJson(),
         },
       );
     }
+    NotificationService.instance.addNotification(notification);
   }
 
   Future<Map<String, dynamic>> _getHeader() async {

@@ -22,66 +22,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
     super.initState();
     _notificationController = Get.find();
     _notificationController.getNotifications();
-    print(
-        '_notificationController.notifications ${_notificationController.notifications}');
   }
 
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
-    List<Notif> notification = [
-      // Notif(
-      //     "Emili Williamson",
-      //     locale.likedYourVideo,
-      //     "5 " + locale.minAgo!,
-      //     "assets/user/user1.png",
-      //     "assets/thumbnails/dance/Layer 951.png",
-      //     Icons.favorite),
-      // Notif(
-      //     "Kesha Taylor",
-      //     locale.commentedOnYour,
-      //     "5 " + locale.minAgo!,
-      //     "assets/user/user2.png",
-      //     "assets/thumbnails/dance/Layer 952.png",
-      //     Icons.message),
-      // Notif(
-      //     "Ling Tong",
-      //     locale.commentedOnYour,
-      //     "5 " + locale.minAgo!,
-      //     "assets/user/user3.png",
-      //     "assets/thumbnails/food/Layer 783.png",
-      //     Icons.message),
-      // Notif(
-      //     "Linda Johnson",
-      //     locale.likedYourVideo,
-      //     "5 " + locale.minAgo!,
-      //     "assets/user/user4.png",
-      //     "assets/thumbnails/food/Layer 786.png",
-      //     Icons.favorite),
-      // Notif("George Smith", locale.startedFollowing, "5 " + locale.minAgo!,
-      //     "assets/user/user1.png", "assets/images/user.webp", Icons.add),
-      // Notif(
-      //     "Emili Williamson",
-      //     locale.likedYourVideo,
-      //     "5 " + locale.minAgo!,
-      //     "assets/user/user1.png",
-      //     "assets/thumbnails/dance/Layer 951.png",
-      //     Icons.favorite),
-      // Notif(
-      //     "Kesha Taylor",
-      //     locale.commentedOnYour,
-      //     "5 " + locale.minAgo!,
-      //     "assets/user/user2.png",
-      //     "assets/thumbnails/dance/Layer 952.png",
-      //     Icons.message),
-      // Notif(
-      //     "Ling Tong",
-      //     locale.commentedOnYour,
-      //     "5 " + locale.minAgo!,
-      //     "assets/user/user3.png",
-      //     "assets/thumbnails/food/Layer 783.png",
-      //     Icons.message),
-    ];
 
     List<String?> messages = [
       locale.heyILikeYourVideos,
@@ -116,14 +61,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
         body: TabBarView(
           children: <Widget>[
             FadedSlideAnimation(
-              child: NotificationTab(notification: notification),
               beginOffset: Offset(0, 0.3),
               endOffset: Offset(0, 0),
               slideCurve: Curves.linearToEaseOut,
+              child: Obx(() {
+                print(
+                    '_notificationController.notifications ${_notificationController.notifications}');
+                return NotificationTab(
+                    notification: _notificationController.notifications);
+              }),
             ),
             FadedSlideAnimation(
-              child:
-                  MessagesTab(notification: notification, messages: messages),
+              child: MessagesTab(messages: messages),
               beginOffset: Offset(0, 0.3),
               endOffset: Offset(0, 0),
               slideCurve: Curves.linearToEaseOut,

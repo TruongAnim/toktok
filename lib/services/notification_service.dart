@@ -13,4 +13,10 @@ class NotificationService {
         .get();
     return querySnapshot.docs.map((e) => Notif.fromSnapshot(e)).toList();
   }
+
+  Future<void> addNotification(Notif notif) async {
+    await FirebaseFirestore.instance
+        .collection('notifications')
+        .add(notif.toJson());
+  }
 }
