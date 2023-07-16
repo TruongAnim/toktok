@@ -22,9 +22,8 @@ class CoinContainer extends StatelessWidget {
             scale: 2.5,
           ),
           const SizedBox(width: 10),
-          StreamBuilder(
-            stream: AuthController.instance.appUser.stream,
-            builder: (context, snapshot) {
+          Obx(
+            () {
               return Text(
                 AuthController.instance.appUser.value.points.toString(),
                 style: Theme.of(context).textTheme.subtitle2!.copyWith(
@@ -32,17 +31,7 @@ class CoinContainer extends StatelessWidget {
                     ),
               );
             },
-          )
-          // Obx(
-          //   () {
-          // return Text(
-          //   AuthController.instance.appUser.value.points.toString(),
-          //   style: Theme.of(context).textTheme.subtitle2!.copyWith(
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          // );
-          //   },
-          // ),
+          ),
         ],
       ),
     );
