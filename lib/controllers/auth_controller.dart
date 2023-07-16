@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/models/user.dart';
+import 'package:toktok/services/firebase_messaging_service.dart';
 import 'package:toktok/services/user_service.dart';
 
 class AuthController extends GetxController {
@@ -29,19 +30,24 @@ class AuthController extends GetxController {
   }
 
   _setInitialScreen(User? callback) {
-    final box = GetStorage();
-    String? language = box.read('language_selected');
-    if (language == null) {
-      return;
-    }
+    // final box = GetStorage();
+    // String? language = box.read('language_selected');
+    // if (language == null) {
+    //   return;
+    // }
 
     if (_currentUser.value == null) {
       Get.offAllNamed(PageRoutes.login);
     } else {
       bindAppUserStream();
       Get.offAllNamed(PageRoutes.bottomNavigation);
-      _userService.updateFmToken();
+      updateFmToken();
     }
+  }
+
+  void updateFmToken() async {
+    _userService
+        .updateFmToken(await FirebaseMessagingService.instance.getFmToken());
   }
 
   void bindAppUserStream() {

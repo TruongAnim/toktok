@@ -79,7 +79,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             } else if (value == locale.termsOfUse) {
                               Navigator.pushNamed(context, PageRoutes.tncPage);
                             } else if (value == locale.logout) {
-                              firebaseAuth.signOut();
+                              _profileController.signOut();
                             } else if (value == "Redeem Coins") {
                               Navigator.pushNamed(
                                   context, PageRoutes.redeemCoins);

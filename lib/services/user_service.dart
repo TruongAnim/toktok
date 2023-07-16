@@ -24,15 +24,12 @@ class UserService {
   }
 
   Stream<AppUser> getUserStream(String uid) {
-    return firebaseStore
-        .collection('users')
-        .doc(uid)
-        .snapshots()
-        .map((event) => AppUser.fromSnapshot(event));
+    return firebaseStore.collection('users').doc(uid).snapshots().map((event) {
+      return AppUser.fromSnapshot(event);
+    });
   }
 
-  Future<void> updateFmToken() async {
-    String? fmToken = await FirebaseMessagingService.instance.getFmToken();
+  Future<void> updateFmToken(String? fmToken) async {
     if (fmToken != null) {
       await firebaseStore
           .collection('users')

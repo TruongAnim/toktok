@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/video.dart';
+import 'package:toktok/services/user_service.dart';
 import 'package:toktok/services/video_service.dart';
 
 class ProfileController extends GetxController {
@@ -112,7 +113,8 @@ class ProfileController extends GetxController {
     update();
   }
 
-  signOut() async {
-    await firebaseAuth.signOut();
+  void signOut() async {
+    await UserService.instance.updateFmToken('');
+    firebaseAuth.signOut();
   }
 }
