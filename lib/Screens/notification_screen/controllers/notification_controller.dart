@@ -24,8 +24,8 @@ class NotificationController extends GetxController {
   }
 
   void onTap(int index) async {
-    List<Video> videos =
-        await VideoService.instance.getVideos([notifications[index].videoId]);
+    List<Video> videos = await VideoService.instance
+        .getVideosFromIds([notifications[index].videoId]);
     Get.toNamed(PageRoutes.followingTabPage, arguments: {
       'videos': videos,
       'isFollowing': false,

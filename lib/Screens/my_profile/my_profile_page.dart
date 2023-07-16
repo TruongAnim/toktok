@@ -47,7 +47,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
       child: Scaffold(
         backgroundColor: darkColor,
         body: DefaultTabController(
-          length: 3,
+          length: 2,
           child: SafeArea(
             child: NestedScrollView(
               headerSliverBuilder:
@@ -128,7 +128,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                         tabs: const [
                           Tab(icon: Icon(Icons.dashboard)),
                           Tab(icon: Icon(Icons.favorite_border)),
-                          Tab(icon: Icon(Icons.bookmark_border)),
+                          // Tab(icon: Icon(Icons.bookmark_border)),
                         ],
                       ),
                     ),
@@ -158,21 +158,21 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                       endOffset: const Offset(0, 0),
                       slideCurve: Curves.linearToEaseOut,
                       child: TabGrid(
-                        _profileController.user['videos'],
+                        _profileController.user['favourites'],
                         icon: Icons.favorite,
                         showView: false,
                       ),
                     ),
-                    FadedSlideAnimation(
-                      beginOffset: const Offset(0, 0.3),
-                      endOffset: const Offset(0, 0),
-                      slideCurve: Curves.linearToEaseOut,
-                      child: TabGrid(
-                        _profileController.user['videos'],
-                        icon: Icons.bookmark,
-                        showView: false,
-                      ),
-                    ),
+                    // FadedSlideAnimation(
+                    //   beginOffset: const Offset(0, 0.3),
+                    //   endOffset: const Offset(0, 0),
+                    //   slideCurve: Curves.linearToEaseOut,
+                    //   child: TabGrid(
+                    //     _profileController.user['videos'],
+                    //     icon: Icons.bookmark,
+                    //     showView: false,
+                    //   ),
+                    // ),
                   ],
                 );
               }),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/video.dart';
+import 'package:toktok/services/video_service.dart';
 
 class ProfileController extends GetxController {
   final Rx<Map<String, dynamic>> _user = Rx<Map<String, dynamic>>({});
@@ -16,24 +17,20 @@ class ProfileController extends GetxController {
   }
 
   void getUserData() async {
-    List<Video> videos = [];
-    QuerySnapshot snapshot = await firebaseStore
-        .collection('videos')
-        .where('uid', isEqualTo: _uid.value)
-        .get();
-    videos = snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
+    List<Video> videos =
+        await VideoService.instance.getVideosFromUser(_uid.value);
+    List<Video> favourites =
+        await VideoService.instance.getFavouritesFromUser(_uid.value);
+
     DocumentSnapshot userData =
         await firebaseStore.collection('users').doc(_uid.value).get();
     String userName = userData['name'];
     String profilePhoto = userData['profilePhoto'];
-    int likes = 0;
+    int likes = await VideoService.instance.getLikesOfUser(_uid.value);
     int follower = 0;
     int following = 0;
     bool isFollowing = false;
 
-    for (var item in snapshot.docs) {
-      likes += ((item.data()! as dynamic)['likes'] as List).length;
-    }
     QuerySnapshot followerDoc = await firebaseStore
         .collection('users')
         .doc(_uid.value)
@@ -66,6 +63,7 @@ class ProfileController extends GetxController {
       'profilePhoto': profilePhoto,
       'name': userName,
       'videos': videos,
+      'favourites': favourites,
       'email': userData['email'],
       'description': userData['description'],
     };

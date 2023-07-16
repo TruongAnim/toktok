@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:toktok/Auth/login_navigator.dart';
-import 'package:toktok/BottomNavigation/controllers/bottom_navigation_controller.dart';
 import 'package:toktok/Locale/language_controller.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';

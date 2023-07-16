@@ -66,11 +66,11 @@ class TabGrid extends StatelessWidget {
                                 color: secondaryColor,
                                 size: 20,
                               )
-                            : SizedBox.shrink(),
+                            : const SizedBox.shrink(),
                         showView
                             ? Text(
                                 ' ${Numeral(list[index].viewCount).format(fractionDigits: 1)}',
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               )
                             : const SizedBox.shrink(),
                         icon != null
@@ -78,7 +78,7 @@ class TabGrid extends StatelessWidget {
                                 icon,
                                 color: Colors.red,
                               )
-                            : SizedBox.shrink(),
+                            : const SizedBox.shrink(),
                       ],
                     ),
                   ),

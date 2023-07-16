@@ -12,12 +12,44 @@ class VideoService {
     return (value.data() as Map<String, dynamic>)['thumbnail'];
   }
 
-  Future<List<Video>> getVideos(List<String> videoId) async {
+  Future<List<Video>> getVideosFromIds(List<String> videoId) async {
     QuerySnapshot snapshot = await firebaseStore
         .collection('videos')
         .where('id', whereIn: videoId)
         .get();
     return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
+  }
+
+  Future<List<Video>> getVideosFromUser(String uid) async {
+    QuerySnapshot snapshot = await firebaseStore
+        .collection('videos')
+        .where('uid', isEqualTo: uid)
+        .get();
+    return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
+  }
+
+  Future<List<Video>> getFavouritesFromUser(String uid) async {
+    QuerySnapshot snapshot = await firebaseStore
+        .collection('videos')
+        .where('likes', arrayContains: uid)
+        .get();
+    return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
+  }
+
+  Future<int> getLikesOfUser(String uid) async {
+    try {
+      QuerySnapshot snapshot = await firebaseStore
+          .collection('videos')
+          .where('uid', isEqualTo: uid)
+          .get();
+      int likes = 0;
+      for (var item in snapshot.docs) {
+        likes += ((item.data()! as dynamic)['likes'] as List).length;
+      }
+      return likes;
+    } catch (error) {
+      return 0;
+    }
   }
 
   void increseView(String videoId) {
