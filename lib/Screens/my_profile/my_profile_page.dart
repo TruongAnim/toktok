@@ -9,6 +9,7 @@ import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/Components/score_container.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';
 
 class MyProfilePage extends StatelessWidget {
@@ -72,17 +73,21 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                               borderSide: BorderSide.none),
                           onSelected: (dynamic value) {
                             if (value == locale!.changeLanguage) {
-                              Navigator.pushNamed(
-                                  context, PageRoutes.languagePage);
+                              AuthController.instance.showDevelopingSnackBar();
+                              // Navigator.pushNamed(
+                              //     context, PageRoutes.languagePage);
                             } else if (value == locale.help) {
-                              Navigator.pushNamed(context, PageRoutes.helpPage);
+                              AuthController.instance.showDevelopingSnackBar();
+                              // Navigator.pushNamed(context, PageRoutes.helpPage);
                             } else if (value == locale.termsOfUse) {
-                              Navigator.pushNamed(context, PageRoutes.tncPage);
+                              AuthController.instance.showDevelopingSnackBar();
+                              // Navigator.pushNamed(context, PageRoutes.tncPage);
                             } else if (value == locale.logout) {
                               _profileController.signOut();
                             } else if (value == "Redeem Coins") {
-                              Navigator.pushNamed(
-                                  context, PageRoutes.redeemCoins);
+                              AuthController.instance.showDevelopingSnackBar();
+                              // Navigator.pushNamed(
+                              //     context, PageRoutes.redeemCoins);
                             }
                           },
                           itemBuilder: (BuildContext context) {

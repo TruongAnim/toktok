@@ -9,6 +9,7 @@ import 'package:toktok/Components/tab_grid.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';
 
 class UserInfo extends StatelessWidget {
@@ -91,8 +92,10 @@ class UserInfo extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                ProfilePageButton(locale!.message,
-                    () => Navigator.pushNamed(context, PageRoutes.chatPage)),
+                ProfilePageButton(locale!.message, () {
+                  AuthController.instance.showDevelopingSnackBar();
+                  // return Navigator.pushNamed(context, PageRoutes.chatPage);
+                }),
                 const SizedBox(width: 16),
                 _profileController.user['isFollowing']
                     ? ProfilePageButton(locale.following, () {

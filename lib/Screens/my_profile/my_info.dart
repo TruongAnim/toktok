@@ -8,6 +8,7 @@ import 'package:toktok/Components/row_item.dart';
 import 'package:toktok/Components/tab_grid.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';
 
 class MyInfo extends StatelessWidget {
@@ -84,8 +85,9 @@ class MyInfo extends StatelessWidget {
             ProfilePageButton(
               locale!.editProfile,
               () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => EditProfile()));
+                AuthController.instance.showDevelopingSnackBar();
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => EditProfile()));
               },
               width: 120,
             ),

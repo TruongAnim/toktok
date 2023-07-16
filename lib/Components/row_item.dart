@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 
 class RowItem extends StatelessWidget {
   final String title;
@@ -28,7 +29,8 @@ class RowItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => route));
+        AuthController.instance.showDevelopingSnackBar();
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => route));
       },
     );
   }

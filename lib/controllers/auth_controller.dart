@@ -131,4 +131,14 @@ class AuthController extends GetxController {
       );
     }
   }
+
+  void showDevelopingSnackBar() {
+    Get.showSnackbar(
+      const GetSnackBar(
+        title: 'Developing feature!!',
+        message: 'Coming soon.',
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
 }
