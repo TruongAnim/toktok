@@ -53,7 +53,7 @@ class _NotificationTabState extends State<NotificationTab> {
                         style:
                             TextStyle(color: lightTextColor.withOpacity(0.15)))
                   ])),
-                  trailing: Container(
+                  trailing: SizedBox(
                     width: 50,
                     child: NotifThumbnail(
                       thumbnail: _controller.getVideoThumnail(notif.videoId),

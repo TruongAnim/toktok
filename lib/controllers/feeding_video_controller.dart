@@ -15,7 +15,7 @@ class FeedingVideoController extends GetxController {
     super.onInit();
     String uid = firebaseAuth.currentUser!.uid;
     _videoList.bindStream(
-      firebaseStore.collection('videos').snapshots().map(
+      firebaseStore.collection('videos').orderBy('publicDate').snapshots().map(
         (QuerySnapshot snapshot) {
           return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
         },

@@ -77,30 +77,31 @@ class UploadController extends GetxController {
       String uid = firebaseAuth.currentUser!.uid;
       DocumentSnapshot snapshot =
           await firebaseStore.collection('users').doc(uid).get();
-      var allDocs = await firebaseStore.collection('videos').get();
-      int len = allDocs.docs.length;
-      String videoId = 'Video $len';
-      String videoUrl = await _uploadVideoToStorage(videoId, videoPath);
-      String thumbnailUrl = await _uploadThumbnailToStorage(videoId, videoPath);
+      DocumentReference videoRef = firebaseStore.collection('videos').doc();
+      String videoUrl = await _uploadVideoToStorage(videoRef.id, videoPath);
+      String thumbnailUrl =
+          await _uploadThumbnailToStorage(videoRef.id, videoPath);
       Video video = Video(
         username: (snapshot.data() as Map<String, dynamic>)['name'],
         uid: uid,
-        id: videoId,
+        id: videoRef.id,
         likes: [],
         commentCount: 0,
-        shareCount: 0,
+        viewCount: 0,
+        points: 0,
         songName: songName,
         caption: caption,
         videoUrl: videoUrl,
         profilePhoto: (snapshot.data() as Map<String, dynamic>)['profilePhoto'],
         thumbnail: thumbnailUrl,
         albumPhoto: RandomUtils.getRandomImageUrl(),
+        publicDate: Timestamp.now(),
       );
-      await firebaseStore.collection('videos').doc(videoId).set(video.toJson());
+      await videoRef.set(video.toJson());
       createNewPostNotification(video);
       isUploading.value = false;
       Get.offAllNamed(PageRoutes.bottomNavigation);
-      getHashtag(caption, videoId);
+      getHashtag(caption, videoRef.id);
     } catch (e) {
       Get.showSnackbar(
         GetSnackBar(

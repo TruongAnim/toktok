@@ -19,4 +19,19 @@ class VideoService {
         .get();
     return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
   }
+
+  void increseView(String videoId) {
+    final DocumentReference documentRef =
+        FirebaseFirestore.instance.collection('videos').doc(videoId);
+
+    FirebaseFirestore.instance.runTransaction(
+      (transaction) async {
+        final DocumentSnapshot snapshot = await transaction.get(documentRef);
+        if (snapshot.exists) {
+          final currentValue = snapshot.get('viewCount') ?? 0;
+          transaction.update(documentRef, {'viewCount': currentValue + 1});
+        }
+      },
+    );
+  }
 }

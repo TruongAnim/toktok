@@ -139,6 +139,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
         setState(() {
           _controller.setLooping(true);
           initialized = true;
+          _videoInfoController.increaseView(widget.video.id);
         });
       });
   }
@@ -187,7 +188,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
 //    }
 // if (widget.pageIndex == 2) _controller.pause();
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
           GestureDetector(
@@ -244,7 +245,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                     const AssetImage('assets/icons/ic_views.png'),
                     color: secondaryColor,
                   ),
-                  widget.video.shareCount.toString(),
+                  widget.video.viewCount.toString(),
                 ),
                 CustomButton(
                     ImageIcon(

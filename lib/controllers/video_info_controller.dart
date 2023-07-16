@@ -6,6 +6,7 @@ import 'package:toktok/models/notif.dart';
 import 'package:toktok/models/user.dart';
 import 'package:toktok/models/video.dart';
 import 'package:toktok/services/firebase_messaging_service.dart';
+import 'package:toktok/services/video_service.dart';
 
 class VideoInfoController extends GetxController {
   void like(String videoId) async {
@@ -38,5 +39,9 @@ class VideoInfoController extends GetxController {
         videoId: video.id,
         time: DateTime.now().millisecondsSinceEpoch);
     FirebaseMessagingService.instance.sendNotification(notif);
+  }
+
+  void increaseView(String videoId) {
+    VideoService.instance.increseView(videoId);
   }
 }

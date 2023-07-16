@@ -1,10 +1,10 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:numeral/numeral.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/models/video.dart';
-import 'package:toktok/utils/random_utils.dart';
 
 class TabGrid extends StatelessWidget {
   final List<Video> list;
@@ -39,33 +39,51 @@ class TabGrid extends StatelessWidget {
               'variable': index,
             }),
             child: FadedScaleAnimation(
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(list[index].thumbnail),
-                      fit: BoxFit.fill),
-                  borderRadius: BorderRadius.circular(5),
+              child: Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(list[index].thumbnail),
+                        fit: BoxFit.fill),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  padding: const EdgeInsets.all(8),
                 ),
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Icon(
-                      viewIcon,
-                      color: secondaryColor,
-                      size: 15,
+                Positioned(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 8, left: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(4),
                     ),
-                    showView
-                        ? Text(' ${RandomUtils.getRandomView()}')
-                        : const SizedBox.shrink(),
-                    const Spacer(),
-                    Icon(
-                      icon,
-                      color: mainColor,
-                    )
-                  ],
-                ),
-              ),
+                    child: Wrap(
+                      children: <Widget>[
+                        showView
+                            ? Icon(
+                                viewIcon,
+                                color: secondaryColor,
+                                size: 20,
+                              )
+                            : SizedBox.shrink(),
+                        showView
+                            ? Text(
+                                ' ${Numeral(list[index].viewCount).format(fractionDigits: 1)}',
+                                style: TextStyle(fontSize: 16),
+                              )
+                            : const SizedBox.shrink(),
+                        icon != null
+                            ? Icon(
+                                icon,
+                                color: Colors.red,
+                              )
+                            : SizedBox.shrink(),
+                      ],
+                    ),
+                  ),
+                )
+              ]),
             ),
           );
         });

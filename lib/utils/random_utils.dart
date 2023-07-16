@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:numeral/numeral.dart';
 
 class RandomUtils {

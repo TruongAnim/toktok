@@ -66,6 +66,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       ),
     ];
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Obx(
         () => Stack(
           children: <Widget>[
