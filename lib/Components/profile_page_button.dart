@@ -25,7 +25,7 @@ class ProfilePageButton extends StatelessWidget {
         child: Text(
           text!,
           style: TextStyle(
-              fontSize: 12,
+              fontSize: 14,
               color: textColor ?? mainColor,
               fontWeight: FontWeight.w500),
         ),

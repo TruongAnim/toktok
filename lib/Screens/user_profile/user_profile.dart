@@ -114,7 +114,8 @@ class _UserProfileBodyState extends State<UserProfileBody> {
                     }
                     return TabGrid(
                       _profileController.user['videos'],
-                      showView: false,
+                      viewIcon: Icons.remove_red_eye,
+                      showView: true,
                     );
                   }),
                 ),
@@ -128,7 +129,8 @@ class _UserProfileBodyState extends State<UserProfileBody> {
                         return Container();
                       }
                       return TabGrid(
-                        _profileController.user['videos'],
+                        _profileController.user['favourites'],
+                        icon: Icons.favorite,
                         showView: false,
                       );
                     })),

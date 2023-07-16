@@ -27,7 +27,7 @@ class MyInfo extends StatelessWidget {
           children: <Widget>[
             const Spacer(),
             CircleAvatar(
-              radius: 40,
+              radius: 45,
               backgroundImage:
                   NetworkImage(_profileController.user['profilePhoto']),
             ),
@@ -37,7 +37,7 @@ class MyInfo extends StatelessWidget {
                 const Spacer(flex: 10),
                 Text(
                   _profileController.user['name'],
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 18),
                 ),
                 const Spacer(),
                 Image.asset(
@@ -49,7 +49,7 @@ class MyInfo extends StatelessWidget {
             ),
             Text(
               '@${_profileController.user['email'].toString().split('@')[0]}',
-              style: TextStyle(fontSize: 10, color: disabledTextColor),
+              style: TextStyle(fontSize: 14, color: disabledTextColor),
             ),
             const Spacer(),
             Row(
@@ -58,19 +58,19 @@ class MyInfo extends StatelessWidget {
                 ImageIcon(
                   const AssetImage("assets/icons/ic_fb.png"),
                   color: secondaryColor,
-                  size: 10,
+                  size: 16,
                 ),
                 const SizedBox(width: 16),
                 ImageIcon(
                   const AssetImage("assets/icons/ic_twt.png"),
                   color: secondaryColor,
-                  size: 10,
+                  size: 16,
                 ),
                 const SizedBox(width: 16),
                 ImageIcon(
                   const AssetImage("assets/icons/ic_insta.png"),
                   color: secondaryColor,
-                  size: 10,
+                  size: 16,
                 ),
               ],
             ),
@@ -78,7 +78,7 @@ class MyInfo extends StatelessWidget {
             Text(
               _profileController.user['description'],
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
             ),
             const Spacer(),
             ProfilePageButton(

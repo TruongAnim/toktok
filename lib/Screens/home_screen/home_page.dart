@@ -62,7 +62,7 @@ class _HomeBodyState extends State<HomeBody> {
                   Positioned.directional(
                     textDirection: Directionality.of(context),
                     top: 14,
-                    start: 160,
+                    start: 168,
                     child: CircleAvatar(
                       backgroundColor: mainColor,
                       radius: 3,

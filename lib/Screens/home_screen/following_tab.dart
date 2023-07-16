@@ -125,23 +125,26 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
   void initState() {
     super.initState();
     _videoInfoController = Get.find();
-    // _controller = VideoPlayerController.network(widget.video.videoUrl)
+    _controller =
+        VideoPlayerController.networkUrl(Uri.parse(widget.video.videoUrl))
+          ..initialize().then((value) {
+            setState(() {
+              _controller.setLooping(true);
+              initialized = true;
+              _videoInfoController.increaseView(widget.video.id);
+              _controller.setVolume(1);
+            });
+          });
+    // String video = RandomUtils.getRandomVideo();
+    // print(video);
+    // _controller = VideoPlayerController.asset(video)
     //   ..initialize().then((value) {
     //     setState(() {
     //       _controller.setLooping(true);
     //       initialized = true;
+    //       _videoInfoController.increaseView(widget.video.id);
     //     });
     //   });
-    String video = RandomUtils.getRandomVideo();
-    print(video);
-    _controller = VideoPlayerController.asset(video)
-      ..initialize().then((value) {
-        setState(() {
-          _controller.setLooping(true);
-          initialized = true;
-          _videoInfoController.increaseView(widget.video.id);
-        });
-      });
   }
 
   @override

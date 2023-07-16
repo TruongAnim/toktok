@@ -14,7 +14,7 @@ class RowItem extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          style: TextStyle(fontSize: 12, height: 1.5),
+          style: TextStyle(fontSize: 18, height: 1.5),
           children: [
             TextSpan(
               text: title + '\n',
@@ -22,7 +22,7 @@ class RowItem extends StatelessWidget {
             ),
             TextSpan(
               text: subtitle,
-              style: TextStyle(fontSize: 8, color: disabledTextColor),
+              style: TextStyle(fontSize: 13, color: disabledTextColor),
             ),
           ],
         ),
