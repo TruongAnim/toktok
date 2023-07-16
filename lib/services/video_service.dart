@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:toktok/constants.dart';
+import 'package:toktok/models/user.dart';
 import 'package:toktok/models/video.dart';
+import 'package:toktok/services/user_service.dart';
 
 class VideoService {
   static final VideoService _instance = VideoService._();
@@ -65,5 +67,13 @@ class VideoService {
         }
       },
     );
+  }
+
+  void donate(Video video, AppUser currentUser) async {
+    FirebaseFirestore.instance
+        .collection('videos')
+        .doc(video.id)
+        .update({'points': video.points + 5});
+    UserService.instance.movePoints(currentUser.uid, video.uid);
   }
 }

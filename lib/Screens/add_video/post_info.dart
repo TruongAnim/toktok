@@ -69,15 +69,15 @@ class _PostInfoState extends State<PostInfo> {
                     prefix: FadedScaleAnimation(
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            AuthController.instance.appUser.profilePhoto),
+                            AuthController.instance.appUser.value.profilePhoto),
                       ),
                     ),
                     label:
-                        '    ' + AppLocalizations.of(context)!.describeVideo!,
+                        '    ${AppLocalizations.of(context)!.describeVideo!}',
                   ),
                   const Spacer(),
                   Text(
-                    AppLocalizations.of(context)!.selectCover! + '\n',
+                    '${AppLocalizations.of(context)!.selectCover!}\n',
                     style: TextStyle(color: secondaryColor, fontSize: 18),
                   ),
                   ListView.builder(

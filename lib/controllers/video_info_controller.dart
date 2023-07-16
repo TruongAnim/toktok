@@ -27,7 +27,7 @@ class VideoInfoController extends GetxController {
   }
 
   void createFavouriteNotification(Video video) async {
-    AppUser appUser = AuthController.instance.appUser;
+    AppUser appUser = AuthController.instance.appUser.value;
     Notif notif = Notif(
         id: '',
         uid: video.uid,
@@ -43,5 +43,12 @@ class VideoInfoController extends GetxController {
 
   void increaseView(String videoId) {
     VideoService.instance.increseView(videoId);
+  }
+
+  void donate(Video video) {
+    AppUser currentUser = AuthController.instance.appUser.value;
+    if (currentUser.points >= 5 && video.uid != currentUser.uid) {
+      VideoService.instance.donate(video, currentUser);
+    }
   }
 }

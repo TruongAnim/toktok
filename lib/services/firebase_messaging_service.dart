@@ -121,7 +121,7 @@ class FirebaseMessagingService {
       return;
     }
     String? fmToken = await UserService.instance.getFmToken(notification.uid);
-    if (fmToken != null) {
+    if (fmToken != null && fmToken.isNotEmpty) {
       Map<String, dynamic> headers = await _getHeader();
       await _dio.post(
         _SEND_NOTIFY_URL,

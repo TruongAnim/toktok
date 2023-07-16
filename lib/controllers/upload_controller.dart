@@ -116,7 +116,7 @@ class UploadController extends GetxController {
 
   void createNewPostNotification(Video video) async {
     List<String> followers = await UserService.instance.getFollowers(video.uid);
-    AppUser appUser = AuthController.instance.appUser;
+    AppUser appUser = AuthController.instance.appUser.value;
     for (String follower in followers) {
       Notif notif = Notif(
           id: '',

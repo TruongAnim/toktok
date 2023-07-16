@@ -133,7 +133,7 @@ void commentSheet(BuildContext context, String postId) async {
                         EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(
-                          AuthController.instance.appUser.profilePhoto),
+                          AuthController.instance.appUser.value.profilePhoto),
                     ),
                   ),
                   suffixIcon: IconButton(

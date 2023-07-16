@@ -13,7 +13,9 @@ import 'package:toktok/services/user_service.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   final UserService _userService = UserService.instance;
-  late AppUser appUser;
+
+  final Rx<AppUser> appUser = Rx<AppUser>(AppUser.empty());
+
   late Rx<User?> _currentUser;
 
   User get user => UserService.instance.getCurrentUser()!;
@@ -36,14 +38,14 @@ class AuthController extends GetxController {
     if (_currentUser.value == null) {
       Get.offAllNamed(PageRoutes.login);
     } else {
+      bindAppUserStream();
       Get.offAllNamed(PageRoutes.bottomNavigation);
-      getAppUser();
       _userService.updateFmToken();
     }
   }
 
-  void getAppUser() async {
-    appUser = await UserService.instance.getAppUser(user.uid);
+  void bindAppUserStream() {
+    appUser.bindStream(UserService.instance.getUserStream(user.uid));
   }
 
   Future<String> uploadToStorage(File avatar) async {
@@ -96,8 +98,9 @@ class AuthController extends GetxController {
           name: userName,
           email: email,
           profilePhoto: urlAvatar,
-          fmToken: 'None',
           description: 'None',
+          fmToken: 'None',
+          points: 1000,
         );
         await firebaseStore
             .collection('users')

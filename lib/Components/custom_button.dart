@@ -15,6 +15,7 @@ class CustomButton extends StatelessWidget {
     return MaterialButton(
       splashColor: transparentColor,
       padding: EdgeInsets.symmetric(vertical: padding),
+      onPressed: onPressed as void Function()?,
       child: Column(
         children: <Widget>[
           icon,
@@ -27,7 +28,6 @@ class CustomButton extends StatelessWidget {
           )
         ],
       ),
-      onPressed: onPressed as void Function()?,
     );
   }
 }

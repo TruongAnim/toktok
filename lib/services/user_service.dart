@@ -23,6 +23,14 @@ class UserService {
     return AppUser.fromSnapshot(value);
   }
 
+  Stream<AppUser> getUserStream(String uid) {
+    return firebaseStore
+        .collection('users')
+        .doc(uid)
+        .snapshots()
+        .map((event) => AppUser.fromSnapshot(event));
+  }
+
   Future<void> updateFmToken() async {
     String? fmToken = await FirebaseMessagingService.instance.getFmToken();
     if (fmToken != null) {
@@ -51,5 +59,28 @@ class UserService {
         .collection('followers')
         .get();
     return snapshot.docs.map((e) => e.id).toList();
+  }
+
+  Future<void> movePoints(String currentId, String targetId) async {
+    DocumentSnapshot snapshotA = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentId)
+        .get();
+    DocumentSnapshot snapshotB = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(targetId)
+        .get();
+
+    int pointsA = (snapshotA.data() as Map<String, dynamic>)['points'];
+    int pointsB = (snapshotB.data() as Map<String, dynamic>)['points'];
+
+    pointsA -= 5;
+    pointsB += 5;
+
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+    batch.update(snapshotA.reference, {'points': pointsA});
+    batch.update(snapshotB.reference, {'points': pointsB});
+
+    await batch.commit();
   }
 }

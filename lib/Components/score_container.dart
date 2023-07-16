@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toktok/Theme/colors.dart';
+import 'package:toktok/controllers/auth_controller.dart';
 
 class CoinContainer extends StatelessWidget {
   const CoinContainer({Key? key}) : super(key: key);
@@ -20,12 +22,27 @@ class CoinContainer extends StatelessWidget {
             scale: 2.5,
           ),
           const SizedBox(width: 10),
-          Text(
-            "750",
-            style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
+          StreamBuilder(
+            stream: AuthController.instance.appUser.stream,
+            builder: (context, snapshot) {
+              return Text(
+                AuthController.instance.appUser.value.points.toString(),
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              );
+            },
+          )
+          // Obx(
+          //   () {
+          // return Text(
+          //   AuthController.instance.appUser.value.points.toString(),
+          //   style: Theme.of(context).textTheme.subtitle2!.copyWith(
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          // );
+          //   },
+          // ),
         ],
       ),
     );

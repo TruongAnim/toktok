@@ -73,7 +73,7 @@ class CommentController extends GetxController {
 
   void createCommentNotification(DocumentReference postRef) async {
     Video video = Video.fromSnapshot(await postRef.get());
-    AppUser appUser = AuthController.instance.appUser;
+    AppUser appUser = AuthController.instance.appUser.value;
     Notif notif = Notif(
         id: '',
         uid: video.uid,

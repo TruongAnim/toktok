@@ -239,14 +239,14 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 15),
                 CustomButton(
-                  ImageIcon(
-                    const AssetImage('assets/icons/ic_views.png'),
-                    color: secondaryColor,
-                  ),
-                  widget.video.viewCount.toString(),
-                ),
+                    Image.asset(
+                      'assets/coin.png',
+                      height: 27,
+                    ),
+                    widget.video.points.toString(),
+                    onPressed: () => _videoInfoController.donate(widget.video)),
                 CustomButton(
                     ImageIcon(
                       const AssetImage('assets/icons/ic_comment.png'),

@@ -5,16 +5,18 @@ class AppUser {
   final String name;
   final String email;
   final String profilePhoto;
-  final String fmToken;
   final String description;
+  final String fmToken;
+  int points;
 
   AppUser({
     required this.uid,
     required this.name,
     required this.email,
     required this.profilePhoto,
-    required this.fmToken,
     required this.description,
+    required this.fmToken,
+    required this.points,
   });
 
   Map<String, dynamic> toJson() {
@@ -23,8 +25,9 @@ class AppUser {
       'name': name,
       'email': email,
       'profilePhoto': profilePhoto,
-      'fmToken': fmToken,
       'description': description,
+      'fmToken': fmToken,
+      'points': points,
     };
   }
 
@@ -35,8 +38,21 @@ class AppUser {
       name: snap['name'],
       email: snap['email'],
       profilePhoto: snap['profilePhoto'],
-      fmToken: snap['fmToken'],
       description: snap['description'],
+      fmToken: snap['fmToken'],
+      points: snap['points'],
+    );
+  }
+
+  static AppUser empty() {
+    return AppUser(
+      uid: 'uid',
+      name: 'name',
+      email: 'email',
+      profilePhoto: 'profilePhoto',
+      description: 'description',
+      fmToken: 'fmToken',
+      points: 0,
     );
   }
 }
