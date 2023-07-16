@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -14,9 +15,12 @@ import 'package:toktok/services/user_service.dart';
 import 'package:toktok/utils/random_utils.dart';
 import 'package:toktok/utils/string_utils.dart';
 import 'package:video_compress/video_compress.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class UploadController extends GetxController {
   Rx<bool> isUploading = Rx<bool>(false);
+  RxList<Uint8List> thumbnails = RxList();
+  Rx<int> thumbnailIndex = RxInt(0);
 
   Future<File?> _compressVideo(String videoPath) async {
     final compressed = await VideoCompress.compressVideo(videoPath,
@@ -24,8 +28,24 @@ class UploadController extends GetxController {
     return compressed!.file;
   }
 
-  Future<File> _getVideoThumbnail(String videoPath) async {
-    final compressed = await VideoCompress.getFileThumbnail(videoPath);
+  void getVideoThumbnails(String videoPath) async {
+    for (int i = 0; i < 5; i++) {
+      final uint8list = await VideoThumbnail.thumbnailData(
+        video: videoPath,
+        imageFormat: ImageFormat.JPEG,
+        maxWidth: 128,
+        quality: 25,
+        timeMs: i * 5000,
+      );
+      if (uint8list != null) {
+        thumbnails.add(uint8list);
+      }
+    }
+  }
+
+  Future<File> getUploadThumbnail(String videoPath) async {
+    File compressed =
+        await VideoCompress.getFileThumbnail(videoPath, quality: 20);
     return compressed;
   }
 
@@ -40,7 +60,7 @@ class UploadController extends GetxController {
 
   Future<String> _uploadThumbnailToStorage(String id, String videoPath) async {
     Reference ref = firebaseStorage.ref().child('thumbnails').child(id);
-    UploadTask uploadTask = ref.putFile((await _getVideoThumbnail(videoPath)));
+    UploadTask uploadTask = ref.putFile(await getUploadThumbnail(videoPath));
     TaskSnapshot snapshot = await uploadTask;
     String downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;

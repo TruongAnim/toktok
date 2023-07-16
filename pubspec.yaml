@@ -58,6 +58,7 @@ dependencies:
   firebase_messaging: ^14.6.4
   dio: ^5.2.1+1
   flutter_local_notifications: ^15.1.0+1
+  video_thumbnail: ^0.5.3
 
 dev_dependencies:
   flutter_test:

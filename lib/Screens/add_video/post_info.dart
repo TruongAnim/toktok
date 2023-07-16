@@ -19,19 +19,6 @@ class _PostInfoState extends State<PostInfo> {
   bool isSwitched1 = false;
   bool isSwitched2 = false;
 
-  final List<PostThumbList> thumbLists = [
-    PostThumbList(dance),
-  ];
-  static List<String> dance = [
-    'assets/thumbnails/dance/Layer 951.png',
-    'assets/thumbnails/dance/Layer 952.png',
-    'assets/thumbnails/dance/Layer 953.png',
-    'assets/thumbnails/dance/Layer 954.png',
-    'assets/thumbnails/dance/Layer 951.png',
-    'assets/thumbnails/dance/Layer 952.png',
-    'assets/thumbnails/dance/Layer 953.png',
-    'assets/thumbnails/dance/Layer 954.png',
-  ];
   Map<String, dynamic> data = {};
   late TextEditingController _titleController;
   late UploadController _uploadController;
@@ -41,6 +28,7 @@ class _PostInfoState extends State<PostInfo> {
     data = Get.arguments;
     _titleController = TextEditingController();
     _uploadController = Get.find();
+    _uploadController.getVideoThumbnails(data['videoPath']);
   }
 
   @override
@@ -80,13 +68,7 @@ class _PostInfoState extends State<PostInfo> {
                     '${AppLocalizations.of(context)!.selectCover!}\n',
                     style: TextStyle(color: secondaryColor, fontSize: 18),
                   ),
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: thumbLists.length,
-                      itemBuilder: (context, index) {
-                        return thumbLists[index];
-                      }),
+                  PostThumbList(),
                   const SizedBox(height: 12.0),
                   ListTile(
                     title: Text(
@@ -154,9 +136,7 @@ class _PostInfoState extends State<PostInfo> {
             : Container()),
         Obx(() {
           if (_uploadController.isUploading.value) {
-            return Container(
-              child: CircularProgressIndicator(),
-            );
+            return CircularProgressIndicator();
           } else {
             return Container();
           }

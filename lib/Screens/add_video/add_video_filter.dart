@@ -52,7 +52,6 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     data = Get.arguments;
     videoPlayerController = VideoPlayerController.file(data['videoFile'])
@@ -67,7 +66,6 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     videoPlayerController.dispose();
   }
@@ -135,7 +133,9 @@ class _AddVideoFilterState extends State<AddVideoFilter> {
                         AudioDetails? result =
                             await Get.toNamed(PageRoutes.addMusic)
                                 as AudioDetails?;
-                        data['music'] = result;
+                        if (result != null) {
+                          data['music'] = result;
+                        }
                         setState(() {});
                       },
                     ),
