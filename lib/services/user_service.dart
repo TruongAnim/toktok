@@ -18,6 +18,11 @@ class UserService {
     return (value.data() as Map<String, dynamic>)['profilePhoto'];
   }
 
+  Future<String> getUserName(String uid) async {
+    var value = await firebaseStore.collection('users').doc(uid).get();
+    return (value.data() as Map<String, dynamic>)['name'];
+  }
+
   Future<AppUser> getAppUser(String uid) async {
     var value = await firebaseStore.collection('users').doc(uid).get();
     return AppUser.fromSnapshot(value);

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toktok/Screens/notification_screen/controllers/notification_controller.dart';
 import 'package:toktok/Screens/notification_screen/widgets/notif_avatar.dart';
 import 'package:toktok/Screens/notification_screen/widgets/notif_thumbnail.dart';
+import 'package:toktok/Screens/notification_screen/widgets/notif_title.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/models/notif.dart';
 import 'package:toktok/utils/common_utils.dart';
@@ -38,9 +39,9 @@ class _NotificationTabState extends State<NotificationTab> {
               ListTile(
                   leading: NotifAvatar(
                       avatar: _controller.getUserProfile(notif.senderId)),
-                  title: Text(
-                    notif.title,
-                    style: TextStyle(color: secondaryColor),
+                  title: NotifTitle(
+                    name: _controller.getUserName(notif.senderId),
+                    title: notif.title,
                   ),
                   subtitle: RichText(
                       text: TextSpan(children: [

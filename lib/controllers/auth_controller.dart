@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/constants.dart';
 import 'package:toktok/models/user.dart';

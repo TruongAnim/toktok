@@ -19,6 +19,10 @@ class NotificationController extends GetxController {
     return await UserService.instance.getProfilePicture(uid);
   }
 
+  Future<String> getUserName(String uid) async {
+    return await UserService.instance.getUserName(uid);
+  }
+
   Future<String> getVideoThumnail(String videoId) async {
     return await VideoService.instance.getVideoThumnail(videoId);
   }
