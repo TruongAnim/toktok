@@ -9,21 +9,10 @@ import 'package:toktok/services/firebase_messaging_service.dart';
 import 'package:toktok/services/video_service.dart';
 
 class VideoInfoController extends GetxController {
-  void like(String videoId) async {
-    DocumentSnapshot doc =
-        await firebaseStore.collection('videos').doc(videoId).get();
-    Video video = Video.fromSnapshot(doc);
+  void like(Video video) async {
     String currentUid = AuthController.instance.user.uid;
-    if (video.likes.contains(currentUid)) {
-      await firebaseStore.collection('videos').doc(videoId).update({
-        'likes': FieldValue.arrayRemove([currentUid])
-      });
-    } else {
-      await firebaseStore.collection('videos').doc(videoId).update({
-        'likes': FieldValue.arrayUnion([currentUid])
-      });
-      createFavouriteNotification(video);
-    }
+    VideoService.instance.like(currentUid, video);
+    createFavouriteNotification(video);
   }
 
   void createFavouriteNotification(Video video) async {

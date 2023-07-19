@@ -271,7 +271,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                   ),
                   widget.video.likes.length.toString(),
                   onPressed: () {
-                    _videoInfoController.like(widget.video.id);
+                    _videoInfoController.like(widget.video);
                   },
                 ),
                 Padding(

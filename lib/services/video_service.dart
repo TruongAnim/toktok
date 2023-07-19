@@ -76,4 +76,16 @@ class VideoService {
         .update({'points': video.points + 5});
     UserService.instance.movePoints(currentUser.uid, video.uid);
   }
+
+  void like(String uid, Video video) async {
+    if (video.likes.contains(uid)) {
+      await firebaseStore.collection('videos').doc(video.id).update({
+        'likes': FieldValue.arrayRemove([uid])
+      });
+    } else {
+      await firebaseStore.collection('videos').doc(video.id).update({
+        'likes': FieldValue.arrayUnion([uid])
+      });
+    }
+  }
 }
