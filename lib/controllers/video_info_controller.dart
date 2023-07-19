@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:toktok/constants.dart';
 import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/models/notif.dart';
 import 'package:toktok/models/user.dart';

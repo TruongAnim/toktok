@@ -11,6 +11,7 @@ import 'package:toktok/models/notif.dart';
 import 'package:toktok/models/user.dart';
 import 'package:toktok/models/video.dart';
 import 'package:toktok/services/firebase_messaging_service.dart';
+import 'package:toktok/services/local_file_service.dart';
 import 'package:toktok/services/user_service.dart';
 import 'package:toktok/utils/random_utils.dart';
 import 'package:toktok/utils/string_utils.dart';
@@ -43,10 +44,9 @@ class UploadController extends GetxController {
     }
   }
 
-  Future<File> getUploadThumbnail(String videoPath) async {
-    File compressed =
-        await VideoCompress.getFileThumbnail(videoPath, quality: 20);
-    return compressed;
+  Future<File> getUploadThumbnail() async {
+    return await LocalFileService.instance
+        .getFileFromUint8List(thumbnails[thumbnailIndex.value]);
   }
 
   Future<String> _uploadVideoToStorage(String id, String videoPath) async {
@@ -61,7 +61,7 @@ class UploadController extends GetxController {
 
   Future<String> _uploadThumbnailToStorage(String id, String videoPath) async {
     Reference ref = firebaseStorage.ref().child('thumbnails').child(id);
-    UploadTask uploadTask = ref.putFile(await getUploadThumbnail(videoPath));
+    UploadTask uploadTask = ref.putFile(await getUploadThumbnail());
     TaskSnapshot snapshot = await uploadTask;
     String downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;
