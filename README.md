@@ -7,8 +7,11 @@ A tiktok clone android app that written using flutter.
 - Upload video from gallery, camera.
 - Surfing videos, like, comment, like comment.
 - Follow Idol, add hashtag, explore hashtag videos
-- Profile page, count likes, count following, count follower.
-- And sign-in, log-in of course.
+- Profile page, count view, count likes, count following, count follower.
+- Donate coin to video.
+- Notification using FCM.
+- Selecting video thumnails, add hashtag.
+- And sign-in, log-in, log-out of course.
 
 ### State management: [GetX](https://pub.dev/packages/get)
 
@@ -16,20 +19,33 @@ A tiktok clone android app that written using flutter.
 
 ### Screenshot
 <p align="center">
-    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/1.png" alt="drawing"   width="250"/>
-    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/2.png" alt="drawing"   width="250"/>
-    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/3.png" alt="drawing"   width="250"/>
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/6.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/7.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/8.png" alt="drawing"   width="30%"/>
 <p align="center">
-    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/4.png" alt="drawing"   width="250"/>
-    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/5.png" alt="drawing"   width="250"/>
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/9.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/10.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/11.png" alt="drawing"   width="30%"/>
+<p align="center">
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/12.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/13.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/14.png" alt="drawing"   width="30%"/>
+<p align="center">
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/15.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/1.png" alt="drawing"   width="30%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://github.com/TruongAnim/toktok/blob/main/Screenshot/2.png" alt="drawing"   width="30%"/>
 
 ## Upcoming feature
-- Change profile picture
 - Update profile page
-- Notification
 - Chat with other
 - Multilanguage support
 - Block user
-- Update hashtag feature
 - Allow using music library
-- Allow selecting video thumbnail
