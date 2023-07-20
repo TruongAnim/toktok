@@ -7,7 +7,7 @@ import 'package:toktok/BottomNavigation/bindings/bottom_navigation_binding.dart'
 import 'package:toktok/Screens/add_video/add_video_page.dart';
 import 'package:toktok/Screens/explore/more_page.dart';
 import 'package:toktok/Screens/explore/search_users.dart';
-import 'package:toktok/Screens/home_screen/following_tab.dart';
+import 'package:toktok/Screens/list_video_screen/list_video_screen.dart';
 import 'package:toktok/Screens/my_profile/badge_request.dart';
 import 'package:toktok/Screens/my_profile/language_page.dart';
 import 'package:toktok/Screens/my_profile/video_option.dart';
@@ -107,7 +107,7 @@ class PageRoutes {
       GetPage(name: addMusic, page: () => const AddMusic()),
       GetPage(name: login, page: () => const MyLogin()),
       GetPage(name: register, page: () => const MyRegister()),
-      GetPage(name: followingTabPage, page: () => const FollowingTabPage()),
+      GetPage(name: followingTabPage, page: () => const ListVideoScreen()),
       GetPage(
           name: notification,
           page: () => const NotificationScreen(),

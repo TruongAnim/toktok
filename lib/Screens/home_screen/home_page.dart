@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toktok/Screens/home_screen/following_tab.dart';
+import 'package:toktok/Screens/list_video_screen/list_video_screen.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/controllers/feeding_video_controller.dart';
