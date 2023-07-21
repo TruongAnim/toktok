@@ -1,35 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:preload_page_view/preload_page_view.dart';
+import 'package:toktok/Screens/list_video_screen/controllers/video_provider_controller.dart';
 import 'package:toktok/Screens/list_video_screen/widgets/video_page.dart';
 import 'package:toktok/models/video.dart';
 
 RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-class ListVideoScreen extends StatelessWidget {
+class ListVideoScreen extends StatefulWidget {
   const ListVideoScreen({super.key});
+
+  @override
+  State<ListVideoScreen> createState() => _ListVideoScreenState();
+}
+
+class _ListVideoScreenState extends State<ListVideoScreen> {
+  late VideoProviderController _controller;
+  @override
+  void initState() {
+    super.initState();
+    Map<String, dynamic> arguments = Get.arguments;
+    _controller = Get.find();
+    _controller.updateVideoIds(
+        (arguments['videos'] as List<Video>).map((e) => e.id).toList());
+  }
 
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> arguments = Get.arguments;
-    return FollowingTabBody(
-        arguments['videos'], arguments['isFollowing'], arguments['variable']);
+    return Obx(
+      () {
+        // List<Video> videos =
+        return ListVideoBody(_controller.videos.value, arguments['isFollowing'],
+            arguments['variable']);
+      },
+    );
   }
 }
 
-class FollowingTabBody extends StatefulWidget {
+class ListVideoBody extends StatefulWidget {
   final List<Video> videos;
   final bool isFollowing;
   final int? variable;
 
-  const FollowingTabBody(this.videos, this.isFollowing, this.variable,
+  const ListVideoBody(this.videos, this.isFollowing, this.variable,
       {super.key});
 
   @override
-  _FollowingTabBodyState createState() => _FollowingTabBodyState();
+  _ListVideoBodyState createState() => _ListVideoBodyState();
 }
 
-class _FollowingTabBodyState extends State<FollowingTabBody> {
+class _ListVideoBodyState extends State<ListVideoBody> {
   PreloadPageController? _pageController;
   int current = 0;
   bool isOnPageTurning = false;

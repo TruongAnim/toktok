@@ -5,7 +5,6 @@ import 'package:toktok/Screens/my_profile/my_info.dart';
 import 'package:toktok/Components/sliver_app_delegate.dart';
 import 'package:toktok/Components/tab_grid.dart';
 import 'package:toktok/Locale/locale.dart';
-import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/Components/score_container.dart';
 import 'package:toktok/constants.dart';

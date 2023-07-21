@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toktok/Screens/my_profile/edit_profile.dart';
 import 'package:toktok/Screens/my_profile/followers.dart';
 import 'package:toktok/Screens/my_profile/following.dart';
 import 'package:toktok/Components/profile_page_button.dart';

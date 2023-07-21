@@ -11,17 +11,6 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
-
-    List<String?> messages = [
-      locale.heyILikeYourVideos,
-      locale.yesIUse,
-      locale.noWorries,
-      locale.ohThank,
-      locale.alreadyLikedIt,
-      locale.noWorries,
-      locale.ohThank,
-      locale.alreadyLikedIt,
-    ];
     return DefaultTabController(
       length: 2,
       child: Scaffold(

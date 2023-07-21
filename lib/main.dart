@@ -9,6 +9,7 @@ import 'package:toktok/Locale/language_controller.dart';
 import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Screens/chat/controllers/chat_controller.dart';
+import 'package:toktok/Screens/list_video_screen/controllers/video_provider_controller.dart';
 import 'package:toktok/Screens/notification_screen/controllers/notification_controller.dart';
 import 'package:toktok/Theme/style.dart';
 import 'package:toktok/controllers/auth_controller.dart';
@@ -38,6 +39,7 @@ void main() async {
     Get.lazyPut(() => HashtagController(), fenix: true);
     Get.lazyPut(() => ChatController(), fenix: true);
     Get.lazyPut(() => NotificationController(), fenix: true);
+    Get.lazyPut(() => VideoProviderController(), fenix: true);
     Get.put(AuthController());
   });
   await FirebaseMessagingService.instance.initNotification();

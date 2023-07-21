@@ -88,4 +88,16 @@ class VideoService {
       });
     }
   }
+
+  Stream<List<Video>> getStreamFromVideoIds(List<String> videoIds) {
+    return firebaseStore
+        .collection('videos')
+        .where('id', whereIn: videoIds)
+        .snapshots()
+        .map(
+      (QuerySnapshot snapshot) {
+        return snapshot.docs.map((e) => Video.fromSnapshot(e)).toList();
+      },
+    );
+  }
 }

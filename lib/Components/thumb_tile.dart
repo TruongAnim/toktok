@@ -2,7 +2,6 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toktok/Routes/routes.dart';
-import 'package:toktok/Screens/list_video_screen/list_video_screen.dart';
 import 'package:toktok/models/video.dart';
 
 class ThumbTile extends StatelessWidget {

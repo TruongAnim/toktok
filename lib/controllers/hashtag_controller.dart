@@ -5,7 +5,7 @@ import 'package:toktok/models/hashtag.dart';
 import 'package:toktok/models/video.dart';
 
 class HashtagController extends GetxController {
-  Rx<List<Hashtag>> _hashtags = Rx<List<Hashtag>>([]);
+  final Rx<List<Hashtag>> _hashtags = Rx<List<Hashtag>>([]);
 
   List<Hashtag> get hashtags => _hashtags.value;
 

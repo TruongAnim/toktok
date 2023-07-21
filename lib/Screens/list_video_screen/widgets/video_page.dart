@@ -49,9 +49,9 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
               _controller.setLooping(true);
               initialized = true;
               _videoInfoController.increaseView(widget.video.id);
-              _controller.setVolume(1);
             });
           });
+
     // String video = RandomUtils.getRandomVideo();
     // print(video);
     // _controller = VideoPlayerController.asset(video)

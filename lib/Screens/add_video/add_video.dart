@@ -4,11 +4,8 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:toktok/Locale/locale.dart';
 import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Screens/add_video/new_source_options.dart';
-import 'package:toktok/Screens/add_video/source_options.dart';
-import 'package:toktok/Theme/colors.dart';
 
 class AddVideo extends StatefulWidget {
   @override

@@ -7,7 +7,6 @@ import 'package:toktok/Components/profile_page_button.dart';
 import 'package:toktok/Components/row_item.dart';
 import 'package:toktok/Components/tab_grid.dart';
 import 'package:toktok/Locale/locale.dart';
-import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Theme/colors.dart';
 import 'package:toktok/controllers/auth_controller.dart';
 import 'package:toktok/controllers/profile_controller.dart';
