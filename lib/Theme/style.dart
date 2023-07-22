@@ -5,6 +5,7 @@ import 'package:toktok/Theme/colors.dart';
 final BorderRadius radius = BorderRadius.circular(6.0);
 
 final ThemeData appTheme = ThemeData.light().copyWith(
+  brightness: Brightness.light,
   scaffoldBackgroundColor: backgroundColor,
   primaryColor: mainColor,
 
@@ -27,9 +28,10 @@ final ThemeData appTheme = ThemeData.light().copyWith(
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: mainColor),
 );
 
-final ThemeData darkTheme = ThemeData.light().copyWith(
-  scaffoldBackgroundColor: backgroundColor,
-  primaryColor: mainColor,
+final ThemeData darkTheme = ThemeData.dark().copyWith(
+  brightness: Brightness.dark,
+  scaffoldBackgroundColor: darkBackgroundColor,
+  primaryColor: darkMainColor,
 
   ///appBar theme
   appBarTheme: AppBarTheme(
@@ -47,20 +49,15 @@ final ThemeData darkTheme = ThemeData.light().copyWith(
     bodyLarge: const TextStyle(),
     bodySmall: const TextStyle(),
   ),
-  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: mainColor),
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: darkMainColor),
 );
 
-/// NAME         SIZE  WEIGHT  SPACING
-/// headline1    96.0  light   -1.5
-/// headline2    60.0  light   -0.5
-/// headline3    48.0  regular  0.0
-/// headline4    34.0  regular  0.25
-/// headline5    24.0  regular  0.0
-/// headline6    20.0  medium   0.15
-/// subtitle1    16.0  regular  0.15
-/// subtitle2    14.0  medium   0.1
-/// body1        16.0  regular  0.5   (bodyText1)
-/// body2        14.0  regular  0.25  (bodyText2)
-/// button       14.0  medium   1.25
-/// caption      12.0  regular  0.4
-/// overline     10.0  regular  1.5
+extension AppTheme on ThemeData {
+  Color get bottomBarColor {
+    if (brightness == Brightness.light) {
+      return secondaryColor;
+    } else {
+      return darkSecondaryColor;
+    }
+  }
+}

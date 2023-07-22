@@ -31,9 +31,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
     var locale = AppLocalizations.of(context)!;
     final List<BottomNavigationBarItem> _bottomBarItems = [
       BottomNavigationBarItem(
-        icon: const ImageIcon(AssetImage('assets/icons/ic_home.png')),
-        activeIcon:
-            const ImageIcon(AssetImage('assets/icons/ic_homeactive.png')),
+        icon: ImageIcon(AssetImage('assets/icons/ic_home.png')),
+        activeIcon: ImageIcon(AssetImage('assets/icons/ic_homeactive.png')),
         label: locale.home,
       ),
       BottomNavigationBarItem(
@@ -79,10 +78,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 elevation: 0.0,
                 type: BottomNavigationBarType.fixed,
                 iconSize: 22.0,
-                selectedItemColor: secondaryColor,
+                selectedItemColor: Theme.of(context).bottomBarColor,
                 selectedFontSize: 12,
                 unselectedFontSize: 10,
-                unselectedItemColor: secondaryColor,
+                unselectedItemColor: Theme.of(context).bottomBarColor,
                 items: _bottomBarItems,
                 onTap: (value) {
                   _bottomNavigationController.changeTab(value);
