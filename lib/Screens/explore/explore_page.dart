@@ -19,6 +19,8 @@ List<String> carouselImages = [
 ];
 
 class ExplorePage extends StatelessWidget {
+  const ExplorePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ExploreBody();
@@ -26,6 +28,8 @@ class ExplorePage extends StatelessWidget {
 }
 
 class ExploreBody extends StatefulWidget {
+  const ExploreBody({super.key});
+
   @override
   _ExploreBodyState createState() => _ExploreBodyState();
 }
@@ -97,7 +101,6 @@ class _ExploreBodyState extends State<ExploreBody> {
 
   @override
   Widget build(BuildContext context) {
-    var locale = AppLocalizations.of(context)!;
     return Builder(
       builder: (BuildContext context) {
         // if (!_loadingAnchoredBanner) {
@@ -231,7 +234,7 @@ class TitleRow extends StatelessWidget {
   final String subTitle;
   final List<Video> videos;
 
-  TitleRow(this.title, this.subTitle, this.videos);
+  TitleRow(this.title, this.subTitle, this.videos, {super.key});
 
   @override
   Widget build(BuildContext context) {

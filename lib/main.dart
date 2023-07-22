@@ -67,21 +67,10 @@ class Toktok extends StatelessWidget {
         ],
         supportedLocales: const [
           Locale('en'),
-          Locale('ar'),
-          Locale('id'),
-          Locale('fr'),
-          Locale('pt'),
-          Locale('es'),
-          Locale('it'),
-          Locale('sw'),
-          Locale('tr'),
-          Locale('de'),
-          Locale('ro'),
+          Locale('vi'),
         ],
         theme: appTheme,
         locale: Locale(language ?? 'en'),
-        // initialRoute:
-        //     language == null ? PageRoutes.languagePage : PageRoutes.login,
         initialRoute: PageRoutes.login,
         getPages: PageRoutes().widgetRoutes());
   }
