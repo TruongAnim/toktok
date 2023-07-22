@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LanguageController extends GetxController {
+  static const supportedLanguage = [
+    Locale('en'),
+    Locale('vi'),
+  ];
   LanguageController();
 
   final Rx<Locale> _locale = Rx<Locale>(const Locale('en'));
@@ -10,49 +15,24 @@ class LanguageController extends GetxController {
 
   void updateLanguage(String language) {
     _locale.value = Locale(language);
+    Get.updateLocale(_locale.value);
+    GetStorage().write('language', language);
+  }
+
+  void getLanguage() {
+    String? language = GetStorage().read('language');
+    if (language != null) {
+      _locale.value = Locale(language);
+    } else {
+      _locale.value = WidgetsBinding.instance.platformDispatcher.locale;
+    }
   }
 
   void selectEngLanguage() {
-    _locale.value = const Locale('en');
+    updateLanguage('en');
   }
 
-  void selectArabicLanguage() {
-    _locale.value = const Locale('ar');
-  }
-
-  void selectPortugueseLanguage() {
-    _locale.value = const Locale('pt');
-  }
-
-  void selectFrenchLanguage() {
-    _locale.value = const Locale('fr');
-  }
-
-  void selectIndonesianLanguage() {
-    _locale.value = const Locale('id');
-  }
-
-  void selectSpanishLanguage() {
-    _locale.value = const Locale('es');
-  }
-
-  void selectItalianLanguage() {
-    _locale.value = const Locale('it');
-  }
-
-  void selectTurkishLanguage() {
-    _locale.value = const Locale('tr');
-  }
-
-  void selectSwahiliLanguage() {
-    _locale.value = const Locale('sw');
-  }
-
-  void selectGermanLanguage() {
-    _locale.value = const Locale('de');
-  }
-
-  void selectRomaniaLanguage() {
-    _locale.value = const Locale('ro');
+  void selectViLanguage() {
+    updateLanguage('vi');
   }
 }

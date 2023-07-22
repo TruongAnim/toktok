@@ -1,16 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:toktok/Locale/Languages/arabic.dart';
+import 'package:toktok/Locale/Languages/vietnamses.dart';
 import 'package:toktok/Locale/Languages/english.dart';
-import 'package:toktok/Locale/Languages/french.dart';
-import 'package:toktok/Locale/Languages/german.dart';
-import 'package:toktok/Locale/Languages/indonesian.dart';
-import 'package:toktok/Locale/Languages/italian.dart';
-import 'package:toktok/Locale/Languages/portuguese.dart';
-import 'package:toktok/Locale/Languages/romania.dart';
-import 'package:toktok/Locale/Languages/spanish.dart';
-import 'package:toktok/Locale/Languages/swahili.dart';
-import 'package:toktok/Locale/Languages/turkish.dart';
+import 'package:toktok/Locale/language_controller.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -22,16 +14,7 @@ class AppLocalizations {
 
   static final Map<String, Map<String, String>> _localizedValues = {
     'en': english(),
-    'ar': arabic(),
-    'pt': portuguese(),
-    'fr': french(),
-    'id': indonesian(),
-    'es': spanish(),
-    'tr': turkish(),
-    'it': italian(),
-    'sw': swahili(),
-    'de': german(),
-    'ro': romania(),
+    'vi': vietnamese(),
   };
 
   String? get changeLanguage {
@@ -463,24 +446,16 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => [
-        'en',
-        'ar',
-        'id',
-        'pt',
-        'fr',
-        'es',
-        'tr',
-        'it',
-        'sw',
-        'de',
-        'ro',
-      ].contains(locale.languageCode);
+  bool isSupported(Locale locale) {
+    print(LanguageController.supportedLanguage.contains(locale));
+    return LanguageController.supportedLanguage.contains(locale);
+  }
 
   @override
   Future<AppLocalizations> load(Locale locale) {
     // Returning a SynchronousFuture here because an async "load" operation
     // isn't needed to produce an instance of AppLocalizations.
+    print('loaddddddddd');
     return SynchronousFuture<AppLocalizations>(AppLocalizations(locale));
   }
 

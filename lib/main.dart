@@ -3,7 +3,6 @@ import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:toktok/Auth/login_navigator.dart';
 import 'package:toktok/Locale/language_controller.dart';
 import 'package:toktok/Locale/locale.dart';
@@ -40,11 +39,11 @@ void main() async {
     Get.lazyPut(() => ChatController(), fenix: true);
     Get.lazyPut(() => NotificationController(), fenix: true);
     Get.lazyPut(() => VideoProviderController(), fenix: true);
+    Get.lazyPut(() => LanguageController(), fenix: true);
     Get.put(AuthController());
   });
-  await FirebaseMessagingService.instance.initNotification();
 
-  MobileAds.instance.initialize();
+  await FirebaseMessagingService.instance.initNotification();
   await GetStorage.init();
   runApp(const Toktok());
 }
@@ -54,8 +53,8 @@ class Toktok extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final box = GetStorage();
-    String? language = box.read('language_selected');
+    LanguageController languageController = Get.find();
+    languageController.getLanguage();
     return GetMaterialApp(
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
@@ -65,12 +64,9 @@ class Toktok extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en'),
-          Locale('vi'),
-        ],
+        supportedLocales: LanguageController.supportedLanguage,
         theme: appTheme,
-        locale: Locale(language ?? 'en'),
+        locale: languageController.locale,
         initialRoute: PageRoutes.login,
         getPages: PageRoutes().widgetRoutes());
   }
