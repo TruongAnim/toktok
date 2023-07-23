@@ -15,25 +15,24 @@ class LanguageController extends GetxController {
 
   void updateLanguage(String language) {
     _locale.value = Locale(language);
+    Get.updateLocale(_locale.value);
     GetStorage().write('language', language);
   }
 
   void getLanguage() {
     String? language = GetStorage().read('language');
-    print('language $language');
     if (language != null) {
-      updateLanguage(language);
+      _locale.value = Locale(language);
     } else {
       _locale.value = WidgetsBinding.instance.platformDispatcher.locale;
-      print(_locale.value);
     }
   }
 
   void selectEngLanguage() {
-    _locale.value = const Locale('en');
+    updateLanguage('en');
   }
 
   void selectViLanguage() {
-    _locale.value = const Locale('vi');
+    updateLanguage('vi');
   }
 }

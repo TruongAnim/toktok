@@ -82,10 +82,6 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                               // Navigator.pushNamed(context, PageRoutes.tncPage);
                             } else if (value == locale.logout) {
                               _profileController.signOut();
-                            } else if (value == "Redeem Coins") {
-                              AuthController.instance.showDevelopingSnackBar();
-                              // Navigator.pushNamed(
-                              //     context, PageRoutes.redeemCoins);
                             }
                           },
                           itemBuilder: (BuildContext context) {
@@ -99,11 +95,6 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                 value: locale.help,
                                 textStyle: TextStyle(color: secondaryColor),
                                 child: Text(locale.help!),
-                              ),
-                              PopupMenuItem(
-                                value: "Redeem Coins",
-                                textStyle: TextStyle(color: secondaryColor),
-                                child: const Text("Redeem Coins"),
                               ),
                               PopupMenuItem(
                                 value: locale.termsOfUse,

@@ -446,13 +446,16 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) =>
-      LanguageController.supportedLanguage.contains(locale);
+  bool isSupported(Locale locale) {
+    print(LanguageController.supportedLanguage.contains(locale));
+    return LanguageController.supportedLanguage.contains(locale);
+  }
 
   @override
   Future<AppLocalizations> load(Locale locale) {
     // Returning a SynchronousFuture here because an async "load" operation
     // isn't needed to produce an instance of AppLocalizations.
+    print('loaddddddddd');
     return SynchronousFuture<AppLocalizations>(AppLocalizations(locale));
   }
 
