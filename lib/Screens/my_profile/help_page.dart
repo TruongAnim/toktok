@@ -40,32 +40,32 @@ class HelpPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: FadedSlideAnimation(
+        beginOffset: const Offset(0, 0.3),
+        endOffset: const Offset(0, 0),
+        slideCurve: Curves.linearToEaseOut,
         child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.all(20.0),
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(20.0),
             itemCount: helps.length,
             itemBuilder: (context, index) {
               return RichText(
                 text: TextSpan(
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle1!
+                        .titleSmall!
                         .copyWith(height: 1.3),
                     children: [
                       TextSpan(text: helps[index].question),
                       TextSpan(
-                        text: '\n' + helps[index].answer + '\n',
+                        text: '\n${helps[index].answer}\n',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText2!
+                            .bodySmall!
                             .copyWith(color: secondaryColor),
                       ),
                     ]),
               );
             }),
-        beginOffset: Offset(0, 0.3),
-        endOffset: Offset(0, 0),
-        slideCurve: Curves.linearToEaseOut,
       ),
     );
   }

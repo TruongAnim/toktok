@@ -234,7 +234,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                 text: TextSpan(children: [
                   TextSpan(
                       text: '@${widget.video.username}\n',
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5,
@@ -244,7 +244,7 @@ class _VideoPageState extends State<VideoPage> with RouteAware {
                     style: const TextStyle(fontSize: 15),
                   ),
                   TextSpan(
-                      text: '${widget.video.songName}',
+                      text: widget.video.songName,
                       style: const TextStyle(
                           fontWeight: FontWeight.w600, height: 1.5)),
                   TextSpan(

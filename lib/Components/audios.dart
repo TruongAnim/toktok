@@ -52,7 +52,7 @@ class _AudiosState extends State<Audios> {
                   ),
                   subtitle: Text(
                     _audioDetails[index].subtitle,
-                    style: theme.textTheme.caption,
+                    style: theme.textTheme.labelLarge,
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,

@@ -173,16 +173,6 @@ class _MyProfileBodyState extends State<MyProfileBody> {
             ),
           ),
         ),
-        // floatingActionButton:  AppConfig.isDemoMode ? BuyThisApp.button(
-        //         AppConfig.appName,
-        //         'https://dashboard.vtlabs.dev/projects/envato-referral-buy-link?project_slug=qvid_flutter',
-        //       ) : null,
-        // bottomNavigationBar: AppConfig.isDemoMode ? Container(
-        //   padding: const EdgeInsets.all(1.0),
-        //   // margin: const EdgeInsets.fromLTRB(10, 0, 0, 60),
-        //   child: BuyThisApp.developerRowOpusDark(
-        //       Colors.transparent, Theme.of(context).primaryColorLight),
-        // )  : const SizedBox.shrink() ,
       ),
     );
   }

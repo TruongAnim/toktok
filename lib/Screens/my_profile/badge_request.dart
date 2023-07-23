@@ -22,7 +22,7 @@ class BadgeRequest extends StatelessWidget {
               locale.provide!,
               style: Theme.of(context)
                   .textTheme
-                  .headline6!
+                  .titleMedium!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
           ),
@@ -36,7 +36,7 @@ class BadgeRequest extends StatelessWidget {
               locale.clickNow!,
               style: Theme.of(context)
                   .textTheme
-                  .bodyText1!
+                  .bodyMedium!
                   .copyWith(color: mainColor),
             ),
             trailing: Container(
@@ -63,7 +63,7 @@ class BadgeRequest extends StatelessWidget {
               locale.uploadNow!,
               style: Theme.of(context)
                   .textTheme
-                  .bodyText1!
+                  .bodyMedium!
                   .copyWith(color: mainColor),
             ),
             trailing: Container(
@@ -91,7 +91,7 @@ class BadgeRequest extends StatelessWidget {
           Text(
             '\n' + locale.itWillTake! + '\n\n',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),

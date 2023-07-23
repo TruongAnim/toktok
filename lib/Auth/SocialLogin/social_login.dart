@@ -49,7 +49,7 @@ class _SocialLoginState extends State<SocialLogin> {
                   locale.comment6!,
                   style: Theme.of(context)
                       .textTheme
-                      .headline6!
+                      .titleMedium!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),

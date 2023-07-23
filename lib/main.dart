@@ -66,9 +66,9 @@ class Toktok extends StatelessWidget {
         ],
         supportedLocales: LanguageController.supportedLanguage,
         theme: appTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
         locale: languageController.locale,
-        // initialRoute:
-        //     language == null ? PageRoutes.languagePage : PageRoutes.login,
         initialRoute: PageRoutes.login,
         getPages: PageRoutes().widgetRoutes());
   }

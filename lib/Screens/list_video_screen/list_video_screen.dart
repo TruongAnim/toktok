@@ -30,8 +30,10 @@ class _ListVideoScreenState extends State<ListVideoScreen> {
     Map<String, dynamic> arguments = Get.arguments;
     return Obx(
       () {
-        // List<Video> videos =
-        return ListVideoBody(_controller.videos.value, arguments['isFollowing'],
+        if (_controller.videos.isEmpty) {
+          return Container();
+        }
+        return ListVideoBody(_controller.videos, arguments['isFollowing'],
             arguments['variable']);
       },
     );

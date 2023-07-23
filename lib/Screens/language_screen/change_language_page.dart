@@ -40,7 +40,6 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
               itemCount: _languages.length,
               itemBuilder: (context, index) => RadioListTile(
                 onChanged: (dynamic value) async {
-                  print(value);
                   setState(() {
                     _selectedLanguage = value;
                   });

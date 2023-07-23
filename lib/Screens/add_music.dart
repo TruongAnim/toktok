@@ -61,7 +61,7 @@ class AddMusic extends StatelessWidget {
                             vertical: 16.0, horizontal: 24),
                         child: Text(
                           "Trending Audios",
-                          style: theme.textTheme.caption!.copyWith(
+                          style: theme.textTheme.labelLarge!.copyWith(
                             fontSize: 14,
                           ),
                         ),

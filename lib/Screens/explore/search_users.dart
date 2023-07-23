@@ -53,7 +53,7 @@ class _SearchUsersState extends State<SearchUsers> {
                         ),
                         border: InputBorder.none,
                         hintText: AppLocalizations.of(context)!.search,
-                        hintStyle: Theme.of(context).textTheme.subtitle1,
+                        hintStyle: Theme.of(context).textTheme.titleSmall,
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.search),
                           color: secondaryColor,
@@ -73,7 +73,7 @@ class _SearchUsersState extends State<SearchUsers> {
                     indicator: BoxDecoration(color: transparentColor),
                     isScrollable: true,
                     labelColor: mainColor,
-                    labelStyle: Theme.of(context).textTheme.headline6,
+                    labelStyle: Theme.of(context).textTheme.titleMedium,
                     unselectedLabelColor: disabledTextColor,
                     tabs: <Widget>[
                       Tab(text: GetStringUtils(local.video!).capitalize),

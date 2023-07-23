@@ -25,11 +25,14 @@ class _LoginBodyState extends State<LoginBody> {
       decoration: BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: transparentColor),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
       ),
       margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: FadedSlideAnimation(
+        beginOffset: const Offset(0, 0.3),
+        endOffset: const Offset(0, 0),
+        slideCurve: Curves.linearToEaseOut,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,10 +41,10 @@ class _LoginBodyState extends State<LoginBody> {
               AppLocalizations.of(context)!.youWillNeed!,
               style: Theme.of(context)
                   .textTheme
-                  .headline6!
+                  .titleMedium!
                   .copyWith(color: secondaryColor),
             ),
-            Spacer(),
+            const Spacer(),
             EntryField(
               label: AppLocalizations.of(context)!.enterPhone,
             ),
@@ -49,12 +52,12 @@ class _LoginBodyState extends State<LoginBody> {
               onPressed: () =>
                   Navigator.pushNamed(context, LoginRoutes.registration),
             ),
-            Spacer(flex: 8),
+            const Spacer(flex: 8),
             Text(
               AppLocalizations.of(context)!.orContinueWith!,
               textAlign: TextAlign.center,
             ),
-            Spacer(),
+            const Spacer(),
             CustomButton(
               icon: Image.asset(
                 'assets/icons/ic_fb.png',
@@ -78,9 +81,6 @@ class _LoginBodyState extends State<LoginBody> {
             ),
           ],
         ),
-        beginOffset: Offset(0, 0.3),
-        endOffset: Offset(0, 0),
-        slideCurve: Curves.linearToEaseOut,
       ),
     );
   }

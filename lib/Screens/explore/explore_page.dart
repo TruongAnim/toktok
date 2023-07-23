@@ -19,6 +19,8 @@ List<String> carouselImages = [
 ];
 
 class ExplorePage extends StatelessWidget {
+  const ExplorePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ExploreBody();
@@ -26,6 +28,8 @@ class ExplorePage extends StatelessWidget {
 }
 
 class ExploreBody extends StatefulWidget {
+  const ExploreBody({super.key});
+
   @override
   _ExploreBodyState createState() => _ExploreBodyState();
 }
@@ -97,7 +101,6 @@ class _ExploreBodyState extends State<ExploreBody> {
 
   @override
   Widget build(BuildContext context) {
-    var locale = AppLocalizations.of(context)!;
     return Builder(
       builder: (BuildContext context) {
         // if (!_loadingAnchoredBanner) {
@@ -125,7 +128,7 @@ class _ExploreBodyState extends State<ExploreBody> {
                     icon: Icon(Icons.search, color: secondaryColor),
                     border: InputBorder.none,
                     hintText: AppLocalizations.of(context)!.search,
-                    hintStyle: Theme.of(context).textTheme.subtitle1,
+                    hintStyle: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
               ),
@@ -231,7 +234,7 @@ class TitleRow extends StatelessWidget {
   final String subTitle;
   final List<Video> videos;
 
-  TitleRow(this.title, this.subTitle, this.videos);
+  TitleRow(this.title, this.subTitle, this.videos, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -245,18 +248,18 @@ class TitleRow extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       subtitle: Row(
         children: <Widget>[
           Text(
             '$subTitle ${AppLocalizations.of(context)!.video!}',
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           const Spacer(),
           Text(
             "${AppLocalizations.of(context)!.viewAll}",
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           Icon(
             Icons.arrow_forward_ios,

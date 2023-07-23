@@ -22,7 +22,7 @@ class NotificationScreen extends StatelessWidget {
               indicator: BoxDecoration(color: transparentColor),
               isScrollable: true,
               labelColor: mainColor,
-              labelStyle: Theme.of(context).textTheme.headline6,
+              labelStyle: Theme.of(context).textTheme.titleMedium,
               unselectedLabelColor: disabledTextColor,
               tabs: <Widget>[
                 Tab(text: locale.notifications),

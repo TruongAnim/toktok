@@ -30,7 +30,7 @@ class _NotifTitleState extends State<NotifTitle> {
             style: TextStyle(color: secondaryColor),
           )
         : Text(
-            '${name} ${widget.title}',
+            '$name ${widget.title}',
             style: TextStyle(color: secondaryColor),
           );
   }

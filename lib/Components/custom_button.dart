@@ -23,7 +23,7 @@ class CustomButton extends StatelessWidget {
             text,
             style: Theme.of(context)
                 .textTheme
-                .caption!
+                .labelLarge!
                 .copyWith(color: secondaryColor),
           )
         ],

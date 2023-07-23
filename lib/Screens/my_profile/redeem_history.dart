@@ -14,7 +14,7 @@ class RedeemHistory extends StatelessWidget {
           centerTitle: true,
           title: Text(
             "Redeem History",
-            style: theme.textTheme.headline6,
+            style: theme.textTheme.titleMedium,
           ),
         ),
         body: Container(
