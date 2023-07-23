@@ -112,5 +112,6 @@ Map<String, String> vietnamese() {
         'It will take 3-4 days to verify\nyour documents by the admin.',
     'getVerified': 'Get verified badge',
     'changeLanguage': 'Thay đổi ngôn ngữ',
+    'done': 'Xong',
   };
 }

@@ -440,6 +440,10 @@ class AppLocalizations {
   String? get clickCurrent {
     return _localizedValues[locale.languageCode]!['clickCurrent'];
   }
+
+  String? get done {
+    return _localizedValues[locale.languageCode]!['done'];
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -447,7 +451,6 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   bool isSupported(Locale locale) {
-    print(LanguageController.supportedLanguage.contains(locale));
     return LanguageController.supportedLanguage.contains(locale);
   }
 
@@ -455,7 +458,6 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   Future<AppLocalizations> load(Locale locale) {
     // Returning a SynchronousFuture here because an async "load" operation
     // isn't needed to produce an instance of AppLocalizations.
-    print('loaddddddddd');
     return SynchronousFuture<AppLocalizations>(AppLocalizations(locale));
   }
 

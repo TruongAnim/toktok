@@ -113,5 +113,6 @@ Map<String, String> english() {
         'It will take 3-4 days to verify\nyour documents by the admin.',
     'getVerified': 'Get verified badge',
     'changeLanguage': 'Change Language',
+    'done': 'Done',
   };
 }
