@@ -9,7 +9,7 @@ import 'package:toktok/Screens/explore/more_page.dart';
 import 'package:toktok/Screens/explore/search_users.dart';
 import 'package:toktok/Screens/list_video_screen/list_video_screen.dart';
 import 'package:toktok/Screens/my_profile/badge_request.dart';
-import 'package:toktok/Screens/my_profile/language_page.dart';
+import 'package:toktok/Screens/language_screen/change_language_page.dart';
 import 'package:toktok/Screens/my_profile/video_option.dart';
 import 'package:toktok/BottomNavigation/bottom_navigation.dart';
 import 'package:toktok/Screens/add_video/add_video.dart';

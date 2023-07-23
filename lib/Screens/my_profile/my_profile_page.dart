@@ -1,6 +1,7 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toktok/Routes/routes.dart';
 import 'package:toktok/Screens/my_profile/my_info.dart';
 import 'package:toktok/Components/sliver_app_delegate.dart';
 import 'package:toktok/Components/tab_grid.dart';
@@ -72,9 +73,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                               borderSide: BorderSide.none),
                           onSelected: (dynamic value) {
                             if (value == locale!.changeLanguage) {
-                              AuthController.instance.showDevelopingSnackBar();
-                              // Navigator.pushNamed(
-                              //     context, PageRoutes.languagePage);
+                              Get.toNamed(PageRoutes.languagePage);
                             } else if (value == locale.help) {
                               AuthController.instance.showDevelopingSnackBar();
                               // Navigator.pushNamed(context, PageRoutes.helpPage);
