@@ -26,7 +26,7 @@ class CoinContainer extends StatelessWidget {
             () {
               return Text(
                 AuthController.instance.appUser.value.points.toString(),
-                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               );

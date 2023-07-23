@@ -55,7 +55,7 @@ class _HomeBodyState extends State<HomeBody> {
                 children: [
                   TabBar(
                     isScrollable: true,
-                    labelStyle: Theme.of(context).textTheme.bodyText1,
+                    labelStyle: Theme.of(context).textTheme.bodyMedium,
                     indicator: BoxDecoration(color: transparentColor),
                     tabs: tabs,
                   ),

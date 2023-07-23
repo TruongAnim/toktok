@@ -43,7 +43,7 @@ class _EditProfileState extends State<EditProfile> {
                   locale.save!,
                   style: Theme.of(context)
                       .textTheme
-                      .headline6!
+                      .titleMedium!
                       .copyWith(color: mainColor),
                 ),
               )
@@ -55,7 +55,7 @@ class _EditProfileState extends State<EditProfile> {
                 child: TabBar(
                   labelColor: mainColor,
                   unselectedLabelColor: secondaryColor,
-                  labelStyle: Theme.of(context).textTheme.headline6,
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
                   indicator: BoxDecoration(color: transparentColor),
                   isScrollable: true,
                   tabs: <Widget>[
@@ -143,7 +143,7 @@ class _EditProfileState extends State<EditProfile> {
             ),
             title: Text(
               locale.getVerified,
-              style: Theme.of(context).textTheme.headline6!.copyWith(
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: disabledTextColor, fontWeight: FontWeight.bold),
             ),
             trailing: Icon(

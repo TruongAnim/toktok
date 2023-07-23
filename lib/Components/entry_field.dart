@@ -64,7 +64,7 @@ class EntryField extends StatelessWidget {
             labelText: label,
             labelStyle: Theme.of(context)
                 .textTheme
-                .subtitle1!
+                .titleSmall!
                 .copyWith(color: disabledTextColor),
             hintText: hint,
             hintStyle: TextStyle(fontSize: 13.3, color: secondaryColor),

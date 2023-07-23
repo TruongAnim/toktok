@@ -164,7 +164,7 @@ class MessageBubble extends StatelessWidget {
               children: <Widget>[
                 Text(
                   time!,
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
                 SizedBox(width: 12.0),
                 Container(
@@ -204,7 +204,7 @@ class MessageBubble extends StatelessWidget {
                 SizedBox(width: 12.0),
                 Text(
                   time!,
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.labelLarge,
                 )
               ],
             ),

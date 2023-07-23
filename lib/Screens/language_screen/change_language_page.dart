@@ -77,7 +77,7 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
                       onPressed: () {},
                       child: Text(
                         'Submit',
-                        style: Theme.of(context).textTheme.button,
+                        style: Theme.of(context).textTheme.labelSmall,
                       ),
                     )),
               ],

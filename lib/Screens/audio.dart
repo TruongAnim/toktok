@@ -27,19 +27,19 @@ class Audio extends StatelessWidget {
     return Scaffold(
       backgroundColor: darkColor,
       appBar: AppBar(
-        title: Text("Audio"),
+        title: const Text("Audio"),
         centerTitle: true,
       ),
       body: Column(
         children: [
           ListTile(
-            contentPadding: EdgeInsets.all(20),
+            contentPadding: const EdgeInsets.all(20),
             leading: Image.asset('assets/thumbnails/dance/Layer 954.png'),
             title: Text(
               "Dance on Heaven",
               style: TextStyle(color: secondaryColor),
             ),
-            subtitle: Text("James Carlo"),
+            subtitle: const Text("James Carlo"),
             trailing: Icon(
               Icons.bookmark_border,
               color: secondaryColor,
@@ -47,15 +47,15 @@ class Audio extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(12), topLeft: Radius.circular(12)),
               color: backgroundColor,
             ),
             child: Text(
               '1.1 M Videos using this audio',
-              style: theme.textTheme.caption!.copyWith(fontSize: 14),
+              style: theme.textTheme.labelLarge!.copyWith(fontSize: 14),
             ),
           ),
           Expanded(
@@ -70,8 +70,8 @@ class Audio extends StatelessWidget {
                 ),
                 Container(
                   width: 134,
-                  margin: EdgeInsets.all(20),
-                  padding: EdgeInsets.all(12),
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: theme.primaryColor,
@@ -83,16 +83,16 @@ class Audio extends StatelessWidget {
                         color: secondaryColor,
                         size: 20,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                       Text(
                         "User Audio",
-                        style: theme.textTheme.subtitle2!.copyWith(
+                        style: theme.textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                     ],

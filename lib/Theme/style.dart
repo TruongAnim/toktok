@@ -16,13 +16,36 @@ final ThemeData appTheme = ThemeData.light().copyWith(
 
   ///text theme
   textTheme: GoogleFonts.openSansTextTheme().copyWith(
-    subtitle1: TextStyle(color: disabledTextColor),
-    caption: TextStyle(color: disabledTextColor),
-    bodyText1: TextStyle(fontSize: 16.0),
-    headline6: TextStyle(fontSize: 18.0),
-    button: TextStyle(fontSize: 16.0, letterSpacing: 1),
-    subtitle2: TextStyle(),
-    bodyText2: TextStyle(),
+    titleSmall: TextStyle(color: disabledTextColor),
+    labelLarge: TextStyle(color: disabledTextColor),
+    bodyMedium: const TextStyle(fontSize: 16.0),
+    titleMedium: const TextStyle(fontSize: 18.0),
+    labelSmall: const TextStyle(fontSize: 16.0, letterSpacing: 1),
+    bodyLarge: const TextStyle(),
+    bodySmall: const TextStyle(),
+  ),
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: mainColor),
+);
+
+final ThemeData darkTheme = ThemeData.light().copyWith(
+  scaffoldBackgroundColor: backgroundColor,
+  primaryColor: mainColor,
+
+  ///appBar theme
+  appBarTheme: AppBarTheme(
+    color: transparentColor,
+    elevation: 0.0,
+  ),
+
+  ///text theme
+  textTheme: GoogleFonts.openSansTextTheme().copyWith(
+    titleSmall: TextStyle(color: disabledTextColor),
+    labelLarge: TextStyle(color: disabledTextColor),
+    bodyMedium: const TextStyle(fontSize: 16.0),
+    titleMedium: const TextStyle(fontSize: 18.0),
+    labelSmall: const TextStyle(fontSize: 16.0, letterSpacing: 1),
+    bodyLarge: const TextStyle(),
+    bodySmall: const TextStyle(),
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: mainColor),
 );

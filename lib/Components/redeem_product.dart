@@ -21,26 +21,26 @@ class RedeemProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     List<RedeemProductDetails> redeemProductDetails = [
-      RedeemProductDetails(
-          "assets/1.png", "Headphone", "1000", Color(0xffEF2938), "XDWA124A"),
+      RedeemProductDetails("assets/1.png", "Headphone", "1000",
+          const Color(0xffEF2938), "XDWA124A"),
       RedeemProductDetails("assets/2.png", "M-audio Subscription (3m)", "250",
-          Color(0xff1B4499), "XDWA124A"),
+          const Color(0xff1B4499), "XDWA124A"),
       RedeemProductDetails("assets/3.png", "Flat 15% Cashback", "1000",
-          Color(0xffDBA32F), "XDWA124A"),
-      RedeemProductDetails(
-          "assets/4.png", "Sunglasses", "5000", Color(0xffCA2231), "XDWA124A"),
-      RedeemProductDetails(
-          "assets/1.png", "Headphone", "1000", Color(0xffEF2938), "XDWA124A"),
+          const Color(0xffDBA32F), "XDWA124A"),
+      RedeemProductDetails("assets/4.png", "Sunglasses", "5000",
+          const Color(0xffCA2231), "XDWA124A"),
+      RedeemProductDetails("assets/1.png", "Headphone", "1000",
+          const Color(0xffEF2938), "XDWA124A"),
       RedeemProductDetails("assets/2.png", "M-audio Subscription (3m)", "250",
-          Color(0xff1B4499), "XDWA124A"),
+          const Color(0xff1B4499), "XDWA124A"),
       RedeemProductDetails("assets/3.png", "Flat 15% Cashback", "1000",
-          Color(0xffDBA32F), "XDWA124A"),
-      RedeemProductDetails(
-          "assets/4.png", "Sunglasses", "5000", Color(0xffCA2231), "XDWA124A"),
+          const Color(0xffDBA32F), "XDWA124A"),
+      RedeemProductDetails("assets/4.png", "Sunglasses", "5000",
+          const Color(0xffCA2231), "XDWA124A"),
     ];
     return ListView.builder(
-        padding: EdgeInsets.only(top: 8),
-        physics: NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 8),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: redeemProductDetails.length,
         itemBuilder: (context, index) {
@@ -59,11 +59,11 @@ class RedeemProduct extends StatelessWidget {
                         children: [
                           Text(
                             redeemProductDetails[index].name,
-                            style: theme.textTheme.subtitle2!.copyWith(
+                            style: theme.textTheme.bodyLarge!.copyWith(
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           Row(
@@ -72,13 +72,12 @@ class RedeemProduct extends StatelessWidget {
                                 "assets/coin.png",
                                 scale: 2.5,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Text(
-                                redeemProductDetails[index].numberOfCoins +
-                                    ' coins',
-                                style: theme.textTheme.caption!.copyWith(
+                                '${redeemProductDetails[index].numberOfCoins} coins',
+                                style: theme.textTheme.labelLarge!.copyWith(
                                   letterSpacing: 0.4,
                                   fontWeight: FontWeight.w500,
                                   color: secondaryColor.withOpacity(0.5),
@@ -93,7 +92,7 @@ class RedeemProduct extends StatelessWidget {
                       bottom: 20,
                       end: 12,
                       child: Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: secondaryColor.withOpacity(0.4),
                           borderRadius: BorderRadius.circular(16),
@@ -102,7 +101,7 @@ class RedeemProduct extends StatelessWidget {
                           isRedeemed
                               ? redeemProductDetails[index].redeemedCodes
                               : "Redeem now".toUpperCase(),
-                          style: theme.textTheme.caption!.copyWith(
+                          style: theme.textTheme.labelLarge!.copyWith(
                               color: secondaryColor,
                               fontSize: 8,
                               letterSpacing: 0.6,
@@ -113,7 +112,7 @@ class RedeemProduct extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
             ],

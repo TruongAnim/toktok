@@ -46,7 +46,7 @@ void commentSheet(BuildContext context, String postId) async {
                         locale.comments!,
                         style: Theme.of(context)
                             .textTheme
-                            .headline6!
+                            .titleMedium!
                             .copyWith(color: lightTextColor),
                       ),
                     ),
@@ -74,7 +74,7 @@ void commentSheet(BuildContext context, String postId) async {
                                   title: Text(comment.username,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText2!
+                                          .bodySmall!
                                           .copyWith(
                                               height: 2,
                                               color: disabledTextColor)),
@@ -85,11 +85,10 @@ void commentSheet(BuildContext context, String postId) async {
                                       ),
                                       TextSpan(
                                           text: TimeAgo.format(
-                                              (comment.publicDate as Timestamp)
-                                                  .toDate()),
+                                              (comment.publicDate).toDate()),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .caption),
+                                              .labelLarge),
                                     ]),
                                   ),
                                   trailing: CustomButton(

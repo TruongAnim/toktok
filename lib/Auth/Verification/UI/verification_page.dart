@@ -22,8 +22,8 @@ class VerificationPage extends StatelessWidget {
       ),
       body: FadedSlideAnimation(
         child: VerificationBody(onVerificationDone),
-        beginOffset: Offset(0, 0.3),
-        endOffset: Offset(0, 0),
+        beginOffset: const Offset(0, 0.3),
+        endOffset: const Offset(0, 0),
         slideCurve: Curves.linearToEaseOut,
       ),
     );
@@ -49,7 +49,7 @@ class _VerificationBodyState extends State<VerificationBody> {
     //shows timer
     _counter = 20; //time counter
 
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _counter > 0 ? _counter-- : _timer.cancel();
       });
@@ -76,7 +76,7 @@ class _VerificationBodyState extends State<VerificationBody> {
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
     return Padding(
-      padding: EdgeInsets.only(left: 20.0, bottom: 16.0, right: 20.0),
+      padding: const EdgeInsets.only(left: 20.0, bottom: 16.0, right: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,32 +84,32 @@ class _VerificationBodyState extends State<VerificationBody> {
           Text(
             '\n' + locale.enterCode! + '+91__________',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
-          SizedBox(height: 32.0),
+          const SizedBox(height: 32.0),
           EntryField(
             label: locale.verificationCode,
             initialValue: '_ _ _ _ _ _',
             maxLength: 6,
             keyboardType: TextInputType.number,
           ),
-          Spacer(),
+          const Spacer(),
           CustomButton(
             text: locale.submit,
             onPressed: () {
               widget.onVerificationDone();
             },
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 locale.resend!,
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   '$_counter ${locale.sec}',
                 ),

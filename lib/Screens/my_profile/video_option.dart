@@ -23,6 +23,9 @@ class _VideoOptionState extends State<VideoOption> {
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
     return FadedSlideAnimation(
+      beginOffset: const Offset(0, 0.3),
+      endOffset: const Offset(0, 0),
+      slideCurve: Curves.linearToEaseOut,
       child: Stack(
         children: <Widget>[
           GestureDetector(
@@ -62,14 +65,14 @@ class _VideoOptionState extends State<VideoOption> {
               children: <Widget>[
                 CustomButton(
                   ImageIcon(
-                    AssetImage('assets/icons/ic_views.png'),
+                    const AssetImage('assets/icons/ic_views.png'),
                     color: secondaryColor,
                   ),
                   '1.2k',
                 ),
                 CustomButton(
                     ImageIcon(
-                      AssetImage('assets/icons/ic_comment.png'),
+                      const AssetImage('assets/icons/ic_comment.png'),
                       color: secondaryColor,
                     ),
                     '287', onPressed: () {
@@ -87,8 +90,8 @@ class _VideoOptionState extends State<VideoOption> {
                     });
                   },
                 ),
-                SizedBox(height: 12.0),
-                CircleAvatar(
+                const SizedBox(height: 12.0),
+                const CircleAvatar(
                     backgroundImage: AssetImage('assets/images/user.webp'))
               ],
             ),
@@ -101,7 +104,7 @@ class _VideoOptionState extends State<VideoOption> {
               text: TextSpan(children: [
                 TextSpan(
                     text: '@emiliwilliamson\n',
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.5)),
@@ -116,9 +119,6 @@ class _VideoOptionState extends State<VideoOption> {
           )
         ],
       ),
-      beginOffset: Offset(0, 0.3),
-      endOffset: Offset(0, 0),
-      slideCurve: Curves.linearToEaseOut,
     );
   }
 }

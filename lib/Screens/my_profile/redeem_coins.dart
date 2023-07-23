@@ -19,15 +19,15 @@ class RedeemCoins extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Text(
               "Your Coin Balance",
-              style: theme.textTheme.headline6!.copyWith(
+              style: theme.textTheme.titleMedium!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Container(
             width: 120,
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: secondaryColor.withOpacity(0.6),
               borderRadius: BorderRadius.circular(30),
@@ -38,12 +38,12 @@ class RedeemCoins extends StatelessWidget {
                   'assets/coin.png',
                   scale: 1.4,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Text(
                   "750",
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 24,
                       ),
@@ -51,31 +51,31 @@ class RedeemCoins extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   color: backgroundColor,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(12),
                       topLeft: Radius.circular(12))),
               child: ListView(
                 children: [
                   Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
                       Text(
                         "Redeem Coin Offers",
-                        style: theme.textTheme.headline6!.copyWith(
+                        style: theme.textTheme.titleMedium!.copyWith(
                           fontSize: 16,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(
@@ -83,18 +83,18 @@ class RedeemCoins extends StatelessWidget {
                         },
                         child: Text(
                           "History",
-                          style: theme.textTheme.headline6!.copyWith(
+                          style: theme.textTheme.titleMedium!.copyWith(
                             color: theme.primaryColor,
                             fontSize: 16,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 12,
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   RedeemProduct(false),

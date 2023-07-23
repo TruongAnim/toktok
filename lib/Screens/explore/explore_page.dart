@@ -128,7 +128,7 @@ class _ExploreBodyState extends State<ExploreBody> {
                     icon: Icon(Icons.search, color: secondaryColor),
                     border: InputBorder.none,
                     hintText: AppLocalizations.of(context)!.search,
-                    hintStyle: Theme.of(context).textTheme.subtitle1,
+                    hintStyle: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
               ),
@@ -248,18 +248,18 @@ class TitleRow extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       subtitle: Row(
         children: <Widget>[
           Text(
             '$subTitle ${AppLocalizations.of(context)!.video!}',
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           const Spacer(),
           Text(
             "${AppLocalizations.of(context)!.viewAll}",
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           Icon(
             Icons.arrow_forward_ios,
